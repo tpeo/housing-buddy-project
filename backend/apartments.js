@@ -6,6 +6,8 @@ const app = express();
 const db = firebase.db;
 const jwt = require('jsonwebtoken');
 
+app.use("/auth", require("./auth").authorize);
+const authorize = require("./auth");
 
 require("dotenv").config();
 
@@ -19,11 +21,12 @@ app.options('/apartments/', cors());
 
 //fetch an apartment's ratings
 app.get("/apartments/:name", async(req, res) => {
-
     const apartments = db.collection("apartments");
     let name = req.params.name;
-    const query = await apartments.where("name", "==", name).get();
-    const ret = query.docs.map((data) => data.data());
+    console.log(name);
+    const query = await apartments.where('name', '==', name).get();
+
+    const ret = query.docs.forEach(doc => console.log(doc.data()));
     res.status(200).json(ret);
 })
 
