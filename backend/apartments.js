@@ -46,7 +46,7 @@ app.post("/apartments/", cors(), async(req, res) => {
     const data = {
         name: req.body.name,
         location: req.body.location,
-        rating: req.body.location,
+        rating: req.body.rating,
         //randomly generate?
         id: r
     }

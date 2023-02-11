@@ -49,6 +49,7 @@ IconContainer.propTypes = {
 export default function RadioGroupRating({handleInputChange}) {
   return (
     <StyledRating
+      id="rating"
       name="highlight-selected-only"
       defaultValue={2}
       IconContainerComponent={IconContainer}

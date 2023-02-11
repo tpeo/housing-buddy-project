@@ -25,10 +25,17 @@ export default function Apartments() {
 
     const handleInputChange = (e) => {
         const {id, value} = e.target;
-        console.log(value);
+        console.log(id);
         setFormValues({
             ...formValues,
             [id]: value,
+        });
+    };
+
+    const handleRatingChange = (e) => {
+        setFormValues({
+            ...formValues,
+            ["rating"]: e.target.value,
         });
     };
 
@@ -86,7 +93,7 @@ export default function Apartments() {
             </Grid>
             <Grid item>
                 <RadioGroupRating
-                    handleInputChange={handleInputChange}
+                    handleInputChange={handleRatingChange}
                 ></RadioGroupRating>
             </Grid>
             <Button variant="contained" color="primary" type="submit">Submit</Button>
