@@ -30,6 +30,19 @@ app.get("/apartments/:name", async(req, res) => {
     res.status(200).json(ret);
 })
 
+//get all apartment names
+app.get("/apartments/", async(req, res) => {
+  const apartments = db.collection("apartment-info");
+  const query = await apartments.get();
+
+  //const set = new Set();
+  const object = [];
+  query.docs.forEach((doc) => object.push(doc.data().name));
+
+  //const ret = JSON.stringify(Array.from(set));
+  res.status(200).json(object);
+})
+
 app.post("/apartments/", cors(), async(req, res) => {
 
   const body = req.body

@@ -8,12 +8,15 @@ import {
     FormLabel,
     Select,
     MenuItem,
-    Button
+    Button,
+    CardContent,
+    Card,
+    Box
 } from "@mui/material"
 
 import './App.css';
 
-export default function Apartments() {
+export default function ReviewForm() {
 
     const defaultValues = {
         name: "name",
@@ -71,9 +74,11 @@ export default function Apartments() {
         addRating();
         //after submit erase input
     };
-    
-  return (
-    <form onSubmit={handleSubmit}>
+
+    const card = (
+      <React.Fragment>
+        <CardContent>
+        <form onSubmit={handleSubmit}>
         <Grid container alignItems="center" justify="center" direction="column">
             <Grid item>
                 <TextField
@@ -100,5 +105,13 @@ export default function Apartments() {
         </Grid>
         
     </form>
+    </CardContent>
+      </React.Fragment>
+    );
+    
+  return (
+    <Box sx={{ minWidth: 275 }}>
+      <Card variant="outlined">{card}</Card>
+    </Box>
   );
 }
