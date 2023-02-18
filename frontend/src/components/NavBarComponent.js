@@ -95,7 +95,7 @@ export default function NavBarComponent() {
     function navHelper(name) {
         switch(name){
             case "VIEW ALL APARTMENTS":
-                navigate('./allapartments');
+                navigate('/allapartments');
                 break;
         }
     }

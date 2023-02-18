@@ -11,7 +11,8 @@ import {
     Tooltip,
     MenuItem,
     Typography,
-    IconButton
+    IconButton,
+    Button
 } from "@mui/material"
 import './App.css'
 import TuneIcon from '@mui/icons-material/Tune';
@@ -23,12 +24,8 @@ import './App.css';
 export default function AllApartments() {
     const navigate = useNavigate();
 
-    const navigateLogin = () => {
-        navigate('/login');
-    }
-
-    const navigateAppa = () => {
-        navigate('/apartments');
+    const navigatetest = () => {
+        navigate('/mainpage');
     }
 
     const [allApartments, setAllApartments] = useState([]);
@@ -137,8 +134,9 @@ export default function AllApartments() {
                     ></ListApartmentComponent>))}
             </Grid>
         </Box>
+        <Button onClick={navigatetest}>maintest</Button>
         <Footer></Footer>
-
+        
     </div>
   );
 }
