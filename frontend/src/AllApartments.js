@@ -11,7 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import './App.css';
 
-export default function AllApartments() {
+export default function HomePage() {
     const navigate = useNavigate();
 
     const navigateLogin = () => {
@@ -64,7 +64,6 @@ export default function AllApartments() {
     <div>
         <NavBarComponent></NavBarComponent>
         {listItems}
-        <h1>hello</h1>
     </div>
   );
 }

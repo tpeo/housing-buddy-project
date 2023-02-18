@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import AllApartments from '../AllApartments';
+import React from "react";
 import {
     AppBar,
     Box,
@@ -11,15 +10,13 @@ import {
     Container,
     Avatar,
     InputBase,
-    Grid,
-    TextField,
     Button,
     Tooltip,
-    CardContent
 } from "@mui/material"
 
 import SearchIcon from '@mui/icons-material/Search';
 import AdbIcon from '@mui/icons-material/Adb';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import { styled, alpha } from '@mui/material/styles';
 
 import { useNavigate } from "react-router-dom";
@@ -53,9 +50,9 @@ export default function NavBarComponent() {
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
-        backgroundColor: alpha(theme.palette.common.white, 0.15),
+        backgroundColor: alpha('#B1B3BC', 0.15),
         '&:hover': {
-          backgroundColor: alpha(theme.palette.common.white, 0.25),
+          backgroundColor: alpha('#B1B3BC', 0.25),
         },
         marginLeft: 0,
         width: '100%',
@@ -104,10 +101,10 @@ export default function NavBarComponent() {
     }
 
     return (
-        <AppBar position="sticky">
+        <AppBar sx={{ background: 'white' }} position="sticky">
           <Container maxWidth="xl">
             <Toolbar disableGutters>
-              <img src='/logo.png' width={280} height={80} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+              <img src='/logo.png' width={200} height={80} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
     
               <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                 <IconButton
@@ -139,7 +136,7 @@ export default function NavBarComponent() {
                 >
                   {pages.map((page) => (
                     <MenuItem key={page} name={page} onClick={() => handleCloseNavMenu(page)}>
-                      <Typography textAlign="center">{page}</Typography>
+                      <Typography sx={{color: "#0495b2"}} textAlign="center">{page}</Typography>
                     </MenuItem>
                   ))}
                 </Menu>
@@ -161,14 +158,13 @@ export default function NavBarComponent() {
                   textDecoration: 'none',
                 }}
               >
-                LOGO
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 {pages.map((page) => (
                   <Button
                     key={page}
                     onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
+                    sx={{ my: 2, color: '#0495b2', display: 'block' }}
                   >
                     {page}
                   </Button>
@@ -178,7 +174,7 @@ export default function NavBarComponent() {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    <SentimentSatisfiedAltIcon color="#0495b2" fontSize="large"></SentimentSatisfiedAltIcon>
                   </IconButton>
                 </Tooltip>
                 <Menu

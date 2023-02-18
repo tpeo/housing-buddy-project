@@ -3,15 +3,14 @@ import NavBarComponent from './components/NavBarComponent';
 import ListApartmentComponent from "./components/ListApartmentComponent";
 import {
     Grid,
-    TextField,
-    Button,
-    CardContent
+    Box,
 } from "@mui/material"
+import './App.css'
 
-import { useNavigate } from "react-router-dom";
+import { resolvePath, useNavigate } from "react-router-dom";
 import './App.css';
 
-export default function HomePage() {
+export default function AllApartments() {
     const navigate = useNavigate();
 
     const navigateLogin = () => {
@@ -47,23 +46,39 @@ export default function HomePage() {
               if (response.status !== 200) {
                 throw new Error();
               }
-              let apartments = [];
-              response.forEach((data) => {apartments.push(data)})
-              setAllApartments(apartments);
+              return response.json();
             })
+            .then((response) => {
+                let apartments = [];
+                response.forEach((data) => {apartments.push(data)})
+                setAllApartments(apartments);
+              })
             .catch((e) => {
               console.log(e);
             });
         }
 
-        console.log(allApartments);
+        const listItems = allApartments.map((ap) => {
+            console.log(ap);
+        });
 
-        const listItems = allApartments.map((ap) => <ListApartmentComponent name={ap}></ListApartmentComponent>);
 
   return (
     <div>
         <NavBarComponent></NavBarComponent>
-        {listItems}
+        <img src='/logowbg.png' height='100%' width='100%'></img>
+        <Box sx={{flexGrow: 1}}>
+            <Grid container spacing={4} 
+                justifyContent="center"
+                alignItems="stretch"
+                >
+                {allApartments.map((name) => (
+                    <ListApartmentComponent
+                        name={name}
+                    ></ListApartmentComponent>))}
+            </Grid>
+        </Box>
+
     </div>
   );
 }
