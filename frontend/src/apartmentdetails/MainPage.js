@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import StaticRating from "./StaticRating";
 import FilterComponent from "../components/FilterComponent";
 import SortIcon from '@mui/icons-material/Sort';
+import ApartmentHeader from "./ApartmentHeader";
 import {
     Grid,
     Box,
@@ -62,6 +63,7 @@ export default function MainPage() {
 
   return (
     <Grid name="main" display="flex" direction="column">
+        <ApartmentHeader></ApartmentHeader>
         <OverviewComponent name="lark"></OverviewComponent>
         <Grid display="flex" direction="row" justifyContent="flex-end">
             <IconButton>
