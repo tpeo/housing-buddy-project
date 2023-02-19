@@ -5,8 +5,9 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
+import StaticRating from './StaticRating';
 
-export default function OverviewComponent() {
+export default function OverviewComponent({rating, name}) {
 
   return (
     <Paper
@@ -34,28 +35,26 @@ export default function OverviewComponent() {
         }}
       />
       <Grid container>
-        <Grid item md={6}>
-          <Box
-            sx={{
-              position: 'relative',
-              p: { xs: 3, md: 6 },
-              pr: { md: 0 },
-            }}
-          >
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-              ApartmentName
-            </Typography>
+        <Grid item md={6} display="flex" direction="column" justifyContent="center">
             <Grid>
+                <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                    {name}
+                </Typography>
+            </Grid>
+            <Grid display="flex" justifyContent="center">
                 <Typography variant="h5" color="inherit" paragraph>
                 4.5/5
                 </Typography>
+                <StaticRating value={rating}></StaticRating>
                 <Link variant="subtitle1" href="#">
-
                 </Link>
             </Grid>
-
-          </Box>
         </Grid>
+      </Grid>
+      <Grid key="review and sort">
+
+      </Grid>
+      <Grid>
       </Grid>
     </Paper>
   );

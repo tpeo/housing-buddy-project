@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBarComponent from './components/NavBarComponent';
 import ListApartmentComponent from "./components/ListApartmentComponent";
+import FilterComponent from "./components/FilterComponent";
 import Footer from './components/Footer';
 import {
     Grid,
@@ -69,21 +70,6 @@ export default function AllApartments() {
             console.log(ap);
         });
 
-    const filters = ['Most Popular', 'Affordability', 'Newest', 'Highest Ratings'];
-
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-  
-    const handleOpenUserMenu = (event) => {
-      setAnchorElUser(event.currentTarget);
-    };
-  
-  
-    const handleCloseUserMenu = () => {
-      setAnchorElUser(null);
-    };
-
-
-
   return (
     <div>
         <NavBarComponent></NavBarComponent>
@@ -92,35 +78,7 @@ export default function AllApartments() {
         <IconButton>
             <SortIcon fontSize="large"></SortIcon>
         </IconButton>
-        <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open filters">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <TuneIcon color="#0495b2" fontSize="large"></TuneIcon>
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: '45px' }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {filters.map((filter) => (
-                    <MenuItem key={filter} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{filter}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
+        <FilterComponent></FilterComponent>
         </Stack>
         <Divider color="#0495b2" sx={{ borderBottomWidth: 10 }}></Divider>
         <Box sx={{flexGrow: 1}}>

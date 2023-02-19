@@ -9,6 +9,9 @@ const jwt = require('jsonwebtoken');
 app.use("/auth", require("./auth").authorize);
 const authorize = require("./auth");
 
+// const review = require("./review");
+// app.use("/review", review);
+
 require("dotenv").config();
 
 app.use(express.json());
@@ -20,14 +23,14 @@ app.use(cors(options));
 app.options('/apartments/', cors());
 
 //fetch an apartment's ratings
-app.get("/apartments/:name", async(req, res) => {
-    const apartments = db.collection("apartments");
-    let name = req.params.name;
-    console.log(name);
-    const query = await apartments.where('name', '==', name).get();
-
-    const ret = query.docs.forEach(doc => console.log(doc.data()));
-    res.status(200).json(ret);
+app.get("/apartments/:apartment", async(req, res) => {
+    let apartment = req.params.apartment;
+    const apartments = db.collection("apartment-info").doc(apartment).collection("reviews");
+    // const query = await apartments.where('apartment', '==', apartment).get();
+    const query = await apartments.get();
+    const reviews = [];
+    const ret = query.forEach((doc) => reviews.push(doc.data()));
+    res.status(200).json(reviews);
 })
 
 //get all apartment names
@@ -59,6 +62,7 @@ app.post("/apartments/", cors(), async(req, res) => {
     const data = {
         name: req.body.name,
         location: req.body.location,
+        title: req.body.title,
         rating: req.body.rating,
         //randomly generate?
         id: r
