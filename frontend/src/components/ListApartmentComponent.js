@@ -2,11 +2,13 @@ import {
     Grid,
     Card,
     Button,
+    Typography,
+    CardActionArea
 } from "@mui/material"
 
 import { useNavigate } from "react-router-dom";
 
-export default function ListApartmentComponent(name) {
+export default function ListApartmentComponent({name, handleOnClick}) {
     const navigate = useNavigate();
 
     const gridItem = {
@@ -25,10 +27,19 @@ export default function ListApartmentComponent(name) {
     }   
 
   return (
-    <Grid item xs={4} sm={6} md={4}>
+    <Grid id={name} item xs={4} sm={6} md={4}>
         <Card sx={gridItem}  key={name} height="100%">
-            <h2></h2>
-            <Button>Visit Page</Button>
+            <CardActionArea sx={{
+                cardActionArea: {
+                    flexGrow: 1,
+                    flexDirection: 'column',
+                    alignItems: 'stretch',
+                  },
+            }}>
+                <Typography variant="h2">{name}</Typography>
+                <Button id={name} onClick={handleOnClick}>Visit Page</Button>                
+            </CardActionArea>
+
         </Card>
     </Grid>
 

@@ -18,12 +18,15 @@ import {
     IconButton,
     Button
 } from "@mui/material"
-import TuneIcon from '@mui/icons-material/Tune';
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReviewComponent from "./components/ReviewComponent";
 
 export default function MainPage() {
+    const params = useParams();
+    
+    const name = params.apartment;
+
     let navigate = useNavigate();
     const [reviews, setReviews] = useState([]);
     //use effect update whenever soomething changes
@@ -41,7 +44,7 @@ export default function MainPage() {
     }
 
     async function getReviews() {
-        let apiCall = "http://localhost:4000/review/lark";
+        let apiCall = `http://localhost:4000/review/${name}`;
     
             await fetch(apiCall, {
             method: "GET",
@@ -73,7 +76,7 @@ export default function MainPage() {
   return (
     <Grid name="main" display="flex" direction="column">
         <ApartmentHeader></ApartmentHeader>
-        <OverviewComponent name="lark"></OverviewComponent>
+        <OverviewComponent name={name}></OverviewComponent>
         <Grid display="flex" direction="row" justifyContent="flex-end">
             <Button onClick={handleOnClick}>Add a review</Button>
             <IconButton>

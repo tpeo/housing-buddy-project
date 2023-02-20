@@ -1,4 +1,5 @@
 import React from "react";
+import ExtLoginComponent from "./login/ExtLoginComponent";
 import {
     AppBar,
     Box,
@@ -187,7 +188,9 @@ export default function NavBarComponent() {
                   </Button>
                 ))}
               </Box>
-    
+
+              <ExtLoginComponent></ExtLoginComponent>
+
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

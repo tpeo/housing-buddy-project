@@ -30,6 +30,22 @@ export default function AllApartments() {
         getAllApartments();
     }, [])
 
+    useEffect(() => {
+      const queryParams = new URLSearchParams(window.location.search);
+      if (queryParams.has("apartment")) {
+
+      }
+
+  }, [])
+
+    const [query, setQuery] = useState("")
+
+    const navApartmentPage = (event) => {
+      console.log(event.target.id);
+      navigate(`/mainpage/${event.target.id}`);
+
+    }
+
     async function getAllApartments() {
         let apiCall = "http://localhost:4000/apartments/";
     
@@ -60,9 +76,9 @@ export default function AllApartments() {
             });
         }
 
-        const listItems = allApartments.map((ap) => {
-            console.log(ap);
-        });
+
+
+
 
   return (
     <div>
@@ -83,11 +99,10 @@ export default function AllApartments() {
                 {allApartments.map((name) => (
                     <ListApartmentComponent
                         name={name}
+                        handleOnClick={navApartmentPage}
                     ></ListApartmentComponent>))}
             </Grid>
         </Box>
-        <Button onClick={navigatetest}>maintest</Button>
-        <ExtLoginComponent></ExtLoginComponent>
         <Footer></Footer>
         
     </div>
