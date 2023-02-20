@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import RadioGroupRating from '../components/RatingComponent';
+import NavBarComponent from "../components/NavBarComponent";
+import Footer from "../components/Footer"
 import {
     Grid,
     TextField,
@@ -108,8 +110,13 @@ export default function ReviewForm() {
     );
     
   return (
-    <Box sx={{ minWidth: 275 }}>
-      <Card variant="outlined">{card}</Card>
-    </Box>
+    <div>
+      <NavBarComponent></NavBarComponent>
+      <Box sx={{ minWidth: 275 }}>
+        <Card variant="outlined">{card}</Card>
+      </Box>
+      <Footer></Footer>
+    </div>
+
   );
 }

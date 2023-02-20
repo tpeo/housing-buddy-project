@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavBarComponent from '../components/NavBarComponent';
+import Footer from '../components/Footer'
 import ListApartmentComponent from "../components/ListApartmentComponent";
 import {
     Grid,
@@ -46,12 +47,11 @@ export default function AllApartmentsPage() {
 
         console.log(allApartments);
 
-        const listItems = allApartments.map((ap) => <ListApartmentComponent name={ap}></ListApartmentComponent>);
 
   return (
     <div>
         <NavBarComponent></NavBarComponent>
-        {listItems}
+        <Footer></Footer>
     </div>
   );
 }

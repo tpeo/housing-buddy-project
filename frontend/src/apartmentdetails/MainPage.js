@@ -37,7 +37,7 @@ export default function MainPage() {
 
     const handleOnClick = () =>  {
         if (localStorage.getItem("loggedIn") == "true") {
-            navigate('/review');
+            navigate(`/${name}/review`);
         } else {
             //push to login popup?
         }
@@ -75,6 +75,7 @@ export default function MainPage() {
 
   return (
     <Grid name="main" display="flex" direction="column">
+        <NavBarComponent></NavBarComponent>
         <ApartmentHeader></ApartmentHeader>
         <OverviewComponent name={name}></OverviewComponent>
         <Grid display="flex" direction="row" justifyContent="flex-end">
@@ -100,6 +101,7 @@ export default function MainPage() {
                 </Grid>
             </Box>
         </Grid>
+        <Footer></Footer>
     </Grid>
 
   );
