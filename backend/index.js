@@ -6,8 +6,7 @@ const app = express();
 const db = firebase.db;
 const jwt = require('jsonwebtoken');
 
-app.use("/auth", require("./auth").authorize);
-const authorize = require("./auth");
+const authMiddleware = require("./auth");
 
 // const review = require("./review");
 // app.use("/review", review);
@@ -22,8 +21,16 @@ const options = {
 app.use(cors(options));
 app.options('/apartments/', cors());
 
+//auth all routes
+//app.use("/", authMiddleware);
+
+//check if user is valid
+app.get("/auth", authMiddleware, (req, res) => {
+  return res.json({ msg: "Success" });
+});
+
 //fetch an apartment's ratings
-app.get("/apartments/:apartment", async(req, res) => {
+app.get("/review/:apartment", async(req, res) => {
     let apartment = req.params.apartment;
     const apartments = db.collection("apartment-info").doc(apartment).collection("reviews");
     // const query = await apartments.where('apartment', '==', apartment).get();
@@ -46,7 +53,7 @@ app.get("/apartments/", async(req, res) => {
   res.status(200).json(object);
 })
 
-app.post("/apartments/", cors(), async(req, res) => {
+app.post("/review/", cors(), async(req, res) => {
 
   const body = req.body
     if(body.name == undefined || body.location == undefined || body.rating == undefined) {
@@ -56,13 +63,11 @@ app.post("/apartments/", cors(), async(req, res) => {
         });
     }
 
-    //make sure rating is 1-5? or frontend
     let r = (Math.random() + 1).toString(36).substring(2);
 
     const data = {
-        name: req.body.name,
-        location: req.body.location,
         title: req.body.title,
+        review: req.body.review,
         rating: req.body.rating,
         //randomly generate?
         id: r

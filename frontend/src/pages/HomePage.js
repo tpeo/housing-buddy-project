@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from "react";
-import NavBarComponent from './components/NavBarComponent';
-import ListApartmentComponent from "./components/ListApartmentComponent";
-import FilterComponent from "./components/FilterComponent";
-import Footer from './components/Footer';
+import NavBarComponent from '../components/NavBarComponent';
+import ListApartmentComponent from "../components/ListApartmentComponent";
+import FilterComponent from "../components/FilterComponent";
+import Footer from '../components/Footer';
+import ExtLoginComponent from "../components/login/ExtLoginComponent";
 import {
     Grid,
     Box,
     Divider,
     Stack,
-    Menu,
-    Tooltip,
-    MenuItem,
-    Typography,
     IconButton,
     Button
 } from "@mui/material"
-import './App.css'
-import TuneIcon from '@mui/icons-material/Tune';
 import SortIcon from '@mui/icons-material/Sort';
 
-import { resolvePath, useNavigate } from "react-router-dom";
-import './App.css';
+import { useNavigate } from "react-router-dom";
 
 export default function AllApartments() {
     const navigate = useNavigate();
@@ -93,6 +87,7 @@ export default function AllApartments() {
             </Grid>
         </Box>
         <Button onClick={navigatetest}>maintest</Button>
+        <ExtLoginComponent></ExtLoginComponent>
         <Footer></Footer>
         
     </div>

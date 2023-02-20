@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import NavBarComponent from '../components/NavBarComponent';
 import OverviewComponent from "./OverviewComponent";
 import Footer from '../components/Footer';
-import StaticRating from "./StaticRating";
+import StaticRating from "./components/StaticRating";
 import FilterComponent from "../components/FilterComponent";
 import SortIcon from '@mui/icons-material/Sort';
-import ApartmentHeader from "./ApartmentHeader";
+import ApartmentHeader from "./components/ApartmentHeader";
 import {
     Grid,
     Box,
@@ -20,10 +20,11 @@ import {
 } from "@mui/material"
 import TuneIcon from '@mui/icons-material/Tune';
 
-import { resolvePath, useNavigate } from "react-router-dom";
-import ReviewComponent from "./ReviewComponent";
+import { useNavigate } from "react-router-dom";
+import ReviewComponent from "./components/ReviewComponent";
 
 export default function MainPage() {
+    let navigate = useNavigate();
     const [reviews, setReviews] = useState([]);
     //use effect update whenever soomething changes
 
@@ -31,8 +32,16 @@ export default function MainPage() {
         getReviews();
     }, [])
 
+    const handleOnClick = () =>  {
+        if (localStorage.getItem("loggedIn") == "true") {
+            navigate('/review');
+        } else {
+            //push to login popup?
+        }
+    }
+
     async function getReviews() {
-        let apiCall = "http://localhost:4000/apartments/lark";
+        let apiCall = "http://localhost:4000/review/lark";
     
             await fetch(apiCall, {
             method: "GET",
@@ -66,6 +75,7 @@ export default function MainPage() {
         <ApartmentHeader></ApartmentHeader>
         <OverviewComponent name="lark"></OverviewComponent>
         <Grid display="flex" direction="row" justifyContent="flex-end">
+            <Button onClick={handleOnClick}>Add a review</Button>
             <IconButton>
             <SortIcon fontSize="large"></SortIcon>
             </IconButton>

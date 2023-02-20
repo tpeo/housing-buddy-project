@@ -1,8 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import * as firebase from "firebase/app";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDy_bb1IMyRhr2i6A9LQLNMlzqM69CVFus",
   authDomain: "housing-buddy-402b5.firebaseapp.com",
@@ -12,17 +16,8 @@ const firebaseConfig = {
   appId: "1:131382078023:web:8439443291c371a27fdf62"
 };
 
-export const auth = require("firebase/auth");
-const googleProvider = new auth.GoogleAuthProvider()
-
-export const signInWithGoogle = () => {
-  auth.signInWithPopup(googleProvider).then((res) => {
-    console.log(res.user)
-  }).catch((error) => {
-    console.log(error.message)
-  })
-}
-
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
 
+export {auth, firebase};

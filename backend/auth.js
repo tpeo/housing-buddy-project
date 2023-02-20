@@ -1,39 +1,27 @@
-const express = require("express");
-const fb = require("firebase-admin");
-
 const firebase = require("./firebase");
-const db = firebase.db;
-const jwt = require("jsonwebtoken");
+//const jwt = require("jwt-decode");
 
-const cors = require("cors");
-require("dotenv").config();
+function authMiddleware(req, res, next) {
+  const headerToken = req.headers.authorization;
+  
+  if (!headerToken) {
+    return res.status(401).send({ message: "No token provided" });
+  }
 
-const authorize = express.Router();
-authorize.use(express.json());
+  if (headerToken && headerToken.split(" ")[0] !== "Bearer") {
+    res.status(401).send({ message: "Invalid token" });
+  }
 
-const options = {
-  origin: "*",
-  methods: "GET, POST, DELETE"
-}
-
-authorize.use(cors(options));
-
-const auth = (req, res, next) => {
-try {
-    const tokenId = req.get("Authorization").split("Bearer ")[1];
-    return fb
+  const token = headerToken.split(" ")[1];
+  firebase
     .auth()
-    .verifyIdToken(tokenId)
-    .then((decoded) => {
-        req.token = decoded;
-        next();
+    .verifyIdToken(token)
+    .then(() => {
+      // Send some important metadata to each call
+      req.username = jwtDecode(token).name;
+      next();
     })
-    .catch((err) => res.status(401).send(err));
-} catch (e) {
-    res.status(400).send("Errors");
+    .catch(() => res.status(403).send({ msg: "Could not authorize" }));
 }
-};
 
-//app.listen(4000, () => console.log("App listening on port " + 4000));
-
-module.exports = {authorize, auth};
+module.exports = authMiddleware;

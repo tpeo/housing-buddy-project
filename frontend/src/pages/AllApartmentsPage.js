@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import NavBarComponent from './components/NavBarComponent';
-import ListApartmentComponent from "./components/ListApartmentComponent";
+import NavBarComponent from '../components/NavBarComponent';
+import ListApartmentComponent from "../components/ListApartmentComponent";
 import {
     Grid,
     TextField,
@@ -8,19 +8,7 @@ import {
     CardContent
 } from "@mui/material"
 
-import { useNavigate } from "react-router-dom";
-import './App.css';
-
-export default function HomePage() {
-    const navigate = useNavigate();
-
-    const navigateLogin = () => {
-        navigate('/login');
-    }
-
-    const navigateAppa = () => {
-        navigate('/apartments');
-    }
+export default function AllApartmentsPage() {
 
     const [allApartments, setAllApartments] = useState([]);
     //use effect update whenever soomething changes

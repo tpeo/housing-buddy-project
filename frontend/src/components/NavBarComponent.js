@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 export default function NavBarComponent() {
 
     const pages = ['About Us', 'FAQ', 'View All Apartments'];
-    const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+    const settings = ['Profile', 'Dashboard', 'Logout'];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -42,7 +42,9 @@ export default function NavBarComponent() {
         setAnchorElNav(null);
     };
   
-    const handleCloseUserMenu = () => {
+    const handleCloseUserMenu = (event) => {
+      console.log(event.currentTarget.innerText);
+      menuHelper(event.currentTarget.innerText);
       setAnchorElUser(null);
     };
 
@@ -99,6 +101,21 @@ export default function NavBarComponent() {
                 break;
         }
     }
+
+    function menuHelper(name) {
+      switch(name){
+          case "Logout":
+              logout();
+              break;
+      }
+
+    function logout() {
+        localStorage.removeItem("@attendanceToken");
+        localStorage.setItem("loggedIn", false);
+        navigate("/"); //navigate to temp page that says you've logged out and times out?
+    }
+  }
+    
 
     return (
         <AppBar sx={{ background: 'white' }} position="sticky">

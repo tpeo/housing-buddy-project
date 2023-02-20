@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import RadioGroupRating from './components/RatingComponent';
+import RadioGroupRating from '../components/RatingComponent';
 import {
     Grid,
     TextField,
@@ -13,8 +13,6 @@ import {
     Card,
     Box
 } from "@mui/material"
-
-import './App.css';
 
 export default function ReviewForm() {
 
@@ -43,7 +41,7 @@ export default function ReviewForm() {
     };
 
     async function addRating() {
-        let apiCall = "http://localhost:4000/apartments/";
+        let apiCall = "http://localhost:4000/review/";
     
         if (formValues.name === "") {return;}
             await fetch(apiCall, {
@@ -56,7 +54,7 @@ export default function ReviewForm() {
             },
             redirect: "follow",
             referrerPolicy: "no-referrer",
-            body: JSON.stringify({ name: formValues.name, location: formValues.location, rating: formValues.rating })
+            body: JSON.stringify({ title: formValues.title, location: formValues.location, rating: formValues.rating })
           })
             .then((response) => {
               if (response.status !== 200) {
@@ -82,8 +80,8 @@ export default function ReviewForm() {
         <Grid container alignItems="center" justify="center" direction="column">
             <Grid item>
                 <TextField
-                id="name"
-                label="Name"
+                id="title"
+                label="Title"
                 type="text"
                 onChange={handleInputChange}
                 ></TextField>

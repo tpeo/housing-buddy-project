@@ -1,8 +1,7 @@
-import ReviewForm from './ReviewForm';
+import ReviewForm from './pages/ReviewForm';
 import SubmissionForm from './SubmissionForm';
-import LoginPage from './LoginPage';
-import HomePage from './HomePage';
-import AllApartments from './AllApartments';
+import HomePage from './pages/HomePage';
+import AllApartments from './pages/AllApartmentsPage';
 import MainPage from './apartmentdetails/MainPage';
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
@@ -15,7 +14,6 @@ function App() {
     <Routes>
       <Route path="/review" element={<ReviewForm></ReviewForm>}></Route>
       <Route path="/SubmissionForm" element={<SubmissionForm></SubmissionForm>}></Route>
-      <Route path="/login" element={<LoginPage></LoginPage>}></Route>
       <Route path="/" element={<HomePage></HomePage>}></Route>
       <Route path="/allapartments" element={<AllApartments></AllApartments>}></Route>
       <Route path="/mainpage" element={<MainPage></MainPage>}></Route>
