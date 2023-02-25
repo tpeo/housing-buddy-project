@@ -6,6 +6,7 @@ import {
     CardActionArea
 } from "@mui/material"
 //import './fonts.css';
+import { shadows } from '@mui/system';
 import { useNavigate } from "react-router-dom";
 
 export default function ListApartmentComponent({name, handleOnClick, backgroundImage}) {
@@ -29,9 +30,10 @@ export default function ListApartmentComponent({name, handleOnClick, backgroundI
         backgroundSize: '100% 100%',
         backgroundPosition: 'center',
         borderRadius: '25px',
+        boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.3)',
     }}>
         <CardActionArea sx={{ flexGrow: 1 }}>
-            <Typography variant="h4" color='white' fontFamily='Roboto'>
+            <Typography variant="h4" color='white' fontFamily='Roboto' fontWeight={500} sx={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 1)' }}>
                 {name}
             </Typography>
         </CardActionArea>

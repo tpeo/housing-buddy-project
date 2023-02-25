@@ -80,7 +80,7 @@ export default function AllApartments() {
 
 //all the apt images for the grid
 const backgroundImages = ['/apartments/lark.png', '/apartments/dobie.png', '/apartments/rambler.png', '/apartments/crest.png', '/apartments/ion.png', '/apartments/2215.png', '/apartments/skyloft.png', '/apartments/inspire.png', '/apartments/26west.png'];
-const tempApt = ["lark", "dobie", "rambler", "crest", "ion", "2215", "skyloft", "inspire", "26 west"]
+const tempApt = ["Lark", "Dobie", "Rambler", "Crest at Pearl", "Ion", "Twenty Two Fifteen", "Skyloft", "Inspire", "26 West"]
 //{tempApt.map((name, index) => (
 //{allApartments.map((name, index) => (
 
