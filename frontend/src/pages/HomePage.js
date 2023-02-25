@@ -11,7 +11,8 @@ import {
     Divider,
     Stack,
     IconButton,
-    Button
+    Button,
+    Typography
 } from "@mui/material"
 import SortIcon from '@mui/icons-material/Sort';
 
@@ -95,11 +96,12 @@ const apartments = tempApt.map((name, index) => (
 const Box = styled.div`
   display: flex;
   flex-direction: row;
-  margin-left: 77px;
-  margin-right: 77px;
+  margin-left: 171px;
+  margin-right: 171px;
   margin-top: 62px;
   margin-bottom: 90px;
   backgroundSize: '100% 100%',
+  justifyContent: 'center',
 `;
 
 const Grid = styled.div`
@@ -108,6 +110,7 @@ const Grid = styled.div`
   backgroundSize: '100% 100%'
 `;
  
+//need to add view all apartments button
 return (
   <div>
       <NavBarComponent></NavBarComponent>
@@ -118,7 +121,7 @@ return (
       </IconButton>
       <FilterComponent></FilterComponent>
       </Stack>
-      <Divider color="#0495b2" sx={{ borderBottomWidth: 10 }}></Divider>
+      <Divider color="#0495b2" sx={{ borderBottomWidth: 50 }}></Divider>
       <Box>
           <Grid container className='grid-container' style={{
               display: "grid",
@@ -129,7 +132,7 @@ return (
               `,
               gridTemplateColumns: "repeat(3, 1fr)",
               gridTemplateRows: "repeat(3, 1fr)",
-              gap: '428px 433px',
+              gap: '310px 310px',
           }}>
               <Grid item className='apt1' style={{ gridArea: "first" }}>
                 {apartments[0]}
@@ -160,6 +163,7 @@ return (
               </Grid>
           </Grid>
       </Box>
+      <Box></Box>
       <Footer></Footer>
       
   </div>
