@@ -107,7 +107,7 @@ const Grid = styled.div`
   margin: 0 10px;
   backgroundSize: '100% 100%'
 `;
-
+ 
 return (
   <div>
       <NavBarComponent></NavBarComponent>
