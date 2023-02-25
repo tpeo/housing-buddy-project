@@ -27,7 +27,8 @@ export default function ListApartmentComponent({name, handleOnClick, backgroundI
         overflow: 'hidden',
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: '100% 100%',
-        backgroundPosition: 'center'
+        backgroundPosition: 'center',
+        borderRadius: '25px',
     }}>
         <CardActionArea sx={{ flexGrow: 1 }}>
             <Typography variant="h4" color='white' fontFamily='Roboto'>

@@ -84,7 +84,7 @@ const tempApt = ["lark", "dobie", "rambler", "crest", "ion", "2215", "skyloft", 
 //{tempApt.map((name, index) => (
 //{allApartments.map((name, index) => (
 
-const apartments = tempApt.map((name, index) => (
+const apartments = allApartments.map((name, index) => (
   <ListApartmentComponent
     key={name}    
     name={name}
@@ -93,7 +93,7 @@ const apartments = tempApt.map((name, index) => (
   />
 ));
 
-const Box = styled.div`
+const Box = styled.div` 
   display: flex;
   flex-direction: row;
   margin-left: 171px;
@@ -106,7 +106,7 @@ const Box = styled.div`
 
 const Grid = styled.div`
   width: calc(100% / 3);
-  margin: 0 10px;
+  margin: 10 10px;
   backgroundSize: '100% 100%'
 `;
  
@@ -122,7 +122,7 @@ return (
       <FilterComponent></FilterComponent>
       </Stack>
       <Divider color="#0495b2" sx={{ borderBottomWidth: 50 }}></Divider>
-      <Box>
+      <Box container spacing={0} justifyContent='center' alignItems='center'>
           <Grid container className='grid-container' style={{
               display: "grid",
               gridTemplateAreas: `
@@ -161,7 +161,7 @@ return (
               <Grid item className='apt9' style={{ gridArea: "ninth" }}>
                 {apartments[8]}
               </Grid>
-          </Grid>
+          </Grid> 
       </Box>
       <Box></Box>
       <Footer></Footer>
