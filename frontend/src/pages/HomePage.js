@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styled from 'styled-components';
 import NavBarComponent from '../components/NavBarComponent';
 import ListApartmentComponent from "../components/ListApartmentComponent";
 import FilterComponent from "../components/FilterComponent";
@@ -76,35 +77,91 @@ export default function AllApartments() {
             });
         }
 
+//all the apt images for the grid
+const backgroundImages = ['/apartments/lark.png', '/apartments/dobie.png', '/apartments/rambler.png', '/apartments/crest.png', '/apartments/ion.png', '/apartments/2215.png', '/apartments/skyloft.png', '/apartments/inspire.png', '/apartments/26west.png'];
+const tempApt = ["lark", "dobie", "rambler", "crest", "ion", "2215", "skyloft", "inspire", "26 west"]
+//{tempApt.map((name, index) => (
+//{allApartments.map((name, index) => (
 
+const apartments = tempApt.map((name, index) => (
+  <ListApartmentComponent
+    key={name}    
+    name={name}
+    handleOnClick={navApartmentPage}
+    backgroundImage={backgroundImages[index % backgroundImages.length]}
+  />
+));
 
+const Box = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 77px;
+  margin-right: 77px;
+  margin-top: 62px;
+  margin-bottom: 90px;
+  backgroundSize: '100% 100%',
+`;
 
+const Grid = styled.div`
+  width: calc(100% / 3);
+  margin: 0 10px;
+  backgroundSize: '100% 100%'
+`;
 
-  return (
-    <div>
-        <NavBarComponent></NavBarComponent>
-        <img src='/logowbg.png' height='100%' width='100%'></img>
-        <Stack direction="row" container justifyContent="flex-end">
-        <IconButton>
-            <SortIcon fontSize="large"></SortIcon>
-        </IconButton>
-        <FilterComponent></FilterComponent>
-        </Stack>
-        <Divider color="#0495b2" sx={{ borderBottomWidth: 10 }}></Divider>
-        <Box sx={{flexGrow: 1}}>
-            <Grid container spacing={4} 
-                justifyContent="center"
-                alignItems="stretch"
-                >
-                {allApartments.map((name) => (
-                    <ListApartmentComponent
-                        name={name}
-                        handleOnClick={navApartmentPage}
-                    ></ListApartmentComponent>))}
-            </Grid>
-        </Box>
-        <Footer></Footer>
-        
-    </div>
-  );
+return (
+  <div>
+      <NavBarComponent></NavBarComponent>
+      <img src='/logowbg.png' height='100%' width='100%'></img>
+      <Stack direction="row" container justifyContent="flex-end">
+      <IconButton>
+          <SortIcon fontSize="large"></SortIcon>
+      </IconButton>
+      <FilterComponent></FilterComponent>
+      </Stack>
+      <Divider color="#0495b2" sx={{ borderBottomWidth: 10 }}></Divider>
+      <Box>
+          <Grid container className='grid-container' style={{
+              display: "grid",
+              gridTemplateAreas: `
+                  "first fourth seventh"
+                  "second fifth eigth"
+                  "third sixth ninth"
+              `,
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gridTemplateRows: "repeat(3, 1fr)",
+              gap: '428px 433px',
+          }}>
+              <Grid item className='apt1' style={{ gridArea: "first" }}>
+                {apartments[0]}
+              </Grid>
+              <Grid item className='apt2' style={{ gridArea: "second" }}>
+                {apartments[1]}
+              </Grid>
+              <Grid item className='apt3' style={{ gridArea: "third" }}>
+                {apartments[2]}
+              </Grid>
+              <Grid item className='apt4' style={{ gridArea: "fourth" }}>
+                {apartments[3]}
+              </Grid>
+              <Grid item className='apt5' style={{ gridArea: "fifth" }}>
+                {apartments[4]}
+              </Grid>
+              <Grid item className='apt6' style={{ gridArea: "sixth" }}>
+                {apartments[5]}
+              </Grid>
+              <Grid item className='apt7' style={{ gridArea: "seventh" }}>
+                {apartments[6]}
+              </Grid>
+              <Grid item className='apt8' style={{ gridArea: "eigth" }}>
+                {apartments[7]}
+              </Grid>
+              <Grid item className='apt9' style={{ gridArea: "ninth" }}>
+                {apartments[8]}
+              </Grid>
+          </Grid>
+      </Box>
+      <Footer></Footer>
+      
+  </div>
+);
 }
