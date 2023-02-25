@@ -43,7 +43,7 @@ export default function ReviewForm() {
     };
 
     async function addRating() {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/`;
     
         if (formValues.name === "") {return;}
             await fetch(apiCall, {

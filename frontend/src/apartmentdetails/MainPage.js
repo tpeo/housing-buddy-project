@@ -44,7 +44,7 @@ export default function MainPage() {
     }
 
     async function getReviews() {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/${name}`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/${name}`;
     
             await fetch(apiCall, {
             method: "GET",
