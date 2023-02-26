@@ -3,7 +3,6 @@ const path = require("path");
 const multer = require("multer");
 const fs = require("fs");
 const bucket = require("./firebase/cred.js").bucket;
-const cors = require("cors");
 
 app.use("/auth", require("./auth").authorize);
 const authorize = require("./auth");
@@ -12,14 +11,8 @@ require("dotenv").config();
 
 // Route Handler
 const reviews = express.Router();
-reviews.use(cors());
 
 app.use(express.json());
-const options = {
-  origin: "*",
-  methods: "GET, POST, DELETE"
-}
-app.use(cors(options));
 
 
 //fetch an apartment's reviews

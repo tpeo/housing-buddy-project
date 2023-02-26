@@ -43,19 +43,14 @@ export default function ReviewForm() {
     };
 
     async function addRating() {
-        let apiCall = "http://localhost:4000/review/";
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/`;
     
         if (formValues.name === "") {return;}
             await fetch(apiCall, {
             method: "POST",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
             headers: {
               "Content-Type": "application/json",
             },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
             body: JSON.stringify({ title: formValues.title, location: formValues.location, rating: formValues.rating })
           })
             .then((response) => {

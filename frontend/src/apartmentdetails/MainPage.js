@@ -44,18 +44,13 @@ export default function MainPage() {
     }
 
     async function getReviews() {
-        let apiCall = `http://localhost:4000/review/${name}`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/${name}`;
     
             await fetch(apiCall, {
             method: "GET",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
             headers: {
               "Content-Type": "application/json",
             },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
           })
             .then((response) => {
               if (response.status !== 200) {

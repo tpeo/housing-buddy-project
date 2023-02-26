@@ -49,18 +49,13 @@ export default function AllApartments() {
     }
 
     async function getAllApartments() {
-        let apiCall = "http://localhost:4000/apartments/";
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/apartments/`;
     
             await fetch(apiCall, {
             method: "GET",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
             headers: {
               "Content-Type": "application/json",
             },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
           })
             .then((response) => {
               if (response.status !== 200) {

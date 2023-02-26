@@ -1,11 +1,10 @@
 const firebase = require("./firebase");
 const express = require("express");
-const cors = require("cors");
 const { JWT } = require("google-auth-library");
 const app = express();
 const db = firebase.db;
 const jwt = require('jsonwebtoken');
-
+const cors = require('cors');
 const authMiddleware = require("./auth");
 
 // const review = require("./review");
@@ -14,13 +13,8 @@ const authMiddleware = require("./auth");
 require("dotenv").config();
 
 app.use(express.json());
-const options = {
-  origin: "*",
-  methods: "GET, POST, DELETE"
-}
-app.use(cors(options));
-app.options('/apartments/', cors());
-
+app.options('/apartments/');
+app.use(cors());
 //auth all routes
 //app.use("/", authMiddleware);
 
@@ -53,7 +47,7 @@ app.get("/apartments/", async(req, res) => {
   res.status(200).json(object);
 })
 
-app.post("/review/", cors(), async(req, res) => {
+app.post("/review/", async(req, res) => {
 
   const body = req.body
     if(body.name == undefined || body.location == undefined || body.rating == undefined) {
