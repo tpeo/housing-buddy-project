@@ -75,7 +75,7 @@ export default function AllApartments() {
 
 //all the apt images for the grid
 const backgroundImages = ['/apartments/26west.png', '/apartments/rambler.png', '/apartments/crest.png', '/apartments/dobie.png', '/apartments/inspire.png', '/apartments/ion.png', '/apartments/lark.png', '/apartments/skyloft.png', '/apartments/txvintage.png'];
-const tempApt = ["Lark", "Dobie", "Rambler", "Crest at Pearl", "Ion", "Twenty Two Fifteen", "Skyloft", "Inspire", "26 West"]
+const tempApt = ["26 West", "Rambler", "Crest", "Dobie", "Inspire", "Ion", "Lark", "Skyloft", "Texan & Vintage"]
 //{tempApt.map((name, index) => (
 //{allApartments.map((name, index) => (
 
@@ -91,18 +91,19 @@ const apartments = allApartments.map((name, index) => (
 const Box = styled.div` 
   display: flex;
   flex-direction: row;
-  margin-left: 256px;
-  margin-right: 171px;
+  justify-content: 'center';
+  margin-left: 150px;
+  margin-right: 150px,
+  padding: auto;
   margin-top: 62px;
   margin-bottom: 90px;
-  backgroundSize: '100% 100%',
-  justifyContent: 'center',
+  background-size: '100% 100%';
 `;
 
 const Grid = styled.div`
   width: calc(100% / 3);
   margin: 10 10px;
-  backgroundSize: '100% 100%'
+  backgroundSize: '100% 100%';
 `;
  
 //need to add view all apartments button
@@ -118,45 +119,47 @@ return (
       </Stack>
       <Divider color="#0495b2" sx={{ borderBottomWidth: 50 }}></Divider>
       <Box>
-          <Grid container className='grid-container' style={{
-              display: "grid",
-              gridTemplateAreas: `
-                  "first fourth seventh"
-                  "second fifth eigth"
-                  "third sixth ninth"
-              `,
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gridTemplateRows: "repeat(3, 1fr)",
-              gap: '310px 310px',
-          }}>
-              <Grid item className='apt1' style={{ gridArea: "first" }}>
-                {apartments[0]}
-              </Grid>
-              <Grid item className='apt2' style={{ gridArea: "second" }}>
-                {apartments[1]}
-              </Grid>
-              <Grid item className='apt3' style={{ gridArea: "third" }}>
-                {apartments[2]}
-              </Grid>
-              <Grid item className='apt4' style={{ gridArea: "fourth" }}>
-                {apartments[3]}
-              </Grid>
-              <Grid item className='apt5' style={{ gridArea: "fifth" }}>
-                {apartments[4]}
-              </Grid>
-              <Grid item className='apt6' style={{ gridArea: "sixth" }}>
-                {apartments[5]}
-              </Grid>
-              <Grid item className='apt7' style={{ gridArea: "seventh" }}>
-                {apartments[6]}
-              </Grid>
-              <Grid item className='apt8' style={{ gridArea: "eigth" }}>
-                {apartments[7]}
-              </Grid>
-              <Grid item className='apt9' style={{ gridArea: "ninth" }}>
-                {apartments[8]}
-              </Grid>
-          </Grid> 
+        <Box>
+            <Grid container className='grid-container' style={{
+                display: "grid",
+                gridTemplateAreas: `
+                    "first fourth seventh"
+                    "second fifth eigth"
+                    "third sixth ninth"
+                `,
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gridTemplateRows: "repeat(3, 1fr)",
+                gap: '310px 310px',
+            }}>
+                <Grid item className='apt1' style={{ gridArea: "first" }}>
+                  {apartments[0]}
+                </Grid>
+                <Grid item className='apt2' style={{ gridArea: "second" }}>
+                  {apartments[1]}
+                </Grid>
+                <Grid item className='apt3' style={{ gridArea: "third" }}>
+                  {apartments[2]}
+                </Grid>
+                <Grid item className='apt4' style={{ gridArea: "fourth" }}>
+                  {apartments[3]}
+                </Grid>
+                <Grid item className='apt5' style={{ gridArea: "fifth" }}>
+                  {apartments[4]}
+                </Grid>
+                <Grid item className='apt6' style={{ gridArea: "sixth" }}>
+                  {apartments[5]}
+                </Grid>
+                <Grid item className='apt7' style={{ gridArea: "seventh" }}>
+                  {apartments[6]}
+                </Grid>
+                <Grid item className='apt8' style={{ gridArea: "eigth" }}>
+                  {apartments[7]}
+                </Grid>
+                <Grid item className='apt9' style={{ gridArea: "ninth" }}>
+                  {apartments[8]}
+                </Grid>
+            </Grid> 
+        </Box>
       </Box>
       <Box></Box>
       <Footer></Footer>
