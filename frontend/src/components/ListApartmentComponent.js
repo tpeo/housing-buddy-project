@@ -28,7 +28,7 @@ export default function ListApartmentComponent({name, handleOnClick}) {
 
   return (
     <Grid id={name} item xs={4} sm={6} md={4}>
-        <Card sx={gridItem}  key={name} height="100%">
+        <Card sx={gridItem}  key={name} height="100%" >
             <CardActionArea sx={{
                 cardActionArea: {
                     flexGrow: 1,
