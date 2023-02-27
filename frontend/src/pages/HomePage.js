@@ -74,7 +74,7 @@ export default function AllApartments() {
         }
 
 //all the apt images for the grid
-const backgroundImages = ['/apartments/lark.png', '/apartments/dobie.png', '/apartments/rambler.png', '/apartments/crest.png', '/apartments/ion.png', '/apartments/2215.png', '/apartments/skyloft.png', '/apartments/inspire.png', '/apartments/26west.png'];
+const backgroundImages = ['/apartments/26west.png', '/apartments/rambler.png', '/apartments/crest.png', '/apartments/dobie.png', '/apartments/inspire.png', '/apartments/ion.png', '/apartments/lark.png', '/apartments/skyloft.png', '/apartments/txvintage.png'];
 const tempApt = ["Lark", "Dobie", "Rambler", "Crest at Pearl", "Ion", "Twenty Two Fifteen", "Skyloft", "Inspire", "26 West"]
 //{tempApt.map((name, index) => (
 //{allApartments.map((name, index) => (
@@ -91,7 +91,7 @@ const apartments = allApartments.map((name, index) => (
 const Box = styled.div` 
   display: flex;
   flex-direction: row;
-  margin-left: 171px;
+  margin-left: 256px;
   margin-right: 171px;
   margin-top: 62px;
   margin-bottom: 90px;
@@ -117,7 +117,7 @@ return (
       <FilterComponent></FilterComponent>
       </Stack>
       <Divider color="#0495b2" sx={{ borderBottomWidth: 50 }}></Divider>
-      <Box container spacing={0} justifyContent='center' alignItems='center'>
+      <Box>
           <Grid container className='grid-container' style={{
               display: "grid",
               gridTemplateAreas: `
