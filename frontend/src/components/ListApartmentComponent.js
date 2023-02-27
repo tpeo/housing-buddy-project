@@ -5,43 +5,41 @@ import {
     Typography,
     CardActionArea
 } from "@mui/material"
-
+//import './fonts.css';
+import { shadows } from '@mui/system';
 import { useNavigate } from "react-router-dom";
 
-export default function ListApartmentComponent({name, handleOnClick}) {
-    const navigate = useNavigate();
-
-    const gridItem = {
-        margin: "10px",
-        width: "80%",
-        height: "100%",
-        position: 'relative',
-        mb: 4,
-        justifyContent: 'center',
-        direction: 'column',
-        alignItems: 'center',
-        backgroundImage: `url('/apartments/lark.jpeg')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-
-    }   
-
+export default function ListApartmentComponent({name, handleOnClick, backgroundImage}) {
+    // ^ add backgroundImage to the changing parameters
   return (
-    <Grid id={name} item xs={4} sm={6} md={4}>
-        <Card sx={gridItem}  key={name} height="100%">
-            <CardActionArea sx={{
-                cardActionArea: {
-                    flexGrow: 1,
-                    flexDirection: 'column',
-                    alignItems: 'stretch',
-                  },
-            }}>
-                <Typography variant="h2">{name}</Typography>
-                <Button id={name} onClick={handleOnClick}>Visit Page</Button>                
-            </CardActionArea>
-
-        </Card>
-    </Grid>
-
+    <Card sx={{
+        width: '300px',
+        height: '300px',
+        backgroundSize: '100% 100%',
+        backgroundPosition: 'center',
+        position: 'absolute',
+        backgroundImage: `url(${backgroundImage})`,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        boxSizing: 'content-box',
+        textAlign: 'center',
+        overflow: 'hidden',
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: '100% 100%',
+        backgroundPosition: 'center',
+        borderRadius: '25px',
+        boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.3)',
+    }}>
+        <CardActionArea sx={{ flexGrow: 1 }}>
+            <Typography variant="h4" color='white' fontFamily='Roboto' fontWeight={500} sx={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 1)' }}>
+                {name}
+            </Typography>
+        </CardActionArea>
+        <Button variant="contained" onClick={handleOnClick} sx={{ mt: 2 }}>
+            Visit Page
+        </Button>
+    </Card>
   );
 }
