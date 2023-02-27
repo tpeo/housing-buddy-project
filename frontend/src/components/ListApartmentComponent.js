@@ -37,7 +37,7 @@ export default function ListApartmentComponent({name, handleOnClick, backgroundI
                 {name}
             </Typography>
         </CardActionArea>
-        <Button variant="contained" onClick={handleOnClick} sx={{ mt: 2 }}>
+        <Button id={name} variant="contained" onClick={handleOnClick} sx={{ mt: 2 }}>
             Visit Page
         </Button>
     </Card>
