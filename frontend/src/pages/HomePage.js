@@ -21,16 +21,15 @@ import { useNavigate } from "react-router-dom";
 export default function AllApartments() {
     const navigate = useNavigate();
 
-    const navigatetest = () => {
-        navigate('/mainpage');
-    }
-
     const [allApartments, setAllApartments] = useState([]);
+    const [apartmentStats, setApartmentStats] = useState([]);
+    const [order, setOrder] = useState([]);
     //use effect update whenever soomething changes
 
     useEffect(() => {
         getAllApartments();
-    }, [])
+        getApartmentStats();
+    }, []);
 
     useEffect(() => {
       const queryParams = new URLSearchParams(window.location.search);
@@ -41,6 +40,7 @@ export default function AllApartments() {
   }, [])
 
     const [query, setQuery] = useState("")
+
 
     const navApartmentPage = (event) => {
       console.log(event.target.id);
@@ -67,6 +67,31 @@ export default function AllApartments() {
                 let apartments = [];
                 response.forEach((data) => {apartments.push(data)})
                 setAllApartments(apartments);
+              })
+            .catch((e) => {
+              console.log(e);
+            });
+        }
+
+      async function getApartmentStats() {
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/apartments/stats`;
+    
+            await fetch(apiCall, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => {
+              if (response.status !== 200) {
+                throw new Error();
+              }
+              return response.json();
+            })
+            .then((response) => {
+                let stats = [];
+                response.forEach((data) => {stats.push(data)})
+                setApartmentStats(stats);
               })
             .catch((e) => {
               console.log(e);
@@ -110,7 +135,7 @@ return (
       <IconButton>
           <SortIcon fontSize="large"></SortIcon>
       </IconButton>
-      <FilterComponent></FilterComponent>
+      <FilterComponent setOrder={setAllApartments} elements={apartmentStats}></FilterComponent>
       </Stack>
       <Divider color="#0495b2" sx={{ borderBottomWidth: 50 }}></Divider>
       <Box>

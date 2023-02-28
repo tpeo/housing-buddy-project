@@ -10,11 +10,11 @@ import {
   MenuItem,
   Typography
 } from '@mui/material'
+var SortedMap = require("collections/sorted-map");
 
-
-export default function FilterComponent() {
-  const filters = ['Most Popular', 'Affordability', 'Newest', 'Highest Ratings'];
-
+export default function FilterComponent({setOrder, elements}) {
+  const filters = ['Overall Rating', 'Cost', 'Proximity', 'Spaciousness', "Amenities", "Management"];
+  const map = new SortedMap();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -22,9 +22,22 @@ export default function FilterComponent() {
   };
 
 
-  const handleCloseUserMenu = () => {
+  const handleCloseNavMenu = (event) => {
+    filterHelper(event.currentTarget.innerText);
     setAnchorElUser(null);
   };
+
+  function filterHelper(filter) {
+    const lower = filter.toLowerCase();
+    //populate sorted map
+    elements.forEach((data) => {
+      map.put(data[`${lower}`], data.name);
+    });
+    //from sorted map populate order
+    setOrder(map.values());
+    //pass objectsordered map to display
+    
+  }
 
   return (
 <Box sx={{ flexGrow: 0 }}>
@@ -47,10 +60,9 @@ export default function FilterComponent() {
                     horizontal: 'right',
                   }}
                   open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
                 >
                   {filters.map((filter) => (
-                    <MenuItem key={filter} onClick={handleCloseUserMenu}>
+                    <MenuItem key={filter} onClick={() => handleCloseNavMenu()}>
                       <Typography textAlign="center">{filter}</Typography>
                     </MenuItem>
                   ))}

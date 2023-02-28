@@ -34,6 +34,22 @@ app.get("/review/:apartment", async(req, res) => {
     res.status(200).json(reviews);
 })
 
+//get all apartment stats
+app.get("/apartments/stats", async(req, res) => {
+  const apartments = db.collection("apartment-info");
+  const query = await apartments.get();
+
+  //const set = new Set();
+  const object = [];
+  query.docs.forEach((doc) => object.push({
+    "name": doc.data().name,
+    "rating": doc.data().rating
+  }));
+
+  //const ret = JSON.stringify(Array.from(set));
+  res.status(200).json(object);
+})
+
 //get all apartment names
 app.get("/apartments/", async(req, res) => {
   const apartments = db.collection("apartment-info");
