@@ -44,7 +44,7 @@ export default function AllApartments() {
 
     const navApartmentPage = (event) => {
       console.log(event.target.id);
-      navigate(`/mainpage/${event.target.id}`);
+      navigate(`/mainpage/${event.target.id.toLowerCase()}`);
 
     }
 

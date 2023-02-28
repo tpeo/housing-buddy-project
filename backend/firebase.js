@@ -2,6 +2,7 @@ const admin = require('firebase-admin');
 
 //var serviceAccount = require("./serviceKey.json");
 var { getStorage } = require("firebase-admin/storage");
+const serverStamp = admin.firestore.Timestamp;
 require("dotenv").config();
 
 const serviceAccount = JSON.parse(process.env.SERVICE_KEY)
@@ -12,4 +13,4 @@ admin.initializeApp({
 
 
 const db = admin.firestore();
-module.exports = {db};
+module.exports = {db, serverStamp};
