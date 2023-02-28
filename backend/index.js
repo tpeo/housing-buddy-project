@@ -97,7 +97,8 @@ app.get("/apartments/:filter", async(req, res) => {
 app.post("/review/", async(req, res) => {
 
   const body = req.body
-    if(body.name == undefined || body.location == undefined || body.rating == undefined) {
+  const apartment = req.body.apartment;
+    if(body.review == undefined || body.rating == undefined) {
         return res.json({
           msg: "Error: content not defined in request",
           data: {},
@@ -105,17 +106,24 @@ app.post("/review/", async(req, res) => {
     }
 
     let r = (Math.random() + 1).toString(36).substring(2);
-
+    let date_obj = new Date();
     const data = {
         title: req.body.title,
+        name: req.body.name,
         review: req.body.review,
         rating: req.body.rating,
+        affordability: req.body.affordability,
+        amenities: req.body.amenities,
+        management: req.body.management,
+        proximity: req.body.proximity,
+        spaciousness: req.body.spaciousness,
+        date: firebase.serverStamp.now(),
         //randomly generate?
         id: r
     }
 
     //best way to handle this?
-    const query = await db.collection('apartments').doc(data.id).set(data);
+    const query = await db.collection("apartment-info").doc(apartment).collection("reviews").doc(data.id).set(data);
     res.status(200).json(query);
 })
 

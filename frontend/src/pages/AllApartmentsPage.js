@@ -46,6 +46,9 @@ export default function AllApartmentsPage() {
   return (
     <div>
         <NavBarComponent></NavBarComponent>
+        <Grid>
+          
+        </Grid>
         <Footer></Footer>
     </div>
   );
