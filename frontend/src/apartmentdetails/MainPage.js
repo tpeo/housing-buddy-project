@@ -26,6 +26,14 @@ export default function MainPage() {
     const params = useParams();
     
     const name = params.apartment;
+    
+    const info_obj = {
+      "name": "name",
+      "link": "link",
+      "number": "number"
+    }
+
+    const [info, setInfo] = useState(info_obj);
 
     let navigate = useNavigate();
     const [reviews, setReviews] = useState([]);
@@ -33,6 +41,7 @@ export default function MainPage() {
 
     useEffect(() => {
         getReviews();
+        getInfo();
     }, [])
 
     const handleOnClick = () =>  {
@@ -68,11 +77,35 @@ export default function MainPage() {
             });
         }
 
+      async function getInfo() {
+        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${name}/info`;
+    
+            await fetch(apiCall, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => {
+              if (response.status !== 200) {
+                throw new Error();
+              }
+              return response.json();
+            })
+            .then((response) => {
+                console.log(response)
+                setInfo(response);
+              })
+            .catch((e) => {
+              console.log(e);
+            });
+        }
+
   return (
     <Grid name="main" display="flex" direction="column">
         <NavBarComponent></NavBarComponent>
-        <ApartmentHeader></ApartmentHeader>
-        <OverviewComponent name={name}></OverviewComponent>
+        <ApartmentHeader info={info}></ApartmentHeader>
+        <OverviewComponent name={info.name}></OverviewComponent>
         <Grid display="flex" direction="row" justifyContent="flex-end">
             <Button onClick={handleOnClick}>Add a review</Button>
             <IconButton>

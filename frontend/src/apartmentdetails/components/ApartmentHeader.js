@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 
-export default function ApartmentHeader() {
+export default function ApartmentHeader({info}) {
     const theme = createTheme({
         typography: {
             body1: {
@@ -47,9 +47,9 @@ export default function ApartmentHeader() {
         }}
       >
         <Typography variant="body1">VISIT THE </Typography>
-        <Link>LARK WEBSITE</Link>
+        <Link href={info.link} target="_blank" rel="noopener noreferrer">{`${info.name} WEBSITE`}</Link>
         <Typography variant="body1">OR CALL </Typography>
-        <Link>000-000-0000</Link>
+        <Link href={`tel:${info.number}`}>{info.number}</Link>
         <Typography variant="body1"> FOR MORE INFORMATION</Typography>
       </Box>
         </ThemeProvider>

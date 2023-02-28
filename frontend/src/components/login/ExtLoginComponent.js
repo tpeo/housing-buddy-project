@@ -16,7 +16,7 @@ export default function ExtLoginComponent() {
         //4 - check if have token in the current user
         if (token) {
           //5 - put the token at localStorage (We'll use this to make requests)
-          localStorage.setItem("@attendanceToken", token);
+          localStorage.setItem("@userToken", token);
           localStorage.setItem("loggedIn", true);
           //6 - navigate user to the home page
           navigate("/");
