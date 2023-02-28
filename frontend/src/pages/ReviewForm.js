@@ -16,7 +16,7 @@ import {
     Box
 } from "@mui/material"
 
-export default function ReviewForm() {
+export default function ReviewForm({name}) {
 
     const defaultValues = {
         name: "name",
@@ -45,13 +45,24 @@ export default function ReviewForm() {
     async function addRating() {
         let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/`;
     
-        if (formValues.name === "") {return;}
+        if (formValues.review === "") {return;}
             await fetch(apiCall, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ title: formValues.title, location: formValues.location, rating: formValues.rating })
+            body: JSON.stringify({ 
+              apartment: {name},
+              title: formValues.title, 
+              name: formValues.name, //what if null?
+              rating: formValues.rating,
+              review: formValues.review,
+              affordability: formValues.affordability,
+              amenities: formValues.amenities,
+              management: formValues.management,
+              proximity: formValues.proximity,
+              spaciousness: formValues.spaciousness,
+            })
           })
             .then((response) => {
               if (response.status !== 200) {
