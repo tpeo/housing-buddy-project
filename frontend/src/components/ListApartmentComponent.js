@@ -13,8 +13,8 @@ export default function ListApartmentComponent({name, handleOnClick, backgroundI
     // ^ add backgroundImage to the changing parameters
   return (
     <Card sx={{
-        width: '300px',
-        height: '300px',
+        width: '20%',
+        height: '43%',
         backgroundSize: '100% 100%',
         backgroundPosition: 'center',
         position: 'absolute',

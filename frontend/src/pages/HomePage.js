@@ -92,20 +92,15 @@ const Box = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: 'center';
-  margin-left: 150px;
-  margin-right: 150px,
+  margin-left: 10%;
+  margin-right: 10%,
   padding: auto;
-  margin-top: 62px;
-  margin-bottom: 90px;
+  margin-top: 2%;
+  margin-bottom: 5%;
   background-size: '100% 100%';
+  overflow: 'hidden';
 `;
 
-const Grid = styled.div`
-  width: calc(100% / 3);
-  margin: 10 10px;
-  backgroundSize: '100% 100%';
-`;
- 
 //need to add view all apartments button
 return (
   <div>
@@ -129,7 +124,7 @@ return (
                 `,
                 gridTemplateColumns: "repeat(3, 1fr)",
                 gridTemplateRows: "repeat(3, 1fr)",
-                gap: '310px 310px',
+                gap: '20rem',
             }}>
                 <Grid item className='apt1' style={{ gridArea: "first" }}>
                   {apartments[0]}
