@@ -95,6 +95,10 @@ export default function NavBarComponent() {
 
     const navigate = useNavigate();
 
+    const navigateHome = () => {
+      navigate('/');
+    }
+
     function navHelper(name) {
         switch(name){
             case "VIEW ALL APARTMENTS":
@@ -122,7 +126,10 @@ export default function NavBarComponent() {
         <AppBar sx={{ background: 'white' }} position="sticky">
           <Container maxWidth="xl">
             <Toolbar disableGutters>
-              <img src='/logo.png' width={200} height={80} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <Button onClick={navigateHome} sx={{ p: 0 }}>
+                <img src='/logo.png' width={200} height={80} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}></img>
+            </Button>
+
     
               <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                 <IconButton

@@ -23,12 +23,12 @@ export default function AllApartments() {
 
     const [allApartments, setAllApartments] = useState([]);
     const [apartmentStats, setApartmentStats] = useState([]);
-    const [order, setOrder] = useState([]);
+    const [order, setOrder] = useState([]); //default order
     //use effect update whenever soomething changes
 
     useEffect(() => {
         getAllApartments();
-        getApartmentStats();
+        setOrder(allApartments);
     }, []);
 
     useEffect(() => {
@@ -49,7 +49,7 @@ export default function AllApartments() {
     }
 
     async function getAllApartments() {
-        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/apartments/`;
+        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/apartments/`;
     
             await fetch(apiCall, {
             method: "GET",
@@ -67,31 +67,6 @@ export default function AllApartments() {
                 let apartments = [];
                 response.forEach((data) => {apartments.push(data)})
                 setAllApartments(apartments);
-              })
-            .catch((e) => {
-              console.log(e);
-            });
-        }
-
-      async function getApartmentStats() {
-        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/apartments/stats`;
-    
-            await fetch(apiCall, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-            .then((response) => {
-              if (response.status !== 200) {
-                throw new Error();
-              }
-              return response.json();
-            })
-            .then((response) => {
-                let stats = [];
-                response.forEach((data) => {stats.push(data)})
-                setApartmentStats(stats);
               })
             .catch((e) => {
               console.log(e);
@@ -132,10 +107,7 @@ return (
       <NavBarComponent></NavBarComponent>
       <img src='/logowbg.png' height='100%' width='100%'></img>
       <Stack direction="row" container justifyContent="flex-end">
-      <IconButton>
-          <SortIcon fontSize="large"></SortIcon>
-      </IconButton>
-      <FilterComponent setOrder={setAllApartments} elements={apartmentStats}></FilterComponent>
+      <FilterComponent collection="apartments" setOrder={setOrder}></FilterComponent>
       </Stack>
       <Divider color="#0495b2" sx={{ borderBottomWidth: 50 }}></Divider>
       <Box>
