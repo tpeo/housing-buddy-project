@@ -5,7 +5,7 @@ import Footer from "../components/Footer"
 import {
     Grid,
     TextField,
-    FormControlLabel,
+    Stack,
     FormControl,
     FormLabel,
     Select,
@@ -13,22 +13,29 @@ import {
     Button,
     CardContent,
     Card,
-    Box
+    Box,
+    Typography
 } from "@mui/material"
 
-export default function ReviewForm({name}) {
+import { useParams } from "react-router-dom";
+
+export default function ReviewForm() {
+  const params = useParams();
+    
+  const name = params.apartment;
 
     const defaultValues = {
         name: "name",
-        location: "location",
-        rating: 5
+        title: "title",
+        rating: 0,
+        review: "hello"
       };
-
+    
+    const ratings = ["affordability", "management", "parking", "amenities", "proximity", "spaciousness"];
     const [formValues, setFormValues] = useState(defaultValues);
 
     const handleInputChange = (e) => {
         const {id, value} = e.target;
-        console.log(id);
         setFormValues({
             ...formValues,
             [id]: value,
@@ -36,14 +43,16 @@ export default function ReviewForm({name}) {
     };
 
     const handleRatingChange = (e) => {
+      console.log(e.target.name)
         setFormValues({
             ...formValues,
-            ["rating"]: e.target.value,
+            [e.target.name]: e.target.value
         });
     };
 
     async function addRating() {
-        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/`;
+        console.log(formValues)
+        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/`;
     
         if (formValues.review === "") {return;}
             await fetch(apiCall, {
@@ -82,10 +91,17 @@ export default function ReviewForm({name}) {
     };
 
     const card = (
-      <React.Fragment>
-        <CardContent>
+      <Grid>
         <form onSubmit={handleSubmit}>
-        <Grid container alignItems="center" justify="center" direction="column">
+        <Grid container display="flex" alignItems="center" justify="center" direction="column" spacing={4}>
+            <Grid item>
+                <TextField
+                id="name"
+                label="Name"
+                type="text"
+                onChange={handleInputChange}
+                ></TextField>
+            </Grid>
             <Grid item>
                 <TextField
                 id="title"
@@ -94,31 +110,52 @@ export default function ReviewForm({name}) {
                 onChange={handleInputChange}
                 ></TextField>
             </Grid>
-            <Grid item>
-                <TextField
-                id="location"
-                label="Location"
-                type="text"
-                onChange={handleInputChange}
-                ></TextField>
-            </Grid>
-            <Grid item>
+            <Grid item display="flex" direction="column"> 
+              <Typography variant="body">Overall Review</Typography>
                 <RadioGroupRating
+                    name="rating"
                     handleInputChange={handleRatingChange}
                 ></RadioGroupRating>
             </Grid>
-            <Button variant="contained" color="primary" type="submit">Submit</Button>
+            <Grid id="category ratings" item>
+              <Box sx={{flexGrow: 1}}>
+              <Grid container spacing={2} 
+                  display="flex"
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="stretch"
+                  >
+                  {ratings.map((rating) => (
+                      <Stack>
+                        <Typography variant="body">{rating}</Typography>
+                        <RadioGroupRating
+                          name={rating}
+                          handleInputChange={handleRatingChange}
+                      ></RadioGroupRating>
+                      </Stack>
+                  ))}
+              </Grid>
+            </Box>
+
+            </Grid>
+            <Grid id="comments"item>
+                <TextField id="review" label ="review" type="text" placeholder="review" multiline rows={2} maxRows={4} onChange={handleInputChange}> 
+                </TextField>
+            </Grid>
+            <Grid item>
+              <Button variant="contained" color="primary" type="submit">Submit</Button>
+            </Grid>
+            
         </Grid>
         
-    </form>
-    </CardContent>
-      </React.Fragment>
+      </form>
+      </Grid>
     );
     
   return (
     <div>
       <NavBarComponent></NavBarComponent>
-      <Box sx={{ minWidth: 275 }}>
+      <Box sx={{}}>
         <Card variant="outlined">{card}</Card>
       </Box>
       <Footer></Footer>

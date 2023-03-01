@@ -97,7 +97,8 @@ app.get("/apartments/:filter", async(req, res) => {
 app.post("/review/", async(req, res) => {
 
   const body = req.body
-  const apartment = req.body.apartment;
+  const apartment = req.body.apartment.name;
+  console.log(apartment.name);
     if(body.review == undefined || body.rating == undefined) {
         return res.json({
           msg: "Error: content not defined in request",
@@ -111,11 +112,11 @@ app.post("/review/", async(req, res) => {
         name: req.body.name,
         review: req.body.review,
         rating: req.body.rating,
-        // affordability: req.body.affordability,
-        // amenities: req.body.amenities,
-        // management: req.body.management,
-        // proximity: req.body.proximity,
-        // spaciousness: req.body.spaciousness,
+        affordability: req.body.affordability,
+        amenities: req.body.amenities,
+        management: req.body.management,
+        proximity: req.body.proximity,
+        spaciousness: req.body.spaciousness,
         date: firebase.serverStamp.now(),
         //randomly generate?
         id: r
@@ -123,7 +124,30 @@ app.post("/review/", async(req, res) => {
 
     //best way to handle this?
     const query = await db.collection("apartment-info").doc(apartment).collection("reviews").doc(data.id).set(data);
+    console.log("hello")
     await db.collection("apartment-info").doc(apartment).update({num_reviews: firebase.increment});
+    res.status(200).json(query);
+})
+
+app.post("/apartment/", async(req, res) => {
+
+  const body = req.body
+    if(body.apartment == undefined || body.location == undefined) {
+        return res.json({
+          msg: "Error: content not defined in request",
+          data: {},
+        });
+    }
+
+    let r = (Math.random() + 1).toString(36).substring(2);
+    const data = {
+        name: req.body.name,
+        location: req.body.location,
+        //randomly generate?
+    }
+    //create review collection
+    //best way to handle this?
+    const query = await db.collection("apartment-info").doc(body.apartment).set(data);
     res.status(200).json(query);
 })
 

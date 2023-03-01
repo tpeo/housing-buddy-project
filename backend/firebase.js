@@ -14,13 +14,14 @@ admin.initializeApp({
 
 // [START aggregate_function]
 exports.aggregateRatings = functions.firestore
-    .document('apartment-info/lark/')
+    .document('apartment-info/lark/reviews')
     .onWrite(async (change, context) => {
       // Get value of the newly added rating
       const ratingVal = change.after.data().rating;
 
       // Get a reference to the restaurant
-      const restRef = db.collection('apartment-info').doc(context.params.restId);
+      //const restRef = db.collection('apartment-info').doc(context.params.restId);
+      const restRef = db.collection('apartment-info').doc('lark');
 
       // Update aggregations in a transaction
       await db.runTransaction(async (transaction) => {
