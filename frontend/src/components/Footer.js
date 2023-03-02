@@ -51,7 +51,7 @@ export default function StickyFooter() {
         flexDirection: 'column',
         justifyContent: 'space-between',
         width: "100%",
-        minHeight: '50vh',
+        minHeight: '30vh',
       }}
     >
 
@@ -78,6 +78,7 @@ export default function StickyFooter() {
              }}>
             <Grid key="contact">
                 <Typography variant="body1">Contact Us</Typography>
+                <Typography variant="body1"></Typography>
                 <Typography variant="body1">000-000-0000</Typography>
                 <href>housingbuddy@gmail.com</href>
             </Grid>
@@ -95,9 +96,9 @@ export default function StickyFooter() {
             <Grid key="follow">
                 <Typography variant="body1">FOLLOW US</Typography>
                 <Stack direction="row">
-                    <FacebookIcon></FacebookIcon>
-                    <TwitterIcon></TwitterIcon>
-                    <InstagramIcon></InstagramIcon>
+                    <FacebookIcon htmlColor='white'></FacebookIcon>
+                    <TwitterIcon htmlColor='white'></TwitterIcon>
+                    <InstagramIcon htmlColor='white'></InstagramIcon>
                 </Stack>
             </Grid>
         </Grid>

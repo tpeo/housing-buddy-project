@@ -28,6 +28,7 @@ export default function ApartmentHeader({info}) {
         display: 'flex',
         flexDirection: 'column',
         width: "100%",
+        justifyContent: 'center',
       }}
     >
 
@@ -43,7 +44,8 @@ export default function ApartmentHeader({info}) {
               ? "#0495b2"
               : theme.palette.grey[800],
           display: 'flex',
-          flexDirection: 'row'  
+          flexDirection: 'row',  
+          justifyContent: 'center'
         }}
       >
         <Typography variant="body1">VISIT THE </Typography>
