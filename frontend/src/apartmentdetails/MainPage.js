@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import StaticRating from "./components/StaticRating";
 import FilterComponent from "../components/FilterComponent";
 import SortIcon from '@mui/icons-material/Sort';
+import AddIcon from '@mui/icons-material/Add';
 import ApartmentHeader from "./components/ApartmentHeader";
 import {
     Grid,
@@ -105,14 +106,26 @@ export default function MainPage() {
     <Grid name="main" display="flex" direction="column">
         <NavBarComponent></NavBarComponent>
         <ApartmentHeader info={info}></ApartmentHeader>
-        <OverviewComponent name={info.name}></OverviewComponent>
-        <Grid display="flex" direction="row" justifyContent="flex-end">
-            <Button onClick={handleOnClick}>Add a review</Button>
-            <IconButton>
-            <SortIcon fontSize="large"></SortIcon>
+        <Box>
+          <OverviewComponent name={info.name}></OverviewComponent>
+        </Box>
+        <Box display={'flex'} direction={'row'} height={'70px'} bgcolor={'#EEEEEE'}>
+          <Grid marginLeft={'2%'} container spacing={0} xs={10} position={'flex-start'} marginTop={'10px'} marginBottom={'10px'}> 
+            <Button variant={'contained'} onClick={handleOnClick} style={{ backgroundColor: '#0495B2' }}>
+              <AddIcon/>
+                Create a Review
+            </Button>
+          </Grid>
+          <Grid marginLeft={'100px'} position={'flex-end'} marginTop={'10px'}> 
+            <IconButton style={{ color: '#0495B2' }}>
+              <SortIcon fontSize="large"></SortIcon>
             </IconButton>
+          </Grid>
+          <Grid  marginTop={'5px'}>
             <FilterComponent></FilterComponent>
-        </Grid>
+          </Grid>
+        </Box>
+        
         <Grid>
             <Box sx={{flexGrow: 1}}>
                 <Grid container spacing={4} 
