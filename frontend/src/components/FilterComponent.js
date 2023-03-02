@@ -86,10 +86,10 @@ export default function FilterComponent({collection, setOrder}) {
   }
 
   return (
-<Box sx={{ flexGrow: 0 }}>
+<Box sx={{ flexGrow: 0 }} marginTop={'12px'}>
   <Tooltip title="Open filters">
     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-      <TuneIcon color="#0495b2" fontSize="large"></TuneIcon>
+      <TuneIcon style={{color: "#0495b2"}} fontSize="large"></TuneIcon>
     </IconButton>
   </Tooltip>
   <Menu

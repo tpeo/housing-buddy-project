@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 export default function ListApartmentComponent({name, handleOnClick, backgroundImage}) {
     // ^ add backgroundImage to the changing parameters
   return (
-    <Card sx={{
+    <Card id={name} onClick={handleOnClick} sx={{
         width: '20%',
         height: '43%',
         backgroundSize: '100% 100%',
@@ -33,7 +33,7 @@ export default function ListApartmentComponent({name, handleOnClick, backgroundI
         boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.3)',
     }}>
         <CardActionArea sx={{ flexGrow: 1 }}>
-            <Typography variant="h4" color='white' fontFamily='Roboto' fontWeight={500} sx={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 1)' }}>
+            <Typography component='h3' variant="h3" color='white' fontWeight={'bold'} sx={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 1)' }}>
                 {name}
             </Typography>
         </CardActionArea>

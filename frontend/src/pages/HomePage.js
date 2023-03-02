@@ -76,8 +76,8 @@ export default function AllApartments() {
 //all the apt images for the grid
 const backgroundImages = ['/apartments/26west.png', '/apartments/rambler.png', '/apartments/crest.png', '/apartments/dobie.png', '/apartments/inspire.png', '/apartments/ion.png', '/apartments/lark.png', '/apartments/skyloft.png', '/apartments/txvintage.png'];
 const tempApt = ["26 West", "Rambler", "Crest", "Dobie", "Inspire", "Ion", "Lark", "Skyloft", "Texan & Vintage"]
-//{tempApt.map((name, index) => (
-//{allApartments.map((name, index) => (
+//tempApt.map((name, index) => (
+//allApartments.map((name, index) => (
 
 const apartments = allApartments.map((name, index) => (
   <ListApartmentComponent
@@ -96,8 +96,7 @@ const Box = styled.div`
   margin-right: 10%,
   padding: auto;
   margin-top: 2%;
-  margin-bottom: 5%;
-  background-size: '100% 100%';
+  margin-bottom: 4%;
   overflow: 'hidden';
 `;
 
@@ -153,9 +152,10 @@ return (
             </Grid> 
         </Box>
       </Box>
-      <Box></Box>
+      <Grid height='100%' justifyContent={'center'} display='flex' flexDirection={'flex-end'} marginTop={'20%'}>
+         <Typography handleOnClick='' color={'#0495B2'}>View All Apartments</Typography>
+      </Grid>
       <Footer></Footer>
-      
   </div>
 );
 }
