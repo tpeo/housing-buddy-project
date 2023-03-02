@@ -75,9 +75,7 @@ export default function AllApartments() {
 
 //all the apt images for the grid
 const backgroundImages = ['/apartments/26west.png', '/apartments/rambler.png', '/apartments/crest.png', '/apartments/dobie.png', '/apartments/inspire.png', '/apartments/ion.png', '/apartments/lark.png', '/apartments/skyloft.png', '/apartments/txvintage.png'];
-const tempApt = ["26 West", "Rambler", "Crest", "Dobie", "Inspire", "Ion", "Lark", "Skyloft", "Texan & Vintage"]
-//{tempApt.map((name, index) => (
-//{allApartments.map((name, index) => (
+
 
 const apartments = allApartments.map((name, index) => (
   <ListApartmentComponent

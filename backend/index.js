@@ -84,12 +84,16 @@ app.get("/apartments/", async(req, res) => {
 app.get("/apartments/:filter", async(req, res) => {
   let filter = req.params.filter;
   const apartments = db.collection("apartment-info");
-  const query = await apartments.orderBy(filter, 'desc').get();
+   let query = 0;
+  if (filter === 'name') {
+    query = await apartments.orderBy(filter).get();
+  } else {
+    query = await apartments.orderBy(filter, 'desc').get();
+  }
 
   //const set = new Set();
   const object = [];
   query.docs.forEach((doc) => object.push(doc.data().name));
-
   //const ret = JSON.stringify(Array.from(set));
   res.status(200).json(object);
 })
@@ -98,7 +102,6 @@ app.post("/review/", async(req, res) => {
 
   const body = req.body
   const apartment = req.body.apartment.name;
-  console.log(apartment.name);
     if(body.review == undefined || body.rating == undefined) {
         return res.json({
           msg: "Error: content not defined in request",
@@ -124,7 +127,6 @@ app.post("/review/", async(req, res) => {
 
     //best way to handle this?
     const query = await db.collection("apartment-info").doc(apartment).collection("reviews").doc(data.id).set(data);
-    console.log("hello")
     await db.collection("apartment-info").doc(apartment).update({num_reviews: firebase.increment});
     res.status(200).json(query);
 })

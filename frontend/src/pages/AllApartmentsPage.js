@@ -5,6 +5,7 @@ import ListApartmentComponent from "../components/ListApartmentComponent";
 import {
     Grid,
     TextField,
+    Box,
     Button,
     CardContent
 } from "@mui/material"
@@ -19,7 +20,7 @@ export default function AllApartmentsPage() {
     }, [])
 
     async function getAllApartments() {
-        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/apartments/`;
+        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/apartments/name`;
     
             await fetch(apiCall, {
             method: "GET",
@@ -32,6 +33,7 @@ export default function AllApartmentsPage() {
                 throw new Error();
               }
               let apartments = [];
+              console.log(apartments)
               response.forEach((data) => {apartments.push(data)})
               setAllApartments(apartments);
             })
@@ -40,14 +42,25 @@ export default function AllApartmentsPage() {
             });
         }
 
-        console.log(allApartments);
 
 
   return (
     <div>
         <NavBarComponent></NavBarComponent>
         <Grid>
-          
+        <Box sx={{flexGrow: 1}}>
+            <Grid container spacing={4} 
+                justifyContent="center"
+                alignItems="stretch"
+                >
+                {allApartments.map((name) => (
+                            <Button sx={{
+                              width: "150px",
+                              height: "49px",
+                              backgroundImage: "linear-gradient(.25turn, #f00, #00f)"
+                            }}>Next</Button>))}
+            </Grid>
+        </Box>
         </Grid>
         <Footer></Footer>
     </div>
