@@ -46,7 +46,7 @@ const StyledRating = styled(Rating)(({ theme }) => ({
     value: PropTypes.number.isRequired,
   };
 
-export default function StaticRating(value) {
+export default function StaticRating({value}) {
   return (
     <StyledRating
       id="rating"

@@ -34,7 +34,13 @@ export default function MainPage() {
       "number": "number"
     }
 
+    //new because this has to be constantly updated
+    const stat_obj = {
+      "rating": 0,
+    }
+
     const [info, setInfo] = useState(info_obj);
+    const [stats, setStats] = useState(stat_obj);
 
     let navigate = useNavigate();
     const [reviews, setReviews] = useState([]);
@@ -43,6 +49,7 @@ export default function MainPage() {
     useEffect(() => {
         getReviews();
         getInfo();
+        getStats();
     }, [])
 
     const handleOnClick = () =>  {
@@ -54,7 +61,7 @@ export default function MainPage() {
     }
 
     async function getReviews() {
-        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/${name}`;
+        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/${name}`;
     
             await fetch(apiCall, {
             method: "GET",
@@ -102,12 +109,36 @@ export default function MainPage() {
             });
         }
 
+        async function getStats() {
+          let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${name}/stats`;
+      
+              await fetch(apiCall, {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((response) => {
+                if (response.status !== 200) {
+                  throw new Error();
+                }
+                return response.json();
+              })
+              .then((response) => {
+                  console.log(response)
+                  setStats(response);
+                })
+              .catch((e) => {
+                console.log(e);
+              });
+          }
+
   return (
     <Grid name="main" display="flex" direction="column">
         <NavBarComponent></NavBarComponent>
         <ApartmentHeader info={info}></ApartmentHeader>
         <Box>
-          <OverviewComponent name={info.name}></OverviewComponent>
+          <OverviewComponent name={info.name} rating={stats.rating}></OverviewComponent>
         </Box>
         <Box display={'flex'} direction={'row'} height={'70px'} bgcolor={'#EEEEEE'}>
           <Grid marginLeft={'2%'} container spacing={0} xs={10} position={'flex-start'} marginTop={'10px'} marginBottom={'10px'}> 

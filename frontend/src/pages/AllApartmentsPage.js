@@ -6,13 +6,17 @@ import {
     Grid,
     TextField,
     Box,
+    Link, 
     Button,
     CardContent
 } from "@mui/material"
+import { useNavigate } from "react-router-dom";
 
 export default function AllApartmentsPage() {
-
+    const navigate = useNavigate();
     const [allApartments, setAllApartments] = useState([]);
+    const backgroundImages = ['/apartments/26west.png', '/apartments/rambler.png', '/apartments/crest.png', '/apartments/dobie.png', '/apartments/inspire.png', '/apartments/ion.png', '/apartments/lark.png', '/apartments/skyloft.png', '/apartments/txvintage.png'];
+    const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     //use effect update whenever soomething changes
 
     useEffect(() => {
@@ -28,12 +32,14 @@ export default function AllApartmentsPage() {
               "Content-Type": "application/json",
             },
           })
+          .then((response) => {
+            if (response.status !== 200) {
+              throw new Error();
+            }
+            return response.json();
+          })
             .then((response) => {
-              if (response.status !== 200) {
-                throw new Error();
-              }
               let apartments = [];
-              console.log(apartments)
               response.forEach((data) => {apartments.push(data)})
               setAllApartments(apartments);
             })
@@ -42,14 +48,26 @@ export default function AllApartmentsPage() {
             });
         }
 
+        const navApartmentPage = (event) => {
+          console.log(event.target.id);
+          navigate(`/mainpage/${event.target.id.toLowerCase()}`);
+    
+        }
 
 
   return (
     <div>
         <NavBarComponent></NavBarComponent>
-        <Grid>
+        <Grid 
+          display="flex"
+          direction="row"
+          justifyContent="center"
+          alignItems="stretch">
+        <Grid item>
         <Box sx={{flexGrow: 1}}>
-            <Grid container spacing={4} 
+            <Grid width="100%" container spacing={1} 
+                display="flex"
+                direction="column"
                 justifyContent="center"
                 alignItems="stretch"
                 >
@@ -57,10 +75,26 @@ export default function AllApartmentsPage() {
                             <Button sx={{
                               width: "150px",
                               height: "49px",
-                              backgroundImage: "linear-gradient(.25turn, #f00, #00f)"
-                            }}>Next</Button>))}
+                              backgroundImage: backgroundImages[0]
+                            }}
+                            id={name}
+                            onClick={navApartmentPage}
+                            >{name}</Button>))}
             </Grid>
         </Box>
+        </Grid>
+
+          <Grid item
+            display="flex"
+            direction="column"
+            justifyContent="center"
+            alignItems="stretch"
+          >
+          {alphabet.map((letter) => (
+            <Link>{letter}</Link>
+          ))}
+          </Grid>
+
         </Grid>
         <Footer></Footer>
     </div>

@@ -50,6 +50,21 @@ app.get("/apartments/stats", async(req, res) => {
   res.status(200).json(object);
 })
 
+//get all apartment stats
+app.get("/:apartment/stats", async(req, res) => {
+  let apartment = req.params.apartment;
+  const apartments = db.collection("apartment-info").doc(apartment);
+  const query = await apartments.get();
+
+  //const set = new Set();
+  const object = {
+    "rating": query.data().rating,
+  }
+
+  //const ret = JSON.stringify(Array.from(set));
+  res.status(200).json(object);
+})
+
 //get all apartment info
 app.get("/:apartment/info", async(req, res) => {
   let apartment = req.params.apartment;
