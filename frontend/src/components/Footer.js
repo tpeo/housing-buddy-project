@@ -80,7 +80,7 @@ export default function StickyFooter() {
                 <Typography variant="body1">Contact Us</Typography>
                 <Typography variant="body1"></Typography>
                 <Typography variant="body1">000-000-0000</Typography>
-                <href>housingbuddy@gmail.com</href>
+                <Link>housingbuddy@gmail.com</Link>
             </Grid>
             <Grid>
                 <Typography variant="body1">APARTMENT MARKETING INSIGHTS TO YOUR INBOX</Typography>

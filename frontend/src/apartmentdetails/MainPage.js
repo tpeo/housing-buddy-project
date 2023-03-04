@@ -101,7 +101,6 @@ export default function MainPage() {
               return response.json();
             })
             .then((response) => {
-                console.log(response)
                 setInfo(response);
               })
             .catch((e) => {
@@ -125,7 +124,6 @@ export default function MainPage() {
                 return response.json();
               })
               .then((response) => {
-                  console.log(response)
                   setStats(response);
                 })
               .catch((e) => {

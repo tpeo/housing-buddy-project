@@ -72,17 +72,6 @@ export default function FilterComponent({collection, setOrder}) {
       default:
         //return;
     }
-    // console.log(elements)
-    // //populate sorted map
-    // elements.forEach((data) => {
-    //   console.log(data[`${lower}`]);
-    //   map.set(data[`${lower}`], data.name); //handle equals
-    // });
-    // //from sorted map populate order
-    // console.log(map);
-    // setOrder(map.values());
-    //pass objectsordered map to display
-    
   }
 
   return (

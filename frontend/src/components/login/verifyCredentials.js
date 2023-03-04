@@ -1,7 +1,6 @@
 const { default: jwtDecode } = require("jwt-decode");
 const verifyCredentials = async (navigate, checkAdmin) => {
     if(localStorage.getItem("@attendanceToken")){
-        console.log(process.env.REACT_APP_HOSTNAME)
         const request = await fetch(`https://${process.env.REACT_APP_HOSTNAME}/auth`, {
             headers: {
                 authorization: "Bearer " + localStorage.getItem("@attendanceToken"),

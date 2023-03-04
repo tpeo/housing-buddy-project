@@ -142,9 +142,45 @@ app.post("/review/", async(req, res) => {
 
     //best way to handle this?
     const query = await db.collection("apartment-info").doc(apartment).collection("reviews").doc(data.id).set(data);
+    addRating(apartment, data);
     await db.collection("apartment-info").doc(apartment).update({num_reviews: firebase.increment});
     res.status(200).json(query);
 })
+
+function addRating(name, filters) {
+  var apartment = db.collection('apartment-info').doc(name);
+  var updateRatings = {
+    rating: 0,
+    affordability: 0,
+    amenities: 0,
+    management: 0,
+    proximity: 0,
+    spaciousness: 0,
+
+  }
+    // In a transaction, add the new rating and update the aggregate totals
+    return db.runTransaction((transaction) => {
+        return transaction.get(apartment).then((res) => {
+            if (!res.exists) {
+                throw "Document does not exist!";
+            }
+
+            // Compute new number of ratings
+            var newNumRatings = res.data().num_reviews + 1;
+
+            Object.keys(updateRatings).forEach((rating) => {
+              var oldRatingTotal = res.data()[rating] * res.data().num_reviews;
+              var newAvgRating = (oldRatingTotal + filters[rating]) / newNumRatings;
+              updateRatings[rating] = newAvgRating;
+              
+            })
+            // Compute new average rating
+
+            // Commit to Firestore
+            transaction.update(apartment, updateRatings);
+        });
+    });
+}
 
 app.post("/apartment/", async(req, res) => {
 

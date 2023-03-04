@@ -11,7 +11,6 @@ exports.aggregateRatings = functions.firestore
     .onWrite(async (change, context) => {
       // Get value of the newly added rating
       const ratingVal = change.after.data().rating;
-        console.log("hello")
       // Get a reference to the restaurant
       //const restRef = db.collection('apartment-info').doc(context.params.restId);
       const restRef = db.collection('apartment-info').doc('lark');

@@ -19,7 +19,6 @@ app.use(express.json());
 app.get("/review/:name", async(req, res) => {
     const apartments = db.collection("apartments");
     let name = req.params.name;
-    console.log(name);
     const query = await apartments.where('name', '==', name).get();
 
     const ret = query.docs.forEach(doc => console.log(doc.data()));

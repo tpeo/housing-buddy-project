@@ -38,13 +38,11 @@ export default function NavBarComponent() {
     };
   
     function handleCloseNavMenu(event) {
-        console.log(event.currentTarget.innerText);
         navHelper(event.currentTarget.innerText);
         setAnchorElNav(null);
     };
   
     const handleCloseUserMenu = (event) => {
-      console.log(event.currentTarget.innerText);
       menuHelper(event.currentTarget.innerText);
       setAnchorElUser(null);
     };

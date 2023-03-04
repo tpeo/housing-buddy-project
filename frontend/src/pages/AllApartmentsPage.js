@@ -15,13 +15,16 @@ import { useNavigate } from "react-router-dom";
 export default function AllApartmentsPage() {
     const navigate = useNavigate();
     const [allApartments, setAllApartments] = useState([]);
+
+    useEffect(() => {
+      getAllApartments();
+  }, [])
+
     const backgroundImages = ['/apartments/26west.png', '/apartments/rambler.png', '/apartments/crest.png', '/apartments/dobie.png', '/apartments/inspire.png', '/apartments/ion.png', '/apartments/lark.png', '/apartments/skyloft.png', '/apartments/txvintage.png'];
     const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     //use effect update whenever soomething changes
 
-    useEffect(() => {
-        getAllApartments();
-    }, [])
+
 
     async function getAllApartments() {
         let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/apartments/name`;
@@ -49,9 +52,23 @@ export default function AllApartmentsPage() {
         }
 
         const navApartmentPage = (event) => {
-          console.log(event.target.id);
           navigate(`/mainpage/${event.target.id.toLowerCase()}`);
     
+        }
+
+        const windowNav = (e) => {
+          e.preventDefault();
+          
+          const letter = e.target.id.toLowerCase();
+          let loc = "";
+          const length = allApartments.length;
+          for (let i = 0; i < length; i++) {
+            if (allApartments[i].toString().toLowerCase().startsWith(letter)) {
+              loc = allApartments[i];
+              break;
+            }
+          }
+          window.location.replace(`#${loc}`);
         }
 
 
@@ -91,7 +108,7 @@ export default function AllApartmentsPage() {
             alignItems="stretch"
           >
           {alphabet.map((letter) => (
-            <Link>{letter}</Link>
+            <Link id={letter} onClick={windowNav}>{letter}</Link>
           ))}
           </Grid>
 

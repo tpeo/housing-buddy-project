@@ -43,7 +43,6 @@ export default function ReviewForm() {
     };
 
     const handleRatingChange = (e) => {
-      console.log(e.target.name)
         setFormValues({
             ...formValues,
             [e.target.name]: e.target.value
@@ -51,7 +50,6 @@ export default function ReviewForm() {
     };
 
     async function addRating() {
-        console.log(formValues)
         let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/`;
     
         if (formValues.review === "") {return;}
@@ -77,7 +75,6 @@ export default function ReviewForm() {
               if (response.status !== 200) {
                 throw new Error();
               }
-              console.log(formValues);
             })
             .catch((e) => {
               console.log(e);

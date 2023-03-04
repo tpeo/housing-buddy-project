@@ -4,17 +4,18 @@ import NavBarComponent from '../components/NavBarComponent';
 import ListApartmentComponent from "../components/ListApartmentComponent";
 import FilterComponent from "../components/FilterComponent";
 import Footer from '../components/Footer';
-import ExtLoginComponent from "../components/login/ExtLoginComponent";
+import { ref, getDownloadURL } from "firebase/storage";
+import {storage} from "../components/firebase/firebase";
+
 import {
     Grid,
     Box,
+    Link,
     Divider,
     Stack,
-    IconButton,
     Button,
     Typography
 } from "@mui/material"
-import SortIcon from '@mui/icons-material/Sort';
 
 import { useNavigate } from "react-router-dom";
 
@@ -26,9 +27,14 @@ export default function AllApartments() {
     const [order, setOrder] = useState([]); //default order
     //use effect update whenever soomething changes
 
+    //all the apt images for the grid
+  const backgroundImages = ['/apartments/26west.png', '/apartments/rambler.png', '/apartments/crestonpearl.png', '/apartments/dobie21.png', '/apartments/inspireon22nd.png', '/apartments/ion.png', '/apartments/lark.png', '/apartments/skyloft.png', '/apartments/texas&vintage.png'];
+  const [bgImg, setBgImg] = useState(backgroundImages);
+
     useEffect(() => {
         getAllApartments();
         setOrder(allApartments);
+        loadImages();
     }, []);
 
     useEffect(() => {
@@ -37,14 +43,27 @@ export default function AllApartments() {
 
       }
 
-  }, [])
+    }, [])
 
-    const [query, setQuery] = useState("")
+  async function downloadImage(filename, bgi) {
+    const storageRef = ref(storage, filename.toLowerCase().replace(/\s+/g, '') + ".png");
+    const url = await getDownloadURL(storageRef);
+    bgi.push(url);
+  }
 
+  function loadImages() {
+    let bgi = [];
+    allApartments.forEach((apartment) => {
+      // console.log(apartment)
+      // downloadImage(apartment, bgi);
+      bgi.push(`/apartments/${apartment.toLowerCase().replace(/\s+/g, '')}.png`);
+    })
+    console.log(bgi)
+    setBgImg(bgi)
+}
 
     const navApartmentPage = (event) => {
-      console.log(event.target.id);
-      navigate(`/mainpage/${event.target.id.toLowerCase()}`);
+      navigate(`/mainpage/${event.target.id.toLowerCase()}`); //bugs out for cards
 
     }
 
@@ -73,18 +92,15 @@ export default function AllApartments() {
             });
         }
 
-//all the apt images for the grid
-const backgroundImages = ['/apartments/26west.png', '/apartments/rambler.png', '/apartments/crest.png', '/apartments/dobie.png', '/apartments/inspire.png', '/apartments/ion.png', '/apartments/lark.png', '/apartments/skyloft.png', '/apartments/txvintage.png'];
-
-
 const apartments = allApartments.map((name, index) => (
   <ListApartmentComponent
     key={name}    
     name={name}
     handleOnClick={navApartmentPage}
-    backgroundImage={backgroundImages[index % backgroundImages.length]}
+    backgroundImage={bgImg[index]}
   />
 ));
+
 
 const Box = styled.div` 
   display: flex;
@@ -151,7 +167,7 @@ return (
         </Box>
       </Box>
       <Grid height='100%' justifyContent={'center'} display='flex' flexDirection={'flex-end'} marginTop={'20%'}>
-         <Typography handleOnClick='' color={'#0495B2'}>View All Apartments</Typography>
+         <Link href='/allapartments' color={'#0495B2'}>View All Apartments</Link>
       </Grid>
       <Footer></Footer>
   </div>
