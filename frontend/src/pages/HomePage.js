@@ -48,6 +48,7 @@ export default function AllApartments() {
   async function downloadImage(filename, bgi) {
     const storageRef = ref(storage, filename.toLowerCase().replace(/\s+/g, '') + ".png");
     const url = await getDownloadURL(storageRef);
+    console.log(url)
     bgi.push(url);
   }
 
@@ -68,7 +69,7 @@ export default function AllApartments() {
     }
 
     async function getAllApartments() {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/apartments/`;
+        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/apartments/rating`;
     
             await fetch(apiCall, {
             method: "GET",
@@ -92,12 +93,12 @@ export default function AllApartments() {
             });
         }
 
-const apartments = allApartments.map((name, index) => (
+const apartments = allApartments.map((obj, index) => (
   <ListApartmentComponent
-    key={name}    
-    name={name}
+    key={obj.name}    
+    name={obj.name}
     handleOnClick={navApartmentPage}
-    backgroundImage={bgImg[index]}
+    backgroundImage={obj.img_link}
   />
 ));
 
