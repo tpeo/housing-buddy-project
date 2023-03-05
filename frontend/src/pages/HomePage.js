@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
-import NavBarComponent from '../components/NavBarComponent';
+import NavBarComponent from '../components/layout/NavBarComponent';
 import ListApartmentComponent from "../components/ListApartmentComponent";
 import FilterComponent from "../components/FilterComponent";
-import Footer from '../components/Footer';
+import Footer from '../components/layout/Footer';
 import { ref, getDownloadURL } from "firebase/storage";
 import {storage} from "../components/firebase/firebase";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import NavBarComponent from '../components/NavBarComponent';
+import NavBarComponent from "../components/layout/NavBarComponent";
 import OverviewComponent from "./components/OverviewComponent";
-import Footer from '../components/Footer';
+import Footer from '../components/layout/Footer';
 import StaticRating from "./components/StaticRating";
 import FilterComponent from "../components/FilterComponent";
 import SortIcon from '@mui/icons-material/Sort';
@@ -133,7 +133,7 @@ export default function MainPage() {
 
   return (
     <Grid name="main" display="flex" direction="column">
-        <NavBarComponent></NavBarComponent>
+      <NavBarComponent></NavBarComponent>
         <ApartmentHeader info={info}></ApartmentHeader>
         <Box>
           <OverviewComponent name={info.name} rating={stats.rating}></OverviewComponent>

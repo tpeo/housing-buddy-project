@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import NavBarComponent from '../components/NavBarComponent';
-import Footer from '../components/Footer'
+import NavBarComponent from '../components/layout/NavBarComponent';
+import Footer from '../components/layout/Footer'
 import ListApartmentComponent from "../components/ListApartmentComponent";
 import {
     Grid,

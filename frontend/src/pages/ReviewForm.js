@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import RadioGroupRating from '../components/RatingComponent';
-import NavBarComponent from "../components/NavBarComponent";
-import Footer from "../components/Footer"
+import NavBarComponent from "../components/layout/NavBarComponent";
+import Footer from "../components/layout/Footer"
 import {
     Grid,
     TextField,

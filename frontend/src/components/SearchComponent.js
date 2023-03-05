@@ -15,7 +15,7 @@ import { styled, alpha } from '@mui/material/styles';
 import { createSearchParams, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 
-export default function NavBarComponent() {
+export default function SearchComponent() {
 
     const navigate = useNavigate();
 
