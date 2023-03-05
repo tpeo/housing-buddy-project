@@ -20,11 +20,8 @@ export default function AllApartmentsPage() {
       getAllApartments();
   }, [])
 
-    const backgroundImages = ['/apartments/26west.png', '/apartments/rambler.png', '/apartments/crest.png', '/apartments/dobie.png', '/apartments/inspire.png', '/apartments/ion.png', '/apartments/lark.png', '/apartments/skyloft.png', '/apartments/txvintage.png'];
     const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     //use effect update whenever soomething changes
-
-
 
     async function getAllApartments() {
         let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/apartments/name`;
