@@ -63,8 +63,9 @@ export default function AllApartmentsPage() {
           let loc = "";
           const length = allApartments.length;
           for (let i = 0; i < length; i++) {
-            if (allApartments[i].toString().toLowerCase().startsWith(letter)) {
-              loc = allApartments[i];
+            let cur = allApartments[i];
+            if (cur.name.toString().toLowerCase().startsWith(letter)) {
+              loc = cur.name;
               break;
             }
           }
@@ -88,15 +89,15 @@ export default function AllApartmentsPage() {
                 justifyContent="center"
                 alignItems="stretch"
                 >
-                {allApartments.map((name) => (
+                {allApartments.map((obj) => (
                             <Button sx={{
                               width: "150px",
                               height: "49px",
-                              backgroundImage: backgroundImages[0]
+                              backgroundImage: obj.img_link
                             }}
-                            id={name}
+                            id={obj.name}
                             onClick={navApartmentPage}
-                            >{name}</Button>))}
+                            >{obj.name}</Button>))}
             </Grid>
         </Box>
         </Grid>
