@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import NavBarComponent from '../components/layout/NavBarComponent';
 import Footer from '../components/layout/Footer'
-import ListApartmentComponent from "../components/ListApartmentComponent";
+import postSubmissionModal from "../components/PostSubmissionModal";
+import AddApartmentModal from "../components/AddApartmentModal";
 import {
     Grid,
     TextField,
@@ -111,6 +112,9 @@ export default function AllApartmentsPage() {
           </Grid>
 
         </Grid>
+        <AddApartmentModal>
+        </AddApartmentModal>
+        
         <Footer></Footer>
     </div>
   );

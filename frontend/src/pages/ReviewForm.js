@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import RadioGroupRating from '../components/RatingComponent';
 import NavBarComponent from "../components/layout/NavBarComponent";
 import Footer from "../components/layout/Footer"
+import PostSubmissionModal from "../components/PostSubmissionModal";
 import {
     Grid,
     TextField,
@@ -11,7 +12,7 @@ import {
     Select,
     MenuItem,
     Button,
-    CardContent,
+    Modal,
     Card,
     Box,
     Typography
@@ -33,6 +34,11 @@ export default function ReviewForm() {
     
     const ratings = ["affordability", "management", "parking", "amenities", "proximity", "spaciousness"];
     const [formValues, setFormValues] = useState(defaultValues);
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+  
+    const [msg, setMsg] = useState("no submission");
 
     const handleInputChange = (e) => {
         const {id, value} = e.target;
@@ -72,7 +78,9 @@ export default function ReviewForm() {
             })
           })
             .then((response) => {
+              setMsg("Review Submitted Successfully!");
               if (response.status !== 200) {
+                setMsg("Review Failed");
                 throw new Error();
               }
             })
@@ -83,6 +91,7 @@ export default function ReviewForm() {
     
     const handleSubmit = (event) => {
         event.preventDefault();
+        setOpen(true);
         addRating();
         //after submit erase input
     };
@@ -141,6 +150,14 @@ export default function ReviewForm() {
             </Grid>
             <Grid item>
               <Button variant="contained" color="primary" type="submit">Submit</Button>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+              <PostSubmissionModal info={msg}></PostSubmissionModal>
+            </Modal>
             </Grid>
             
         </Grid>

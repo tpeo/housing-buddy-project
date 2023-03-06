@@ -95,24 +95,6 @@ app.get("/apartments/", async(req, res) => {
   res.status(200).json(object);
 })
 
-// //get ratings sorted for apartments
-// app.get("/apartments/:filter", async(req, res) => {
-//   let filter = req.params.filter;
-//   const apartments = db.collection("apartment-info");
-//    let query = 0;
-//   if (filter === 'name') {
-//     query = await apartments.orderBy(filter).get();
-//   } else {
-//     query = await apartments.orderBy(filter, 'desc').get();
-//   }
-
-//   //const set = new Set();
-//   const object = [];
-//   query.docs.forEach((doc) => object.push(doc.data().name));
-//   //const ret = JSON.stringify(Array.from(set));
-//   res.status(200).json(object);
-// })
-
 //get ratings sorted for apartments
 app.get("/apartments/:filter", async(req, res) => {
   let filter = req.params.filter;
