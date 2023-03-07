@@ -28,6 +28,7 @@ export default function NavBarComponent() {
     const pages = ['About Us', 'FAQ', 'View All Apartments'];
     const settings = ['Profile', 'Dashboard', 'Logout'];
 
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
   
@@ -70,9 +71,59 @@ export default function NavBarComponent() {
       }
   }
 
+  function UserMenu(props) {
+    return (
+      <Box sx={{ flexGrow: 0 }}>
+      <Tooltip title="Open settings">
+        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+          <Avatar src={window.localStorage.getItem("@pfp")}></Avatar>
+        </IconButton>
+      </Tooltip>
+      <Menu
+        sx={{ mt: '45px' }}
+        id="menu-appbar"
+        anchorEl={anchorElUser}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
+      >
+        {settings.map((setting) => (
+          <MenuItem key={setting} onClick={handleCloseUserMenu}>
+            <Typography textAlign="center">{setting}</Typography>
+          </MenuItem>
+        ))}
+      </Menu>
+    </Box>
+    );
+  }
+
+  function Default(props) {
+    return (
+      <ExtLoginComponent></ExtLoginComponent>
+    );
+  }
+
+  function Dashboard({isLoggedIn}) {
+    if (isLoggedIn === "true") {
+      return <UserMenu/>;
+    } else {
+      return <Default/>;
+    }
+  }
+
   function logout() {
     localStorage.removeItem("@attendanceToken");
+    localStorage.removeItem("@user");
     localStorage.setItem("loggedIn", false);
+    window.location.reload(false);
     navigate("/"); //navigate to temp page that says you've logged out and times out?
   }
     
@@ -150,38 +201,8 @@ export default function NavBarComponent() {
                   </Button>
                 ))}
               </Box>
-
-              <ExtLoginComponent></ExtLoginComponent>
               <SearchComponent></SearchComponent>
-              <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <SentimentSatisfiedAltIcon color="#0495b2" fontSize="large"></SentimentSatisfiedAltIcon>
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: '45px' }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
+              <Dashboard isLoggedIn={localStorage.getItem("loggedIn")}></Dashboard>
             </Toolbar>
           </Container>
         </AppBar>
