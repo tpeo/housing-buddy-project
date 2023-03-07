@@ -87,6 +87,8 @@ export default function AllApartments() {
             });
         }
 
+const tempApt = ['lark', 'lark', 'lark', 'lark', 'lark', 'lark', 'lark', 'lark', 'lark',] 
+
 const apartments = allApartments.map((obj, index) => (
   <ListApartmentComponent
     key={obj.name}    
