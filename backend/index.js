@@ -7,8 +7,10 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const authMiddleware = require("./auth");
 
-// const review = require("./review");
-// app.use("/review", review);
+const user = require("./user");
+app.use("/user", user.users);
+// const auth = require("./auth");
+// app.use("/auth", auth.auth);
 
 require("dotenv").config();
 

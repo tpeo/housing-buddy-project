@@ -3,9 +3,9 @@ import HomePage from './pages/HomePage';
 import AllApartments from './pages/AllApartmentsPage';
 import MainPage from './apartmentdetails/MainPage';
 import SearchPage from './pages/SearchPage'
+import UserProfile from './pages/UserProfile';
 import React from 'react';
 import { Routes, Route, useParams } from "react-router-dom";
-//import UserProvider from "./provider"
 import './App.css';
 
 
@@ -18,6 +18,7 @@ function App() {
       <Route path="/allapartments" element={<AllApartments></AllApartments>}></Route>
       <Route path="/mainpage/:apartment" element={<MainPage></MainPage>}></Route>
       <Route path="/search" element={<SearchPage></SearchPage>}></Route>
+      <Route path="/profile" element={<UserProfile></UserProfile>}></Route>
     </Routes>
   );
 }

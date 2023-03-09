@@ -16,18 +16,15 @@ import {
     Tooltip,
 } from "@mui/material"
 
-import SearchIcon from '@mui/icons-material/Search';
 import AdbIcon from '@mui/icons-material/Adb';
-import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import { styled, alpha } from '@mui/material/styles';
-
 import { useNavigate } from "react-router-dom";
 
 export default function NavBarComponent() {
+    const navigate = useNavigate();
 
     const pages = ['About Us', 'FAQ', 'View All Apartments'];
     const settings = ['Profile', 'Dashboard', 'Logout'];
-
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -49,8 +46,6 @@ export default function NavBarComponent() {
       setAnchorElUser(null);
     };
 
-    const navigate = useNavigate();
-
     const navigateHome = () => {
       navigate('/');
     }
@@ -65,6 +60,9 @@ export default function NavBarComponent() {
 
     function menuHelper(name) {
       switch(name){
+          case "Profile":
+            navigate('/profile');
+            break;
           case "Logout":
               logout();
               break;

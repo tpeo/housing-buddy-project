@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {verifyCredentials} from '../login/verifyCredentials';
+import AddApartmentModal from "../AddApartmentModal";
+import ApartmentSelectComponent from "../ApartmentSelectComponent";
 import {
   Avatar,
-  IconButton
+  Box,
+  IconButton,
+  Typography,
+  Modal
 } from "@mui/material"
 import { auth, firebase } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +15,11 @@ import { useNavigate } from "react-router-dom";
 export default function ExtLoginComponent() {
 
   let navigate = useNavigate();
+  const [newUser, setNewUser] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   async function googleLogin() {
     //1 - init Google Auth Provider
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -18,6 +29,7 @@ export default function ExtLoginComponent() {
         //3 - pick the result and store the token
         const token = await auth?.currentUser?.getIdToken(true);
         const user = {
+          "uid": auth.currentUser.uid,
           "name": auth.currentUser.displayName,
           "email": auth.currentUser.email,
           "pfp": auth.currentUser.photoURL,
@@ -30,7 +42,14 @@ export default function ExtLoginComponent() {
           localStorage.setItem("@user", JSON.stringify(user));
           localStorage.setItem("@pfp", user.pfp);
           //6 - navigate user to the home page
-          navigate("/");
+          navSignIn();
+          if (setNewUser) {
+            //ask them to input their apartment
+            setOpen(true);
+            navigate('../profile');
+          } else {
+            navigate('/'); //stay on current page
+          }
           window.location.reload(false);
         }
       },
@@ -38,6 +57,13 @@ export default function ExtLoginComponent() {
         console.log(error);
       }
     );
+
+    function navSignIn() {
+      const fetchData = async () => {
+        setNewUser(await verifyCredentials(navigate, true));
+      }
+      fetchData();
+    }
   }
 
   return (
@@ -46,6 +72,18 @@ export default function ExtLoginComponent() {
           <Avatar src="google_icon.png"></Avatar>
           <span>Login</span>
         </IconButton>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+            <Box>
+                <Typography>Where are you living?</Typography>
+                <ApartmentSelectComponent></ApartmentSelectComponent>
+                <AddApartmentModal></AddApartmentModal>
+            </Box>
+        </Modal>
       </div>
   );
 }
