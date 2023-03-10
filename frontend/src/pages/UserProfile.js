@@ -19,12 +19,17 @@ import {
 export default function UserProfile() {
 
     let navigate = useNavigate();
-    const [user, setUser] = useState();
+    const [user, setUser] = useState({
+      "name": "name",
+      "email": "email"
+    }); //do i have to do this?
     const [loaded, setLoaded] = useState(false);
     const [reviews, setReviews] = useState();
+
     useEffect(() => {
         const fetchData = async () => {
-            setUser(await verifyCredentials(navigate, true));
+            getUser();
+            console.log(user)
             setLoaded(true);
         }
         fetchData();
@@ -55,6 +60,29 @@ export default function UserProfile() {
               console.log(e);
             });
         }
+
+        async function getUser() {
+          let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/user/info/${JSON.parse(window.localStorage.getItem("@user")).uid}`;
+      
+              await fetch(apiCall, {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((response) => {
+                if (response.status !== 200) {
+                  throw new Error();
+                }
+                return response.json();
+              })
+              .then((response) => {
+                  setUser(response);
+                })
+              .catch((e) => {
+                console.log(e);
+              });
+          }
   
   function renderPage() {
     if (loaded) {

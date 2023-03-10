@@ -41,14 +41,14 @@ users.post('/', async (req, res) => {
   });
 
 //get user info
-    users.get("/info/:user_id", async(req, res) => {
-        let uid = req.params.user_id;
-        const user = db.collection("users").doc(uid);
-        // const query = await apartments.where('apartment', '==', apartment).get();
-        const query = await user.get();
+users.get("/info/:user_id", async(req, res) => {
+    let uid = req.params.user_id;
+    const user = db.collection("users").doc(uid);
+    // const query = await apartments.where('apartment', '==', apartment).get();
+    const query = await user.get();
 
-        res.status(200).json(query);
-    })
+    res.status(200).json(query.data());
+})
 
   users.put("/apartment/", async(req, res) => {
 

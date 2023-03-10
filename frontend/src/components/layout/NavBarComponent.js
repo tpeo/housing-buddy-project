@@ -74,7 +74,9 @@ export default function NavBarComponent() {
       <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar src={window.localStorage.getItem("@pfp")}></Avatar>
+          <Avatar src={window.localStorage.getItem("@pfp")}>
+            <img src={window.localStorage.getItem("@pfp")} referrerPolicy="no-referrer"></img>
+          </Avatar>
         </IconButton>
       </Tooltip>
       <Menu

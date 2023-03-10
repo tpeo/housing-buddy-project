@@ -13,7 +13,6 @@ const verifyCredentials = async (navigate) => {
         //     return -1;
         // }
         const decode = jwtDecode(localStorage.getItem("@userToken"));
-        console.log(decode);
         const user = await fetch(`http://localhost:4000/user`, {
             method: "POST",
             headers: {
@@ -22,8 +21,9 @@ const verifyCredentials = async (navigate) => {
             },
             body: JSON.stringify({ user: decode }),
         });
-        const result = (await user.json()).newUser;
-        return result;
+        const result = (await user.json());
+        window.localStorage.setItem("@apartment", result.apartment);
+        return result.newUser;
     }else{
         navigate("/login");
         return -1;
