@@ -19,7 +19,7 @@ export default function OverviewComponent({rating, name}) {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundImage: `url(${process.env.PUBLIC_URL}/tempblankbckgd.png)`,
+        backgroundImage: `url(${process.env.PUBLIC_URL}/mainbanner.png)`,
       }}
     >
       {/* Increase the priority of the hero background image */}
@@ -42,7 +42,7 @@ export default function OverviewComponent({rating, name}) {
                       {rating}/5
                     </Typography>
                 </Box>
-                <Box marginLeft={'25px'} marginTop={0} paddingTop={0}>
+                <Box marginLeft={'25px'}>
                   <Typography variant={'h10'}>Overall Rating</Typography>
                 </Box>
               </Grid>

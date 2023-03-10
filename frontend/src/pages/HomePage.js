@@ -69,10 +69,12 @@ export default function AllApartments() {
             });
         }
 
+const tempApt = ['lark', 'lark', 'lark', 'lark', 'lark', 'lark', 'lark', 'lark', 'lark',] 
+
 const apartments = allApartments.map((obj, index) => (
   <ListApartmentComponent
     key={obj.name}    
-    name={obj.name}
+    name={obj.name} 
     handleOnClick={navApartmentPage}
     backgroundImage={obj.img_link}
   />

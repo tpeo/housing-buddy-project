@@ -16,23 +16,23 @@ const StyledRating = styled(Rating)(({ theme }) => ({
   
   const customIcons = {
     1: {
-        icon: <SentimentVeryDissatisfiedIcon color="error" />,
+        icon: <SentimentVeryDissatisfiedIcon fontSize='large' color="error" />,
         label: 'Very Dissatisfied',
       },
       2: {
-        icon: <SentimentDissatisfiedIcon color="error" />,
+        icon: <SentimentDissatisfiedIcon fontSize='large' color="error" />,
         label: 'Dissatisfied',
       },
       3: {
-        icon: <SentimentSatisfiedIcon color="warning" />,
+        icon: <SentimentSatisfiedIcon fontSize='large' color="warning" />,
         label: 'Neutral',
       },
       4: {
-        icon: <SentimentSatisfiedAltIcon color="success" />,
+        icon: <SentimentSatisfiedAltIcon fontSize='large' color="success" />,
         label: 'Satisfied',
       },
       5: {
-        icon: <SentimentVerySatisfiedIcon color="success" />,
+        icon: <SentimentVerySatisfiedIcon fontSize='large' color="success" />,
         label: 'Very Satisfied',
       },
   };

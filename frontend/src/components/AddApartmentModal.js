@@ -110,7 +110,7 @@ export default function AddApartmentModal() {
                 ></TextField>
             </Grid>
             <Grid id="comments"item>
-                <TextField id="review" label ="review" type="text" placeholder="review" onChange={handleInputChange}> 
+                <TextField id="review" label ="Review" type="text" placeholder="Review" onChange={handleInputChange}> 
                 </TextField>
             </Grid>
             <Grid item>
