@@ -53,7 +53,7 @@ export default function MainPage() {
     }, [])
 
     const handleOnClick = () =>  {
-        if (localStorage.getItem("loggedIn") == "true") {
+        if (localStorage.getItem("loggedIn") == "true" && window.localStorage.getItem("@apartment") === name) {
             navigate(`/${name}/review`);
         } else {
             //push to login popup?

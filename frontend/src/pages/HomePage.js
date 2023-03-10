@@ -39,24 +39,6 @@ export default function AllApartments() {
 
     }, [])
 
-//   async function downloadImage(filename, bgi) {
-//     const storageRef = ref(storage, filename.toLowerCase().replace(/\s+/g, '') + ".png");
-//     const url = await getDownloadURL(storageRef);
-//     console.log(url)
-//     bgi.push(url);
-//   }
-
-//   function loadImages() {
-//     let bgi = [];
-//     allApartments.forEach((apartment) => {
-//       // console.log(apartment)
-//       // downloadImage(apartment, bgi);
-//       bgi.push(`/apartments/${apartment.toLowerCase().replace(/\s+/g, '')}.png`);
-//     })
-//     console.log(bgi)
-//     setBgImg(bgi)
-// }
-
     const navApartmentPage = (event) => {
       navigate(`/mainpage/${event.target.id.toLowerCase()}`); //bugs out for cards
 

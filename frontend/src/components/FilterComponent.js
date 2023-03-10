@@ -9,13 +9,10 @@ import {
   Menu,
   MenuItem,
   Typography,
-  breadcrumbsClasses
 } from '@mui/material'
-var SortedMap = require("collections/sorted-map");
 
 export default function FilterComponent({collection, setOrder}) {
   const filters = ['Overall Rating', 'Cost', 'Proximity', 'Spaciousness', "Amenities", "Management"];
-  const map = new SortedMap();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -68,6 +65,9 @@ export default function FilterComponent({collection, setOrder}) {
     switch(lower) {
       case "overall rating": 
         lower = "rating";
+        break;
+      case "amenities":
+        lower = "amenities";
         break;
       default:
         //return;
