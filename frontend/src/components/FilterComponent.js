@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import TuneIcon from '@mui/icons-material/Tune';
+
 import {
   Box, 
   Tooltip,
@@ -11,9 +13,13 @@ import {
   Typography,
 } from '@mui/material'
 
-export default function FilterComponent({collection, setOrder}) {
+export default function FilterComponent({db, collection, setOrder}) {
   const filters = ['Overall Rating', 'Cost', 'Proximity', 'Spaciousness', "Amenities", "Management"];
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  useEffect(() => {
+    cacheFilters();
+  }, []);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -21,19 +27,21 @@ export default function FilterComponent({collection, setOrder}) {
 
 
   const handleCloseNavMenu = (event) => {
-    const filter = event.currentTarget.innerText;
-    cacheFilter(filter);
-    setOrder(localStorage.getItem(filter));
+    const filter = filterHelper(event.currentTarget.innerText);
+    const obj = window.localStorage.getItem(`_${collection}_${filter}`);
+    setOrder(JSON.parse(obj));
     setAnchorElUser(null);
   };
 
-  function cacheFilter(filter) {
-    if (localStorage.getItem(`_${filter}`) != null) {
-      cacheSortedFilter(filter.toLowerCase());
-    }
+  async function cacheFilters() {
+    const promises = filters.map(async (filter) => {
+      singleFilter(collection, filter.toLowerCase());
+    });
+    
+    await Promise.all(promises);
   }
 
-  async function cacheSortedFilter(collection, filter) {
+  async function singleFilter(collection, filter) {
     let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${collection}/${filter}`;
 
         await fetch(apiCall, {
@@ -49,9 +57,9 @@ export default function FilterComponent({collection, setOrder}) {
           return response.json();
         })
         .then((response) => {
-            let apartments = [];
-            response.forEach((data) => {apartments.push(data)})
-            localStorage.setItem(`_${filter}`, apartments);
+            if (window.localStorage.getItem(`_${collection}_${filter}`) === null) {
+              window.localStorage.setItem(`_${collection}_${filter}`, JSON.stringify(response));
+            }
           })
         .catch((e) => {
           console.log(e);
@@ -66,12 +74,11 @@ export default function FilterComponent({collection, setOrder}) {
       case "overall rating": 
         lower = "rating";
         break;
-      case "amenities":
-        lower = "amenities";
-        break;
       default:
-        //return;
+        lower = filter.toLowerCase();
+        break;
     }
+    return lower;
   }
 
   return (

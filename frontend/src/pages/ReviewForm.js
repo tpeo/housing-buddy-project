@@ -53,7 +53,7 @@ export default function ReviewForm() {
     const handleRatingChange = (e) => {
         setFormValues({
             ...formValues,
-            [e.target.name]: e.target.value
+            [e.target.name.toLowerCase()]: e.target.value
         });
     };
 

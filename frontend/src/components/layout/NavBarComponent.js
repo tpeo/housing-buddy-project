@@ -1,6 +1,6 @@
 import React from "react";
 import ExtLoginComponent from "../login/ExtLoginComponent";
-import SearchComponent from "../SearchComponent"
+import SearchComponent from "../search/SearchComponent"
 import {
     AppBar,
     Box,

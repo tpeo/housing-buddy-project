@@ -10,11 +10,7 @@ import ApartmentHeader from "./components/ApartmentHeader";
 import {
     Grid,
     Box,
-    Divider,
-    Stack,
-    Menu,
-    Tooltip,
-    MenuItem,
+    Pagination,
     Typography,
     IconButton,
     Button
@@ -41,6 +37,7 @@ export default function MainPage() {
 
     const [info, setInfo] = useState(info_obj);
     const [stats, setStats] = useState(stat_obj);
+    const [page, setPage] = React.useState(1);
 
     let navigate = useNavigate();
     const [reviews, setReviews] = useState([]);
@@ -52,12 +49,21 @@ export default function MainPage() {
         getStats();
     }, [])
 
+    const reviewsPerPage = 1;
+    const indexLast = page * reviewsPerPage;
+    const indexFirst = indexLast - reviewsPerPage;
+    const currentCards = reviews.slice(indexFirst, indexLast);
+    
     const handleOnClick = () =>  {
         if (localStorage.getItem("loggedIn") == "true" && window.localStorage.getItem("@apartment") === name) {
             navigate(`/${name}/review`);
         } else {
             //push to login popup?
         }
+    }
+
+    const handlePageChange = (event, value) => {
+      setPage(value);
     }
 
     async function getReviews() {
@@ -162,12 +168,15 @@ export default function MainPage() {
                     justifyContent="center"
                     alignItems="stretch"
                     >
-                    {reviews.map((r) => (
+                    {currentCards.map((r) => (
                         <ReviewComponent key={r.title}
                             title={r.title}
                             review={r.review}
                             rating={r.rating}
                         ></ReviewComponent>))}
+
+                <Pagination count={3} page={page} 
+                    onChange={handlePageChange} />
                 </Grid>
             </Box>
         </Grid>

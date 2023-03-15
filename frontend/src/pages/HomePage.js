@@ -7,6 +7,7 @@ import Footer from '../components/layout/Footer';
 import { ref, getDownloadURL } from "firebase/storage";
 import {storage} from "../components/firebase/firebase";
 
+
 import {
     Grid,
     Box,
@@ -23,21 +24,12 @@ export default function AllApartments() {
     const navigate = useNavigate();
 
     const [allApartments, setAllApartments] = useState([]);
-    const [apartmentStats, setApartmentStats] = useState([]);
     const [order, setOrder] = useState([]); //default order
 
     useEffect(() => {
         getAllApartments();
         setOrder(allApartments);
     }, []);
-
-    useEffect(() => {
-      const queryParams = new URLSearchParams(window.location.search);
-      if (queryParams.has("apartment")) {
-
-      }
-
-    }, [])
 
     const navApartmentPage = (event) => {
       navigate(`/mainpage/${event.target.id.toLowerCase()}`); //bugs out for cards
@@ -93,13 +85,13 @@ const Box = styled.div`
   overflow: 'hidden';
 `;
 
-//need to add view all apartments button
 return (
+
   <div>
       <NavBarComponent></NavBarComponent>
       <img src='/logowbg.png' height='100%' width='100%'></img>
       <Stack direction="row" container justifyContent="flex-end">
-      <FilterComponent collection="apartments" setOrder={setOrder}></FilterComponent>
+      <FilterComponent collection="apartments" setOrder={setAllApartments}></FilterComponent>
       </Stack>
       <Divider color="#0495b2" sx={{ borderBottomWidth: 50 }}></Divider>
       <Box>
@@ -150,5 +142,6 @@ return (
       </Grid>
       <Footer></Footer>
   </div>
+
 );
 }

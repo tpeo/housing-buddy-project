@@ -6,6 +6,8 @@ import SearchPage from './pages/SearchPage'
 import UserProfile from './pages/UserProfile';
 import React from 'react';
 import { Routes, Route, useParams } from "react-router-dom";
+import { Query, QueryClient, QueryClientProvider, useQuery  } from 'react-query';
+
 import './App.css';
 
 
