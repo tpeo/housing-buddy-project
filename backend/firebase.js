@@ -15,5 +15,6 @@ admin.initializeApp({
 
 const db = admin.firestore();
 const increment = admin.firestore.FieldValue.increment(1);
+const decrement = admin.firestore.FieldValue.increment(-1);
 const bucket = getStorage().bucket();
-module.exports = {db, serverStamp, increment, bucket};
+module.exports = {db, serverStamp, increment, decrement, bucket};

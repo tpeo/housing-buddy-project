@@ -12,6 +12,9 @@ app.use("/user", user.users);
 // const auth = require("./auth");
 // app.use("/auth", auth.auth);
 
+const review = require("./reviews");
+app.use("/review", review.reviews);
+
 require("dotenv").config();
 
 app.use(express.json());
@@ -24,17 +27,6 @@ app.use(cors());
 app.get("/auth", authMiddleware, (req, res) => {
   return res.json({ msg: "Success" });
 });
-
-//fetch an apartment's ratings
-app.get("/review/:apartment", async(req, res) => {
-    let apartment = req.params.apartment;
-    const apartments = db.collection("apartment-info").doc(apartment).collection("reviews");
-    // const query = await apartments.where('apartment', '==', apartment).get();
-    const query = await apartments.get();
-    const reviews = [];
-    const ret = query.forEach((doc) => reviews.push(doc.data()));
-    res.status(200).json(reviews);
-})
 
 //get all apartment stats
 app.get("/apartments/stats", async(req, res) => {
@@ -137,6 +129,8 @@ app.post("/review/", async(req, res) => {
         management: req.body.management,
         proximity: req.body.proximity,
         spaciousness: req.body.spaciousness,
+        likes: 0,
+        dislikes: 0,
         date: firebase.serverStamp.now(),
         //randomly generate?
         id: r

@@ -197,7 +197,7 @@ export default function MainPage() {
             </IconButton>
           </Grid>
           <Grid  marginTop={'5px'}>
-            <FilterComponent apartment={name} collection="reviews" setOrder={setReviews}></FilterComponent>
+            <FilterComponent apartment={name} collection="review" setOrder={setReviews}></FilterComponent>
           </Grid>
         </Box>
         
@@ -210,9 +210,11 @@ export default function MainPage() {
                     >
                     {currentCards.map((r) => (
                         <ReviewComponent key={r.title}
+                            apartment={name}
                             title={r.title}
                             review={r.review}
                             rating={r.rating}
+                            fullR={r}
                         ></ReviewComponent>))}
 
                 <Pagination count={3} page={page} 
