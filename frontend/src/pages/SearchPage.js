@@ -11,7 +11,7 @@ import {
 } from "@mui/material"
 import Footer from "../components/layout/Footer";
 import NavBarComponent from "../components/layout/NavBarComponent";
-import { Hits } from 'react-instantsearch-dom';
+import { Hits, connectHits } from 'react-instantsearch-dom';
 import { hits } from 'instantsearch.js/es/widgets';
 
 import { styled, alpha } from '@mui/material/styles';
@@ -24,7 +24,7 @@ export default function SearchPage() {
 
     const navigate = useNavigate();
     let searchQuery = "";
-    const [results, setResults] = useState({});
+    let results = {};
 
     const algoliasearch = require('algoliasearch');
     const appId = 'MBBVF21PRE';
@@ -38,25 +38,31 @@ export default function SearchPage() {
 	    searchQuery = queryParameters.get("query");
     }
 
-    const Hit = ({ hit }) => <p>{hit.name}</p>;
+    const Hits = ({ hits }) => (
+        <ol>
+          {hits.map(hit => (
+            <li key={hit.objectID}>{hit.name}</li>
+          ))}
+        </ol>
+      );
+      
+    const CustomHits = connectHits(Hits);
 
-    console.log(searchQuery)
-    index.search(searchQuery, {}).then(({ hits }) => {
-        console.log(hits)
-          
-    });
+ //   useEffect(() => {
+        index.search(searchQuery, {}).then(({ hits }) => {
+            console.log(hits)       
+        });
+  //  }, [searchQuery])
+
 
     console.log(results)
-    // const hits = results.map((obj) => (
-    //     <Hit hitComponent={results} />
-    //   ));
 
     return (
         <Grid>
             <NavBarComponent></NavBarComponent>
             <Typography variant="h1">Search Results</Typography>
-
             <InstantSearch indexName="apartments" searchClient={searchClient}>
+                <CustomHits></CustomHits>
             </InstantSearch>
             <Footer></Footer>
         </Grid>

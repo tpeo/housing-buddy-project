@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import NavBarComponent from "../components/layout/NavBarComponent";
 import OverviewComponent from "./components/OverviewComponent";
-import Footer from '../components/layout/Footer';
-import StaticRating from "./components/StaticRating";
 import FilterComponent from "../components/FilterComponent";
 import SortIcon from '@mui/icons-material/Sort';
 import AddIcon from '@mui/icons-material/Add';
 import ApartmentHeader from "./components/ApartmentHeader";
+import ApartmentSelectComponent from "../components/ApartmentSelectComponent"
+import AddApartmentModal from "../components/AddApartmentModal"
+import LayoutComponent from "../components/layout/LayoutComponent";
 import {
     Grid,
     Box,
     Pagination,
     Typography,
     IconButton,
+    Modal,
     Button
 } from "@mui/material"
 
@@ -23,6 +24,9 @@ export default function MainPage() {
     const params = useParams();
     
     const name = params.apartment;
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
     
     const info_obj = {
       "name": "name",
@@ -33,6 +37,11 @@ export default function MainPage() {
     //new because this has to be constantly updated
     const stat_obj = {
       "rating": 0,
+      "affordability": 0,
+      "amenities": 0,
+      "management": 0,
+      "proximity": 0,
+      "spaciousness": 0,
     }
 
     const [info, setInfo] = useState(info_obj);
@@ -49,16 +58,34 @@ export default function MainPage() {
         getStats();
     }, [])
 
+    const style = {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 400,
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      boxShadow: 24,
+      p: 4,
+    };
+
     const reviewsPerPage = 1;
     const indexLast = page * reviewsPerPage;
     const indexFirst = indexLast - reviewsPerPage;
     const currentCards = reviews.slice(indexFirst, indexLast);
-    
+
     const handleOnClick = () =>  {
-        if (localStorage.getItem("loggedIn") == "true" && window.localStorage.getItem("@apartment") === name) {
-            navigate(`/${name}/review`);
+        if (localStorage.getItem("loggedIn") === "true") {
+            if (window.localStorage.getItem("@apartment") === name) {
+              navigate(`/${name}/review`);
+            } else if (window.localStorage.getItem("@apartment") === null) {
+              setOpen(true)
+            } else {
+              //don't allow them ->
+            }
         } else {
-            //push to login popup?
+
         }
     }
 
@@ -138,11 +165,12 @@ export default function MainPage() {
           }
 
   return (
-    <Grid name="main" display="flex" direction="column">
-      <NavBarComponent></NavBarComponent>
+    <LayoutComponent>
+    {
+      <Grid name="main" display="flex" direction="column">
         <ApartmentHeader info={info}></ApartmentHeader>
         <Box>
-          <OverviewComponent name={info.name} rating={stats.rating}></OverviewComponent>
+          <OverviewComponent name={info.name} rating={stats.rating} stats={stats}></OverviewComponent>
         </Box>
         <Box display={'flex'} direction={'row'} height={'70px'} bgcolor={'#EEEEEE'}>
           <Grid marginLeft={'2%'} container spacing={0} xs={10} position={'flex-start'} marginTop={'10px'} marginBottom={'10px'}> 
@@ -150,6 +178,18 @@ export default function MainPage() {
               <AddIcon/>
                 Create a Review
             </Button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+        >
+            <Box sx={style}>
+                <Typography>Where are you living?</Typography>
+                <ApartmentSelectComponent></ApartmentSelectComponent>
+                <AddApartmentModal></AddApartmentModal>
+            </Box>
+        </Modal>
           </Grid>
           <Grid marginLeft={'100px'} position={'flex-end'} marginTop={'10px'}> 
             <IconButton style={{ color: '#0495B2' }}>
@@ -157,7 +197,7 @@ export default function MainPage() {
             </IconButton>
           </Grid>
           <Grid  marginTop={'5px'}>
-            <FilterComponent></FilterComponent>
+            <FilterComponent apartment={name} collection="reviews" setOrder={setReviews}></FilterComponent>
           </Grid>
         </Box>
         
@@ -180,8 +220,10 @@ export default function MainPage() {
                 </Grid>
             </Box>
         </Grid>
-        <Footer></Footer>
     </Grid>
 
+    }
+  </LayoutComponent>
+    
   );
 }

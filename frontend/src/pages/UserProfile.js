@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import NavBarComponent from "../components/layout/NavBarComponent";
-import Footer from '../components/layout/Footer';
+import LayoutComponent from "../components/layout/LayoutComponent";
 import { useNavigate } from "react-router-dom";
 import {verifyCredentials} from '../components/login/verifyCredentials';
 import {
@@ -100,11 +99,11 @@ export default function UserProfile() {
   }
 
   return (
+    <LayoutComponent>
     <Grid name="main" display="flex" direction="column">
-      <NavBarComponent></NavBarComponent>
       {renderPage()}
-      <Footer></Footer>
     </Grid>
+    </LayoutComponent>
 
   );
 }

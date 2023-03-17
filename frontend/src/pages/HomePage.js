@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
-import NavBarComponent from '../components/layout/NavBarComponent';
 import ListApartmentComponent from "../components/ListApartmentComponent";
 import FilterComponent from "../components/FilterComponent";
-import Footer from '../components/layout/Footer';
+import LayoutComponent from "../components/layout/LayoutComponent";
 import { ref, getDownloadURL } from "firebase/storage";
 import {storage} from "../components/firebase/firebase";
 
@@ -86,9 +85,8 @@ const Box = styled.div`
 `;
 
 return (
-
+  <LayoutComponent>
   <div>
-      <NavBarComponent></NavBarComponent>
       <img src='/logowbg.png' height='100%' width='100%'></img>
       <Stack direction="row" container justifyContent="flex-end">
       <FilterComponent collection="apartments" setOrder={setAllApartments}></FilterComponent>
@@ -140,8 +138,8 @@ return (
       <Grid height='100%' justifyContent={'center'} display='flex' flexDirection={'flex-end'} marginTop={'20%'}>
          <Link href='/allapartments' color={'#0495B2'}>View All Apartments</Link>
       </Grid>
-      <Footer></Footer>
   </div>
+  </LayoutComponent>
 
 );
 }

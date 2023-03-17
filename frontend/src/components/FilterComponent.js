@@ -13,7 +13,7 @@ import {
   Typography,
 } from '@mui/material'
 
-export default function FilterComponent({db, collection, setOrder}) {
+export default function FilterComponent({apartment, collection, setOrder}) {
   const filters = ['Overall Rating', 'Cost', 'Proximity', 'Spaciousness', "Amenities", "Management"];
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -42,7 +42,12 @@ export default function FilterComponent({db, collection, setOrder}) {
   }
 
   async function singleFilter(collection, filter) {
-    let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${collection}/${filter}`;
+    let apiCall = "";
+    if (collection === "apartments") {
+      apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${collection}/${filter}`;
+    } else {
+      apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${collection}/${apartment}/${filter}`;
+    }
 
         await fetch(apiCall, {
         method: "GET",

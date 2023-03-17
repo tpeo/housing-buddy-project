@@ -43,7 +43,8 @@ export default function ExtLoginComponent() {
           localStorage.setItem("@pfp", user.pfp);
           //6 - navigate user to the home page
           navSignIn();
-          if (setNewUser) {
+          console.log(newUser)
+          if (newUser) {
             //ask them to input their apartment
             setOpen(true);
             navigate('../profile');

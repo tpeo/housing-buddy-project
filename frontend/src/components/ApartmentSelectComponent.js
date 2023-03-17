@@ -43,8 +43,8 @@ export default function ApartmentSelectComponent() {
   };
 
   async function updateApartment() {
-    let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/user/apartment`;
-
+    let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/user/apartment/`;
+    let user = window.localStorage.getItem("@user")
     if (apartment === "") {return;}
         await fetch(apiCall, {
         method: "PUT",
@@ -52,8 +52,8 @@ export default function ApartmentSelectComponent() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ 
-            user_id: window.localStorage.getItem("user"), //have to parse this
-            apartment: {apartment}
+            user_id: JSON.parse(user).uid,
+            apartment: apartment
         })
       })
         .then((response) => {
@@ -66,8 +66,9 @@ export default function ApartmentSelectComponent() {
         });
     }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = () => {
     updateApartment();
+    window.localStorage.setItem("@apartment", apartment);
   }
 
   return (
@@ -86,8 +87,9 @@ export default function ApartmentSelectComponent() {
                 <MenuItem value={name}>{name}</MenuItem>
             ))}
         </Select>
+        <Button type="submit">Submit</Button>
+
       </FormControl>
-      <Button type="submit">Submit</Button>
       </form>
     </Box>
   );

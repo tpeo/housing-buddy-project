@@ -51,7 +51,8 @@ export default function StickyFooter() {
         flexDirection: 'column',
         justifyContent: 'space-between',
         width: "100%",
-        minHeight: '30vh',
+        position: "relative",
+        bottom: 0,
       }}
     >
 

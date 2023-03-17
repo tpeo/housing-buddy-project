@@ -1,14 +1,19 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
+import {
+  Paper,
+  Typography,
+  Grid,
+  Link,
+  Box, 
+  Stack
+} from '@mui/material';
+
 import StaticRating from './StaticRating';
 
-export default function OverviewComponent({rating, name}) {
+export default function OverviewComponent({rating, name, stats}) {
 
+  const ratings = ["Affordability", "Management", "Parking", "Amenities", "Proximity", "Spaciousness"];
   return (
     <Paper
       sx={{
@@ -52,7 +57,30 @@ export default function OverviewComponent({rating, name}) {
             </Grid>
             <Grid marginTop={'20px'} width={'100%'} display={'flex'} direction={'row'} justifyContent={'center'} alignItems={'center'}>
               <Grid width={'60%'} height={'245px'} sx={{border: '7px solid #0495B2'}} display={'flex'} direction={'row'} justifyContent={'center'} alignItems={'center'}>
-                <Typography margin={'2%'}>ratings</Typography>
+              <Grid id="category ratings" display='flex' direction='row' justifyContent={'center'} item>
+              <Box sx={{flexGrow: 1}}>
+              <Grid container spacing={2} 
+                  display="flex"
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="stretch"
+                  marginLeft={'4%'}
+                  width={'31rem'}
+                  >
+                  {ratings.map((rating, index) => (
+                      <Grid item xs={6} key={rating}>
+                      <Stack>
+                        <Typography variant="body" color={'#0495b2'}>{rating}</Typography>
+                        <StaticRating
+                          value={stats[index] || 0}
+                      ></StaticRating>
+                      </Stack>
+                      </Grid>
+                  ))}
+              </Grid>
+            </Box>
+
+            </Grid>
               </Grid>
             </Grid>
           </Grid>

@@ -120,8 +120,10 @@ export default function NavBarComponent() {
   }
 
   function logout() {
-    localStorage.removeItem("@attendanceToken");
+    localStorage.removeItem("@userToken");
     localStorage.removeItem("@user");
+    localStorage.removeItem("@pfp");
+    localStorage.removeItem("@apartment");
     localStorage.setItem("loggedIn", false);
     window.location.reload(false);
     navigate("/"); //navigate to temp page that says you've logged out and times out?
