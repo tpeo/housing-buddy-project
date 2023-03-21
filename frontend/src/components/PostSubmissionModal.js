@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { send } from 'emailjs-com';
 
 import {
-  Grid,
   Box,
-  Link,
   Button,
   Typography,
   Modal,
-  TextField
 } from "@mui/material"
 
 const style = {
@@ -24,10 +23,21 @@ const style = {
   p: 4,
 };
 
-export default function PostSubmissionModal({info}) {
+export default function PostSubmissionModal({info, nav, appt}) {
+  const navigate = useNavigate();
+
+  function navigateTo() {
+    if (nav === "home") {
+      navigate(`/`);
+    } else if (nav === "app_main") {
+      navigate(`../mainpage/${appt}`);
+    }
+  }
+
   return (
     <Box sx={style}>
         <Typography variant="body1">{info}</Typography>
+        <Button onClick={() => navigateTo()}>{`Return to ${appt}`}</Button>
     </Box>
   );
 }

@@ -53,7 +53,6 @@ export default function MainPage() {
 
     useEffect(() => {
         getReviews();
-        console.log(reviews)
         getInfo();
         getStats();
     }, [])
@@ -70,10 +69,11 @@ export default function MainPage() {
       p: 4,
     };
 
-    const reviewsPerPage = 1;
+    const reviewsPerPage = 10;
+    const pages = Math.ceil(reviews/reviewsPerPage);
     const indexLast = page * reviewsPerPage;
     const indexFirst = indexLast - reviewsPerPage;
-    const currentCards = reviews.slice(indexFirst, indexLast);
+    const currentCards = reviews.slice(indexFirst, Math.max(indexLast, reviews.length));
     
 
     const handleOnClick = () =>  {
@@ -91,6 +91,7 @@ export default function MainPage() {
     }
 
     const handlePageChange = (event, value) => {
+      console.log(value)
       setPage(value);
     }
 
@@ -213,8 +214,13 @@ export default function MainPage() {
                             fullR={r}
                         ></ReviewComponent>))}
 
-                <Pagination count={3} page={page} 
-                    onChange={handlePageChange} />
+                {(pages > 1) && (
+                  <div id="pagination">
+                      <Pagination count={pages} page={page} 
+                        onChange={handlePageChange} /> 
+                      <Typography>{`${page} of ${pages}`}</Typography>
+                  </div>
+                  )}
                 </Grid>
             </Box>
         </Grid>

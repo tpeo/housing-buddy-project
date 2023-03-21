@@ -168,9 +168,9 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                     </Collapse> 
                 </Grid>
                 <Grid id="tags" item>
-                    {fullR.tags.map((tag) => (
-                        <Typography sx={{border: 1, borderColor: '#0495b2', borderRadius: '20px'}} variant="body">{tag}</Typography>
-                    ))}
+                    {(fullR.tags != undefined) &&(fullR.tags.map((tag) => (
+                        <Typography sx={{ color: '#0495b2', border: 1, borderColor: '#0495b2', borderRadius: '20px'}} variant="body">{tag}</Typography>
+                    )))}
                 </Grid>
                 <Grid item>
                     <Typography>{date}</Typography>

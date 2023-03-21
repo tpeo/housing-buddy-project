@@ -194,8 +194,8 @@ export default function ReviewForm() {
             <Grid id="tags" item>
               <Stack id="button-group" direction="row">
                 {ratings.map((rating) => (
-                  <Button onClick={handleTags} variant="outlined" id={rating} 
-                  style={{color: '#12AAC9', '&:click': {color: 'success',},}}> {rating} </Button>
+                  <Button onClick={handleTags} variant="outlined" id={rating}
+                  style={{color: '#12AAC9', '&:click': {color: 'success',}, '&:iconFill': {color: 'success',}, borderRadius: '16px'}}> {rating} </Button>
                 ))}
               </Stack>
             </Grid>
@@ -207,7 +207,7 @@ export default function ReviewForm() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
-              <PostSubmissionModal info={msg}></PostSubmissionModal>
+              <PostSubmissionModal info={msg} nav="app_main" appt={name}></PostSubmissionModal>
             </Modal>
             </Grid>
             

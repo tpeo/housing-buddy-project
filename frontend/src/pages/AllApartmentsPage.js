@@ -94,6 +94,7 @@ export default function AllApartmentsPage() {
                               backgroundImage: obj.img_link
                             }}
                             id={obj.name}
+                            key={obj.name}
                             onClick={navApartmentPage}
                             >{obj.name}</Button>))}
             </Grid>

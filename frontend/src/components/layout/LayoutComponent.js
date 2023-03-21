@@ -8,7 +8,9 @@ export default function LayoutComponent(props) {
     return (
         <div id="page">
             <NavBarComponent></NavBarComponent>
+                <div id="children">
                 {props.children}
+                </div>
             <Footer></Footer>
         </div>
 

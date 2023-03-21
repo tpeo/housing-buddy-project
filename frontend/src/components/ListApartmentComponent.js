@@ -10,15 +10,12 @@ import { shadows } from '@mui/system';
 import { useNavigate } from "react-router-dom";
 
 export default function ListApartmentComponent({name, handleOnClick, backgroundImage}) {
-    // ^ add backgroundImage to the changing parameters
-  return (
-    <Card id={name} onClick={handleOnClick} sx={{
+
+    return (
+    <Card id={name} sx={{
         width: '20%',
         height: '43%',
-        backgroundSize: '100% 100%',
-        backgroundPosition: 'center',
         position: 'absolute',
-        backgroundImage: `url(${backgroundImage})`,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',

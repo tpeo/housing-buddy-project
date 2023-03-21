@@ -15,6 +15,7 @@ export default function FilterComponent({apartment, collection, setOrder}) {
   const filters = ['Overall Rating', 'Cost', 'Proximity', 'Spaciousness', "Amenities", "Management"];
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [text, setText] = useState("Most Popular");
+  const storageName = collection === "apartments" ? collection : `${collection}_${apartment}`;
 
   useEffect(() => {
     cacheFilters();
@@ -29,7 +30,7 @@ export default function FilterComponent({apartment, collection, setOrder}) {
   const handleCloseNavMenu = (event) => {
     const filter = filterHelper(event.currentTarget.innerText);
     setText(filter);
-    const obj = window.localStorage.getItem(`_${collection}_${filter}`);
+    const obj = window.localStorage.getItem(`_${storageName}_${filter}`);
     setOrder(JSON.parse(obj));
     setAnchorElUser(null);
   };
@@ -66,8 +67,8 @@ export default function FilterComponent({apartment, collection, setOrder}) {
           return response.json();
         })
         .then((response) => {
-            if (window.localStorage.getItem(`_${collection}_${filter}`) === null) {
-              window.localStorage.setItem(`_${collection}_${filter}`, JSON.stringify(response));
+            if (window.localStorage.getItem(`_${storageName}_${filter}`) === null) {
+              window.localStorage.setItem(`_${storageName}_${filter}`, JSON.stringify(response));
             }
           })
         .catch((e) => {
@@ -83,6 +84,9 @@ export default function FilterComponent({apartment, collection, setOrder}) {
     switch(lower) {
       case "overall rating": 
         lower = "rating";
+        break;
+      case "cost":
+        lower = "affordability";
         break;
       default:
         lower = filter.toLowerCase();

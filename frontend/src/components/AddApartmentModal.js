@@ -125,7 +125,7 @@ export default function AddApartmentModal() {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-            <PostSubmissionModal info={msg}></PostSubmissionModal>
+            <PostSubmissionModal info={msg} nav="home" appt="home" ></PostSubmissionModal>
         </Modal>
         </Box>
       </Modal>
