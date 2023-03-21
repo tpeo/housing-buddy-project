@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Grid,
     Card,
     CardActionArea,
     CardActions,
     Collapse,
-    Button,
     Stack,
     IconButton,
     CardContent,
     Box,
     Typography,
+    useScrollTrigger,
 } from "@mui/material"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
@@ -20,6 +20,7 @@ import OutlinedFlagIcon from '@mui/icons-material/OutlinedFlag';
 import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import StaticRating from "./StaticRating";
+import SentimentSatisfied from "@mui/icons-material/SentimentSatisfied";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -37,6 +38,12 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
     const [expanded, setExpanded] = React.useState(false);
     const convertDate = new Date(fullR.date._seconds * 1000 + fullR.date._nanoseconds/1000000);
     const date = convertDate.toDateString();
+    let tags = [];
+
+    useEffect(() => {
+        tags = fullR.tags;
+        console.log(tags)
+    }, [])
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
@@ -93,14 +100,14 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
   return (
     <Grid item xs={4} sm={6} md={4}>
         <Card sx={gridItem} height="100%">
-            <Grid name="main" display="flex" direction="row">
+            <Grid name="main" display="flex" direction="row" justifyContent='space-between'>
                 <Grid item >
                     <Box width={'120px'} marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
                             <Typography marginLeft='7px' component='h3' variant="h3" fontWeight={'bold'} color="inherit" paragraph>
                             {rating}/5
                             </Typography>
                     </Box>
-                    <Typography variant="body">name</Typography>
+                    <Typography variant="body">{fullR.name}</Typography>
                     <Stack direction="row">
                         <IconButton id={fullR.id} onClick={(event) => handleLike(event, "likes")}>
                             <ThumbUpOffAltOutlinedIcon></ThumbUpOffAltOutlinedIcon>
@@ -115,9 +122,10 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                 <Grid item>
                     <Typography variant="h1">{title}</Typography>
                     
-                    <StaticRating value={rating}></StaticRating>
+                    <StaticRating value={parseInt(rating)}></StaticRating>
                     <Typography variant="body1">{review}</Typography>
                     <CardActions>
+                        <Typography variant="body">Click to see more</Typography>
                         <ExpandMore
                             expand={expanded}
                             onClick={handleExpandClick}
@@ -141,11 +149,14 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                                 >
                                 {ratings.map((rating, index) => (
                                     <Grid item xs={6} key={rating}>
-                                    <Stack>
+                                    <Stack direction="row">
+                                        <SentimentSatisfied></SentimentSatisfied>
+                                        <Box width={'120px'} marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
+                                            <Typography marginLeft='7px' component='h3' variant="h3" fontWeight={'bold'} color="inherit" paragraph>
+                                            {parseInt(stats[index]) || 0}/5
+                                            </Typography>
+                                        </Box>
                                         <Typography variant="body" color={'#0495b2'}>{rating}</Typography>
-                                        <StaticRating
-                                        value={stats[index] || 0}
-                                    ></StaticRating>
                                     </Stack>
                                     </Grid>
                                 ))}
@@ -155,6 +166,11 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                             </Grid>
                         </CardContent>
                     </Collapse> 
+                </Grid>
+                <Grid id="tags" item>
+                    {fullR.tags.map((tag) => (
+                        <Typography sx={{border: 1, borderColor: '#0495b2', borderRadius: '20px'}} variant="body">{tag}</Typography>
+                    ))}
                 </Grid>
                 <Grid item>
                     <Typography>{date}</Typography>

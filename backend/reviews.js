@@ -18,7 +18,7 @@ reviews.get("/:apartment", async(req, res) => {
   let apartment = req.params.apartment;
   const apartments = db.collection("apartment-info").doc(apartment).collection("reviews");
   // const query = await apartments.where('apartment', '==', apartment).get();
-  const query = await apartments.get();
+  const query = await apartments.orderBy("likes", 'desc').get();
   const reviews = [];
   const ret = query.forEach((doc) => reviews.push(doc.data()));
   res.status(200).json(reviews);

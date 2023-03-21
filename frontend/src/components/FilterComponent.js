@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
 import TuneIcon from '@mui/icons-material/Tune';
 
 import {
@@ -16,6 +14,7 @@ import {
 export default function FilterComponent({apartment, collection, setOrder}) {
   const filters = ['Overall Rating', 'Cost', 'Proximity', 'Spaciousness', "Amenities", "Management"];
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [text, setText] = useState("Most Popular");
 
   useEffect(() => {
     cacheFilters();
@@ -23,11 +22,13 @@ export default function FilterComponent({apartment, collection, setOrder}) {
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+    
   };
 
 
   const handleCloseNavMenu = (event) => {
     const filter = filterHelper(event.currentTarget.innerText);
+    setText(filter);
     const obj = window.localStorage.getItem(`_${collection}_${filter}`);
     setOrder(JSON.parse(obj));
     setAnchorElUser(null);
@@ -35,6 +36,9 @@ export default function FilterComponent({apartment, collection, setOrder}) {
 
   async function cacheFilters() {
     const promises = filters.map(async (filter) => {
+      if (filter === "Overall Rating") {
+        filter = "rating"
+      }
       singleFilter(collection, filter.toLowerCase());
     });
     
@@ -75,6 +79,7 @@ export default function FilterComponent({apartment, collection, setOrder}) {
   function filterHelper(filter) {
     //add error handler for invalid
     let lower = filter.toLowerCase();
+    console.log(lower)
     switch(lower) {
       case "overall rating": 
         lower = "rating";
@@ -90,6 +95,7 @@ export default function FilterComponent({apartment, collection, setOrder}) {
 <Box sx={{ flexGrow: 0 }} marginTop={'12px'}>
   <Tooltip title="Open filters">
     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+      <Typography variant='body'>{text}</Typography>
       <TuneIcon style={{color: "#0495b2"}} fontSize="large"></TuneIcon>
     </IconButton>
   </Tooltip>

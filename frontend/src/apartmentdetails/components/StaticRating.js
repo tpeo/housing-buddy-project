@@ -12,6 +12,9 @@ const StyledRating = styled(Rating)(({ theme }) => ({
     '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
       color: theme.palette.action.disabled,
     },
+    '& .MuiRating-iconFilled': {
+      color: '#0495B2',
+    },
   }));
   
   const customIcons = {
@@ -24,7 +27,7 @@ const StyledRating = styled(Rating)(({ theme }) => ({
         label: 'Dissatisfied',
       },
       3: {
-        icon: <SentimentSatisfiedIcon fontSize='large' color='#45C6E0'/>,
+        icon: <SentimentSatisfiedIcon fontSize='large' color='#0495B2'/>,
         label: 'Neutral',
       },
       4: {
@@ -51,7 +54,8 @@ export default function StaticRating({value}) {
     <StyledRating
       id="rating"
       name="read-only"
-      defaultValue={value}
+      value={value}
+      defaultValue={0}
       IconContainerComponent={IconContainer}
       readOnly
     />

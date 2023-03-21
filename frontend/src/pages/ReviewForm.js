@@ -8,11 +8,8 @@ import {
     Grid,
     TextField,
     Stack,
-    FormControl,
-    FormLabel,
-    Select,
-    MenuItem,
     Button,
+    ButtonGroup,
     Modal,
     Card,
     Box,
@@ -27,18 +24,28 @@ export default function ReviewForm() {
     
   const name = params.apartment;
 
-    const defaultValues = {
-        name: "name",
-        title: "title",
-        rating: 0,
-        review: "hello"
-      };
+  const defaultValues = {
+      name: "name",
+      title: "title",
+      rating: 0,
+      review: "hello"
+    };
+  
+  const defaultTags = {
+    affordability: false,
+    management: false,
+    parking: false,
+    amenities: false,
+    proximity: false,
+    spaciousness: false
+  }
     
     const ratings = ["Affordability", "Management", "Parking", "Amenities", "Proximity", "Spaciousness"];
     const [formValues, setFormValues] = useState(defaultValues);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [tags, setTags] = useState(defaultTags);
   
     const [msg, setMsg] = useState("no submission");
 
@@ -59,6 +66,14 @@ export default function ReviewForm() {
 
     async function addRating() {
         let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/`;
+
+        let selected = [];
+        for (const tag in tags) {
+          if (tags[tag] == true) {
+            selected.push(tag)
+          }
+        }
+        console.log(selected)
     
         if (formValues.review === "") {return;}
             await fetch(apiCall, {
@@ -77,6 +92,7 @@ export default function ReviewForm() {
               management: formValues.management,
               proximity: formValues.proximity,
               spaciousness: formValues.spaciousness,
+              tags: selected
             })
           })
             .then((response) => {
@@ -97,6 +113,22 @@ export default function ReviewForm() {
         addRating();
         //after submit erase input
     };
+
+    const handleTags = (event) => {
+      const tag = event.target.id.toLowerCase()
+      const prev = tags[tag]
+
+      if (prev == true) {
+        //set color
+      }
+
+      setTags({
+        ...tags,
+        [tag]: !prev
+      });
+
+      console.log(tags)
+    }
 
     const card = (
       <Grid>
@@ -121,7 +153,7 @@ export default function ReviewForm() {
                 onChange={handleInputChange}
                 ></TextField>
             </Grid>
-            <Grid item display="flex" direction="column"> 
+            <Grid item display="flex" > 
               <Typography variant="body" color={"#0495b2"} fontWeight={'bold'}>Overall Review</Typography>
                 <RadioGroupRating
                     name="rating"
@@ -129,7 +161,7 @@ export default function ReviewForm() {
                     styled={{}}
                 ></RadioGroupRating>
             </Grid>
-            <Grid id="category ratings" display='flex' direction='row' justifyContent={'center'} item>
+            <Grid id="category ratings" display='flex' justifyContent={'center'} item>
               <Box sx={{flexGrow: 1}}>
               <Grid container spacing={2} 
                   display="flex"
@@ -156,8 +188,16 @@ export default function ReviewForm() {
             </Grid>
             <Grid id="comments" width={'450px'} display='flex' direction='column' justifyContent={'center'} item>
                 <Typography color={"#0495b2"} fontWeight={'bold'}>Comments (optional)</Typography>
-                <TextField id="review" label ="Type your review here" type="text" placeholder="Review" multiline rows={2} maxRows={4} onChange={handleInputChange}> 
+                <TextField id="review" label ="Type your review here" type="text" placeholder="Review" multiline rows={2} onChange={handleInputChange}> 
                 </TextField>
+            </Grid>
+            <Grid id="tags" item>
+              <Stack id="button-group" direction="row">
+                {ratings.map((rating) => (
+                  <Button onClick={handleTags} variant="outlined" id={rating} 
+                  style={{color: '#12AAC9', '&:click': {color: 'success',},}}> {rating} </Button>
+                ))}
+              </Stack>
             </Grid>
             <Grid item>
               <Button variant="contained" style={{backgroundColor: '#0495B2', fontWeight:'bold', fontFamily:'sans-serif'}} color="primary" type="submit">Submit Review</Button>

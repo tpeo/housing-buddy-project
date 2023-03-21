@@ -12,27 +12,53 @@ const StyledRating = styled(Rating)(({ theme }) => ({
   '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
     color: theme.palette.action.disabled,
   },
+  '& .MuiRating-iconFilled': {
+    color: '#0495B2',
+  },
 }));
+
+// const customIcons = {
+//   1: {
+//     icon: <SentimentVeryDissatisfiedIcon fontSize='large' style={{color: '#71DAF9', '&:hover': {color: 'error'},}} />,
+//     label: 'Very Dissatisfied',
+//   },
+//   2: {
+//     icon: <SentimentDissatisfiedIcon fontSize='large' style={{color: '#68CDEB', '&:hover': {color: 'error'},}}/>,
+//     label: 'Dissatisfied',
+//   },
+//   3: {
+//     icon: <SentimentSatisfiedIcon fontSize='large' style={{color: '#45C6E0', '&:hover': {color: 'warning'},}} />,
+//     label: 'Neutral',
+//   },
+//   4: {
+//     icon: <SentimentSatisfiedAltIcon fontSize='large' style={{color: '#12AAC9', '&:hover': {color: 'success'},}} />,
+//     label: 'Satisfied',
+//   },
+//   5: {
+//     icon: <SentimentVerySatisfiedIcon fontSize='large' style={{color: '#0495B2', '&:hover': {color: 'success'},}} />,
+//     label: 'Very Satisfied',
+//   },
+// };
 
 const customIcons = {
   1: {
-    icon: <SentimentVeryDissatisfiedIcon fontSize='large' style={{color: '#71DAF9', '&:hover': {color: 'error',},}} />,
+    icon: <SentimentVeryDissatisfiedIcon fontSize='large' color='#71DAF9' />,
     label: 'Very Dissatisfied',
   },
   2: {
-    icon: <SentimentDissatisfiedIcon fontSize='large' style={{color: '#68CDEB', '&:hover': {color: 'error',},}}/>,
+    icon: <SentimentDissatisfiedIcon fontSize='large' color='#68CDEB'/>,
     label: 'Dissatisfied',
   },
   3: {
-    icon: <SentimentSatisfiedIcon fontSize='large' style={{color: '#45C6E0', '&:hover': {color: 'warning',},}} />,
+    icon: <SentimentSatisfiedIcon fontSize='large' color='#45C6E0'/>,
     label: 'Neutral',
   },
   4: {
-    icon: <SentimentSatisfiedAltIcon fontSize='large' style={{color: '#12AAC9', '&:hover': {color: 'success',},}} />,
+    icon: <SentimentSatisfiedAltIcon fontSize='large' color='#12AAC9'/>,
     label: 'Satisfied',
   },
   5: {
-    icon: <SentimentVerySatisfiedIcon fontSize='large' style={{color: '#0495B2', '&:hover': {color: 'success',},}} />,
+    icon: <SentimentVerySatisfiedIcon fontSize='large' color='#0495B2'/>,
     label: 'Very Satisfied',
   },
 };
@@ -54,7 +80,7 @@ export default function RadioGroupRating({handleInputChange, name}) {
       defaultValue={2}
       IconContainerComponent={IconContainer}
       getLabelText={(value) => customIcons[value].label}
-      highlightSelectedOnly
+      //highlightSelectedOnly
       onChange={handleInputChange}
     />
   );

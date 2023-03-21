@@ -37,7 +37,13 @@ app.get("/apartments/stats", async(req, res) => {
   const object = [];
   query.docs.forEach((doc) => object.push({
     "name": doc.data().name,
-    "rating": doc.data().rating
+    "rating": doc.data().rating,
+    "affordability": doc.data().affordability,
+    "amenities": doc.data().amenities,
+    "management": doc.data().management,
+    "parking": doc.data().parking,
+    "spaciousness": doc.data().spaciousness,
+    "proximity": doc.data().proximity
   }));
 
   //const ret = JSON.stringify(Array.from(set));
@@ -48,11 +54,17 @@ app.get("/apartments/stats", async(req, res) => {
 app.get("/:apartment/stats", async(req, res) => {
   let apartment = req.params.apartment;
   const apartments = db.collection("apartment-info").doc(apartment);
-  const query = await apartments.get();
+  const doc = await apartments.get();
 
   //const set = new Set();
   const object = {
-    "rating": query.data().rating,
+    "rating": doc.data().rating,
+    "affordability": doc.data().affordability,
+    "amenities": doc.data().amenities,
+    "management": doc.data().management,
+    "parking": doc.data().parking,
+    "spaciousness": doc.data().spaciousness,
+    "proximity": doc.data().proximity
   }
 
   //const ret = JSON.stringify(Array.from(set));
@@ -129,6 +141,7 @@ app.post("/review/", async(req, res) => {
         management: req.body.management,
         proximity: req.body.proximity,
         spaciousness: req.body.spaciousness,
+        tags: req.body.tags,
         likes: 0,
         dislikes: 0,
         date: firebase.serverStamp.now(),
@@ -160,18 +173,18 @@ function addRating(name, filters) {
             if (!res.exists) {
                 throw "Document does not exist!";
             }
-
             // Compute new number of ratings
             var newNumRatings = res.data().num_reviews + 1;
 
+
             Object.keys(updateRatings).forEach((rating) => {
               var oldRatingTotal = res.data()[rating] * res.data().num_reviews;
-              var newAvgRating = (oldRatingTotal + filters[rating]) / newNumRatings;
+              var newAvgRating = (oldRatingTotal + parseInt(filters[rating])) / newNumRatings;
               updateRatings[rating] = newAvgRating;
               
             })
             // Compute new average rating
-
+            console.log(updateRatings)
             // Commit to Firestore
             transaction.update(apartment, updateRatings);
         });

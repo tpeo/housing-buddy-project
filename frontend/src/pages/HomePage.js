@@ -3,31 +3,42 @@ import styled from 'styled-components';
 import ListApartmentComponent from "../components/ListApartmentComponent";
 import FilterComponent from "../components/FilterComponent";
 import LayoutComponent from "../components/layout/LayoutComponent";
-import { ref, getDownloadURL } from "firebase/storage";
-import {storage} from "../components/firebase/firebase";
 
 
 import {
     Grid,
-    Box,
     Link,
     Divider,
     Stack,
-    Button,
-    Typography
+    Typography,
+    IconButton
 } from "@mui/material"
 
+import AddIcon from '@mui/icons-material/Add';
+
 import { useNavigate } from "react-router-dom";
+
+const Box = styled.div` 
+  display: flex;
+  flex-direction: row;
+  justify-content: 'center';
+  margin-left: 10%;
+  margin-right: 10%,
+  padding: auto;
+  margin-top: 2%;
+  margin-bottom: 4%;
+  overflow: 'hidden';
+`;
 
 export default function AllApartments() {
     const navigate = useNavigate();
 
     const [allApartments, setAllApartments] = useState([]);
-    const [order, setOrder] = useState([]); //default order
+    //const [order, setOrder] = useState([]); //default order
 
     useEffect(() => {
         getAllApartments();
-        setOrder(allApartments);
+        //setOrder(allApartments);
     }, []);
 
     const navApartmentPage = (event) => {
@@ -71,25 +82,16 @@ const apartments = allApartments.map((obj, index) => (
   />
 ));
 
-
-const Box = styled.div` 
-  display: flex;
-  flex-direction: row;
-  justify-content: 'center';
-  margin-left: 10%;
-  margin-right: 10%,
-  padding: auto;
-  margin-top: 2%;
-  margin-bottom: 4%;
-  overflow: 'hidden';
-`;
-
 return (
   <LayoutComponent>
-  <div>
-      <img src='/logowbg.png' height='100%' width='100%'></img>
-      <Stack direction="row" container justifyContent="flex-end">
-      <FilterComponent collection="apartments" setOrder={setAllApartments}></FilterComponent>
+  <div position='relative'>
+      <img src='/logowbg.png' height='100%' width='100%' alt="bg-img"></img>
+      <Stack direction="row" container justifyContent="space-between">
+        <IconButton>
+          <Typography variant="body">Request to Add an Apartment</Typography>
+          <AddIcon></AddIcon>
+        </IconButton>
+        <FilterComponent collection="apartments" setOrder={setAllApartments}></FilterComponent>
       </Stack>
       <Divider color="#0495b2" sx={{ borderBottomWidth: 50 }}></Divider>
       <Box>
