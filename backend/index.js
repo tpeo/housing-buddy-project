@@ -141,9 +141,11 @@ app.post("/review/", async(req, res) => {
         management: req.body.management,
         proximity: req.body.proximity,
         spaciousness: req.body.spaciousness,
+        parking: req.body.parking,
         tags: req.body.tags,
         likes: 0,
         dislikes: 0,
+        flagged: false,
         date: firebase.serverStamp.now(),
         //randomly generate?
         id: r

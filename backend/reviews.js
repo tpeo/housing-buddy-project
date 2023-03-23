@@ -18,7 +18,7 @@ reviews.get("/:apartment", async(req, res) => {
   let apartment = req.params.apartment;
   const apartments = db.collection("apartment-info").doc(apartment).collection("reviews");
   // const query = await apartments.where('apartment', '==', apartment).get();
-  const query = await apartments.orderBy("likes", 'desc').get();
+  const query = await apartments.orderBy('flagged').orderBy("likes", 'desc').get();
   const reviews = [];
   const ret = query.forEach((doc) => reviews.push(doc.data()));
   res.status(200).json(reviews);
@@ -42,9 +42,9 @@ reviews.get("/:apartment/:filter", async(req, res) => {
 
     let query = 0;
     if (filter === 'name') {
-      query = await reviews.orderBy(filter).get();
+      query = await reviews.orderBy('flagged').orderBy(filter).get();
     } else {
-      query = await reviews.orderBy(filter, 'desc').get();
+      query = await reviews.orderBy('flagged').orderBy(filter, 'desc').get();
     }
   
     const object = [];
@@ -59,7 +59,7 @@ reviews.get("/:apartment/tags/:tags/", async(req, res) => {
   let apartment = req.params.apartment;
   const reviews = db.collection("apartment-info").doc(apartment).collection("reviews");
 
-  const query = await reviews.orderBy('likes', 'desc').get();
+  const query = await reviews.orderBy('flagged').orderBy('likes', 'desc').get();
 
   const object = [];
   query.docs.forEach((doc) => {
@@ -106,6 +106,24 @@ reviews.put("/dislikes", async(req, res) => {
   const apartment = body.apartment;
   
   const query = await db.collection("apartment-info").doc(apartment).collection("reviews").doc(body.id).update({dislikes: firebase.increment});
+
+  res.status(200).json(query);
+})
+
+//update flagging
+reviews.put("/flag", async(req, res) => {
+
+  const body = req.body
+    if(body.id ==undefined || body.apartment == undefined) {
+        return res.json({
+          msg: "Error: review not defined in request",
+          data: {},
+        });
+    }
+
+  const apartment = body.apartment;
+  
+  const query = await db.collection("apartment-info").doc(apartment).collection("reviews").doc(body.id).update({flagged: true});
 
   res.status(200).json(query);
 })

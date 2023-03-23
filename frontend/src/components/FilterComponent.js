@@ -39,6 +39,8 @@ export default function FilterComponent({apartment, collection, setOrder}) {
     const promises = filters.map(async (filter) => {
       if (filter === "Overall Rating") {
         filter = "rating"
+      } else if (filter === "Cost") {
+        filter = "affordability"
       }
       singleFilter(collection, filter.toLowerCase());
     });

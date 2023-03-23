@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Grid,
     Card,
@@ -9,6 +9,12 @@ import {
     IconButton,
     CardContent,
     Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
     Typography,
     useScrollTrigger,
 } from "@mui/material"
@@ -39,15 +45,58 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
     const convertDate = new Date(fullR.date._seconds * 1000 + fullR.date._nanoseconds/1000000);
     const date = convertDate.toDateString();
     let tags = [];
+    let flag = fullR.flagged;
+    const [color, setColor] = useState("#0495b2");
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     useEffect(() => {
         tags = fullR.tags;
-        console.log(tags)
+        console.log(flag)
+        if (flag) {
+            setColor('red');
+        }
     }, [])
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
     };
+
+    function handleFlag(event) {
+        updateFlag(event.target.id);
+        setOpen(false);
+    }
+
+    async function updateFlag(id) {
+        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/flag`;
+        if (apartment === "") {return;}
+            await fetch(apiCall, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ 
+                id: id,
+                apartment: apartment,
+            })
+          })
+            .then((response) => {
+              if (response.status !== 200) {
+                throw new Error();
+              }
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        }
 
     const ratings = ["Affordability", "Management", "Parking", "Amenities", "Proximity", "Spaciousness"];
     const stats = [];
@@ -110,11 +159,11 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                     <Typography variant="body">{fullR.name}</Typography>
                     <Stack direction="row">
                         <IconButton id={fullR.id} onClick={(event) => handleLike(event, "likes")}>
-                            <ThumbUpOffAltOutlinedIcon></ThumbUpOffAltOutlinedIcon>
+                            <ThumbUpOffAltOutlinedIcon style={{color: "#0495b2"}}></ThumbUpOffAltOutlinedIcon>
                         </IconButton>
                         <Typography variant="body">{fullR.likes}</Typography>
                         <IconButton id={fullR.id} onClick={(event) => handleLike(event, "dislikes")}>
-                            <ThumbDownOffAltOutlinedIcon></ThumbDownOffAltOutlinedIcon>
+                            <ThumbDownOffAltOutlinedIcon style={{color: "#0495b2"}}></ThumbDownOffAltOutlinedIcon>
                         </IconButton>
                         <Typography variant="body">{fullR.dislikes}</Typography>
                     </Stack>
@@ -175,9 +224,25 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                 </Grid>
                 <Grid sx={{margin: '10px'}} item>
                     <Typography>{date}</Typography>
-                    <IconButton>
-                        <OutlinedFlagIcon></OutlinedFlagIcon>
+                    <IconButton id={fullR.id} onClick={handleClickOpen}>
+                        <OutlinedFlagIcon style={{color: color}}></OutlinedFlagIcon>
                     </IconButton>
+                    <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                    >
+                        <DialogTitle id="alert-dialog-title"> Confirm Flag to Review?</DialogTitle>
+                        <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Once you confirm, you cannot undo this, and the team will be notified. </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                        <Button onClick={handleClose}>Disagree</Button>
+                        <Button id={fullR.id} onClick={(event) => handleFlag(event)} autoFocus>Agree</Button>
+                        </DialogActions>
+                    </Dialog>
                 </Grid>
             </Grid>
 

@@ -3,6 +3,7 @@ import LayoutComponent from "../components/layout/LayoutComponent";
 import { useNavigate } from "react-router-dom";
 import {verifyCredentials} from '../components/login/verifyCredentials';
 import {
+    Avatar,
     Grid,
     Box,
     Divider,
@@ -86,12 +87,20 @@ export default function UserProfile() {
   function renderPage() {
     if (loaded) {
       return(
-        <div>
-            <Typography id="name">{user.name}</Typography>
-            <Typography id="email">{user.email}</Typography>
-            <Typography id="apartment">{user.apartment}</Typography>
+        <Grid>
+            <Grid item>
+              <Avatar src={window.localStorage.getItem("@pfp")}>
+                <img src={window.localStorage.getItem("@pfp")} referrerPolicy="no-referrer"></img>
+              </Avatar>
+            </Grid>
+            <Grid item>
+              <Typography id="name">{user.name}</Typography>
+              <Typography id="email">{user.email}</Typography>
+              <Typography id="apartment">{user.apartment}</Typography>
+            </Grid>
+
             <Button>Edit Profile</Button>
-        </div>
+        </Grid>
       )
     } else {
       return null;

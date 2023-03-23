@@ -33,7 +33,6 @@ export default function SortComponent({apartment, setOrder}) {
   const tags = ['Cost', 'Proximity', 'Spaciousness', "Amenities", "Management"];
   const [tagValues, setTagValues] = useState(tagDefault);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [clicks, setClicks] = useState(0);
 
   const [showTags, setShowTags] = useState([]);
 
@@ -70,8 +69,6 @@ export default function SortComponent({apartment, setOrder}) {
             selected.splice(idx, 1)
         }
     }
-
-    console.log(selected)
     setShowTags(selected);
   }
 
@@ -129,7 +126,7 @@ export default function SortComponent({apartment, setOrder}) {
   >
     <MenuItem key="checkboxes">
         <Stack>
-            <Box>
+            <Box sx={{flexGrow: 1}}>
                 {(showTags != undefined) &&(showTags.map((tag) => (
                             <Typography sx={{ color: '#0495b2', border: 1, borderColor: '#0495b2', 
                                 borderRadius: '20px', margin: '4px', backgroundColor: 'rgba(113, 218, 249, 0.33)'}} variant="body">{tag}</Typography>
