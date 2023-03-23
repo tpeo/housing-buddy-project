@@ -38,7 +38,7 @@ app.get("/apartments/stats", async(req, res) => {
   query.docs.forEach((doc) => object.push({
     "name": doc.data().name,
     "rating": doc.data().rating,
-    "affordability": doc.data().affordability,
+    "cleanliness": doc.data().cleanliness,
     "amenities": doc.data().amenities,
     "management": doc.data().management,
     "parking": doc.data().parking,
@@ -59,7 +59,7 @@ app.get("/:apartment/stats", async(req, res) => {
   //const set = new Set();
   const object = {
     "rating": doc.data().rating,
-    "affordability": doc.data().affordability,
+    "cleanliness": doc.data().cleanliness,
     "amenities": doc.data().amenities,
     "management": doc.data().management,
     "parking": doc.data().parking,
@@ -136,7 +136,7 @@ app.post("/review/", async(req, res) => {
         name: req.body.name,
         review: req.body.review,
         rating: req.body.rating,
-        affordability: req.body.affordability,
+        cleanliness: req.body.cleanliness,
         amenities: req.body.amenities,
         management: req.body.management,
         proximity: req.body.proximity,
@@ -162,7 +162,7 @@ function addRating(name, filters) {
   var apartment = db.collection('apartment-info').doc(name);
   var updateRatings = {
     rating: 0,
-    affordability: 0,
+    cleanliness: 0,
     amenities: 0,
     management: 0,
     proximity: 0,

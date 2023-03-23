@@ -32,7 +32,7 @@ export default function ReviewForm() {
     };
   
   const defaultTags = {
-    affordability: false,
+    cleanliness: false,
     management: false,
     parking: false,
     amenities: false,
@@ -40,7 +40,7 @@ export default function ReviewForm() {
     spaciousness: false
   }
     
-    const ratings = ["Affordability", "Management", "Parking", "Amenities", "Proximity", "Spaciousness"];
+    const ratings = ["Cleanliness", "Management", "Parking", "Amenities", "Proximity", "Spaciousness"];
     const [formValues, setFormValues] = useState(defaultValues);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -87,7 +87,7 @@ export default function ReviewForm() {
               name: formValues.name, //what if null?
               rating: formValues.rating,
               review: formValues.review,
-              affordability: formValues.affordability,
+              cleanliness: formValues.cleanliness,
               amenities: formValues.amenities,
               management: formValues.management,
               proximity: formValues.proximity,

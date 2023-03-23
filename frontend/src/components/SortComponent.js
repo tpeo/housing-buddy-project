@@ -22,7 +22,7 @@ import { connectStorageEmulator } from 'firebase/storage';
 
 export default function SortComponent({apartment, setOrder}) {
     let tagDefault = {
-        affordability: false,
+        cleanliness: false,
         management: false,
         parking: false,
         amenities: false,
@@ -30,7 +30,7 @@ export default function SortComponent({apartment, setOrder}) {
         spaciousness: false
     }
 
-  const tags = ['Cost', 'Proximity', 'Spaciousness', "Amenities", "Management"];
+  const tags = ['Cleanliness', 'Proximity', 'Spaciousness', "Amenities", "Management"];
   const [tagValues, setTagValues] = useState(tagDefault);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 

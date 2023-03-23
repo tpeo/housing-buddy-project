@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 
 export default function FilterComponent({apartment, collection, setOrder}) {
-  const filters = ['Overall Rating', 'Cost', 'Proximity', 'Spaciousness', "Amenities", "Management"];
+  const filters = ['Overall Rating', 'Cleanliness', 'Proximity', 'Spaciousness', "Amenities", "Management"];
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [text, setText] = useState("Most Popular");
   const storageName = collection === "apartments" ? collection : `${collection}_${apartment}`;
@@ -39,8 +39,6 @@ export default function FilterComponent({apartment, collection, setOrder}) {
     const promises = filters.map(async (filter) => {
       if (filter === "Overall Rating") {
         filter = "rating"
-      } else if (filter === "Cost") {
-        filter = "affordability"
       }
       singleFilter(collection, filter.toLowerCase());
     });
@@ -86,9 +84,6 @@ export default function FilterComponent({apartment, collection, setOrder}) {
     switch(lower) {
       case "overall rating": 
         lower = "rating";
-        break;
-      case "cost":
-        lower = "affordability";
         break;
       default:
         lower = filter.toLowerCase();

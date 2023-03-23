@@ -36,7 +36,7 @@ export default function MainPage() {
     //new because this has to be constantly updated
     const stat_obj = {
       "rating": 0,
-      "affordability": 0,
+      "cleanliness": 0,
       "amenities": 0,
       "management": 0,
       "proximity": 0,

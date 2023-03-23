@@ -98,7 +98,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
             });
         }
 
-    const ratings = ["Affordability", "Management", "Parking", "Amenities", "Proximity", "Spaciousness"];
+    const ratings = ["Cleanliness", "Management", "Parking", "Amenities", "Proximity", "Spaciousness"];
     const stats = [];
     ratings.forEach((rating) => {
         stats.push(fullR[`${rating.toLowerCase()}`]);

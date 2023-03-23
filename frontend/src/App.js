@@ -4,6 +4,7 @@ import AllApartments from './pages/AllApartmentsPage';
 import MainPage from './apartmentdetails/MainPage';
 import SearchPage from './pages/SearchPage'
 import UserProfile from './pages/UserProfile';
+import ApartmentComparisonPage from './pages/ApartmentComparisonPage';
 import React from 'react';
 import { Routes, Route, useParams } from "react-router-dom";
 import { Query, QueryClient, QueryClientProvider, useQuery  } from 'react-query';
@@ -21,6 +22,7 @@ function App() {
       <Route path="/mainpage/:apartment" element={<MainPage></MainPage>}></Route>
       <Route path="/search" element={<SearchPage></SearchPage>}></Route>
       <Route path="/profile" element={<UserProfile></UserProfile>}></Route>
+      <Route path="/compare" element={<ApartmentComparisonPage></ApartmentComparisonPage>}></Route>
     </Routes>
   );
 }

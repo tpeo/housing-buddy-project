@@ -12,7 +12,7 @@ import StaticRating from './StaticRating';
 
 export default function OverviewComponent({rating, name, stats}) {
 
-  const ratings = ["Affordability", "Management", "Parking", "Amenities", "Proximity", "Spaciousness"];
+  const ratings = ["Cleanliness", "Management", "Parking", "Amenities", "Proximity", "Spaciousness"];
   return (
     <Paper
       sx={{

@@ -23,8 +23,8 @@ import { useNavigate } from "react-router-dom";
 export default function NavBarComponent() {
     const navigate = useNavigate();
 
-    const pages = ['About Us', 'FAQ', 'View All Apartments'];
-    const settings = ['Profile', 'Dashboard', 'Logout'];
+    const pages = ['About Us', 'FAQ', 'View All Apartments', 'Apartment Comparison'];
+    const settings = ['Profile', 'Logout'];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -55,6 +55,9 @@ export default function NavBarComponent() {
             case "VIEW ALL APARTMENTS":
                 navigate('/allapartments');
                 break;
+            case "APARTMENT COMPARISON":
+              navigate('/compare');
+              break;
         }
     }
 
