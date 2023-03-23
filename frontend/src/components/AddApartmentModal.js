@@ -25,7 +25,7 @@ const style = {
   p: 4,
 };
 
-export default function AddApartmentModal() {
+export default function AddApartmentModal({txt}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -75,7 +75,7 @@ export default function AddApartmentModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Don't See an Apartment? Request to Add One!</Button>
+      <Button onClick={handleOpen} style={{color: "#0495b2"}}>{txt}</Button>
       <Modal
         open={open}
         onClose={handleClose}

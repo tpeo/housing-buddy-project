@@ -8,8 +8,8 @@ export default function LayoutComponent(props) {
     return (
         <div id="page">
             <NavBarComponent></NavBarComponent>
-                <div id="children">
-                {props.children}
+                <div id="children" min-height='100vh'>
+                    {props.children}
                 </div>
             <Footer></Footer>
         </div>

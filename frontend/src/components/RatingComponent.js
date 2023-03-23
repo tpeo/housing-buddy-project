@@ -77,7 +77,7 @@ export default function RadioGroupRating({handleInputChange, name}) {
     <StyledRating
       id="rating"
       name={name}
-      defaultValue={2}
+      defaultValue={0}
       IconContainerComponent={IconContainer}
       getLabelText={(value) => customIcons[value].label}
       //highlightSelectedOnly

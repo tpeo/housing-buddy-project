@@ -82,7 +82,7 @@ export default function ExtLoginComponent() {
             <Box>
                 <Typography>Where are you living?</Typography>
                 <ApartmentSelectComponent></ApartmentSelectComponent>
-                <AddApartmentModal></AddApartmentModal>
+                <AddApartmentModal txt="Don't See an Apartment? Request to Add One!"></AddApartmentModal>
             </Box>
         </Modal>
       </div>

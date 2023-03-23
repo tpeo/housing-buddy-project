@@ -97,9 +97,9 @@ export default function FilterComponent({apartment, collection, setOrder}) {
 
   return (
 <Box sx={{ flexGrow: 0 }} marginTop={'12px'}>
+  <Typography variant='body' style={{color: "#0495b2"}}>{text}</Typography>
   <Tooltip title="Open filters">
     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-      <Typography variant='body'>{text}</Typography>
       <TuneIcon style={{color: "#0495b2"}} fontSize="large"></TuneIcon>
     </IconButton>
   </Tooltip>

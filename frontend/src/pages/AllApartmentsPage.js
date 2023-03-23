@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import NavBarComponent from '../components/layout/NavBarComponent';
-import Footer from '../components/layout/Footer'
-import postSubmissionModal from "../components/PostSubmissionModal";
+import LayoutComponent from "../components/layout/LayoutComponent";
 import AddApartmentModal from "../components/AddApartmentModal";
 import {
     Grid,
@@ -9,7 +7,9 @@ import {
     Box,
     Link, 
     Button,
-    CardContent
+    Card,
+    CardContent,
+    Typography
 } from "@mui/material"
 import { useNavigate } from "react-router-dom";
 
@@ -72,33 +72,59 @@ export default function AllApartmentsPage() {
 
 
   return (
-    <div>
-        <NavBarComponent></NavBarComponent>
+    <LayoutComponent>
+        <Typography variant="h1">All Apartments</Typography>
         <Grid 
           display="flex"
           direction="row"
           justifyContent="center"
-          alignItems="stretch">
-        <Grid item>
-        <Box sx={{flexGrow: 1}}>
-            <Grid width="100%" container spacing={1} 
-                display="flex"
-                direction="column"
-                justifyContent="center"
-                alignItems="stretch"
-                >
-                {allApartments.map((obj) => (
-                            <Button sx={{
-                              width: "150px",
-                              height: "49px",
-                              backgroundImage: obj.img_link
-                            }}
-                            id={obj.name}
-                            key={obj.name}
-                            onClick={navApartmentPage}
-                            >{obj.name}</Button>))}
-            </Grid>
-        </Box>
+          alignItems="flex-start"
+        >
+
+        <Grid width='50%' margin='20px' item>
+          <Box sx={{flexGrow: 1}}>
+              <Grid width="100%" container spacing={1} 
+                  display="flex"
+                  direction="column"
+                  justifyContent="center"
+                  alignItems="stretch"
+                  >
+                  {allApartments.map((obj) => (
+                            <Card sx={{
+                              width: '100%',
+                              height: '100%',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              boxSizing: 'content-box',
+                              textAlign: 'center',
+                              overflow: 'hidden',
+                              backgroundImage: `url(${obj.img_link})`,
+                              backgroundSize: '100% 100%',
+                              backgroundPosition: 'center',
+                              borderRadius: '25px',
+                              boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.3)',
+                              margin: '10px'
+                          }}>
+                              <Button sx={{
+                                width: "150px",
+                                height: "49px",
+                              }}
+                              id={obj.name}
+                              key={obj.name}
+                              onClick={navApartmentPage}
+                              >
+                                <Typography id={obj.name} component='h3' variant="h3" color='white' fontWeight={'bold'} 
+                                      sx={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 1)' }}>
+                                  {obj.name}
+                              </Typography>
+                              </Button>
+                              
+                            </Card>
+  ))}
+              </Grid>
+          </Box>
         </Grid>
 
           <Grid item
@@ -113,10 +139,11 @@ export default function AllApartmentsPage() {
           </Grid>
 
         </Grid>
-        <AddApartmentModal>
-        </AddApartmentModal>
+        <Grid display='flex' justifyContent='center' item>
+          <AddApartmentModal txt="Don't See an Apartment? Request to Add One!"/>
+        </Grid>
+
         
-        <Footer></Footer>
-    </div>
+    </LayoutComponent>
   );
 }

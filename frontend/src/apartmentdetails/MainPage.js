@@ -12,11 +12,13 @@ import {
     Pagination,
     Typography,
     Modal,
-    Button
+    Button,
+    IconButton
 } from "@mui/material"
 
 import { useNavigate, useParams } from "react-router-dom";
 import ReviewComponent from "./components/ReviewComponent";
+import SortIcon from '@mui/icons-material/Sort';
 
 export default function MainPage() {
     const params = useParams();
@@ -189,11 +191,14 @@ export default function MainPage() {
             <Box sx={style}>
                 <Typography>Where are you living?</Typography>
                 <ApartmentSelectComponent></ApartmentSelectComponent>
-                <AddApartmentModal></AddApartmentModal>
+                <AddApartmentModal txt="Don't See an Apartment? Request to Add One!"></AddApartmentModal>
             </Box>
         </Modal>
           </Grid>
-          <Grid  marginTop={'5px'}>
+          <Grid  display='flex' direction='row' marginTop={'5px'}>
+            <IconButton>
+              <SortIcon style={{color: "#0495b2"}} fontSize="large"></SortIcon>
+            </IconButton>
             <FilterComponent apartment={name} collection="review" setOrder={setReviews}></FilterComponent>
           </Grid>
         </Box>

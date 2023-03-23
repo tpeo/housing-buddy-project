@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import ListApartmentComponent from "../components/ListApartmentComponent";
+import AddApartmentModal from "../components/AddApartmentModal";
 import FilterComponent from "../components/FilterComponent";
 import LayoutComponent from "../components/layout/LayoutComponent";
 
@@ -79,27 +80,24 @@ return (
         <img src='/logowbg.png' height='100%' width='100%' alt="bg-img"></img>
         <Stack direction="row" container justifyContent="space-between">
           <IconButton>
-            <Typography variant="body">Request to Add an Apartment</Typography>
-            <AddIcon></AddIcon>
+            <AddApartmentModal txt="Apartment Request Form"/>
+            <AddIcon style={{color: "#0495b2"}}></AddIcon>
           </IconButton>
           <FilterComponent collection="apartments" setOrder={setAllApartments}></FilterComponent>
         </Stack>
         <Divider color="#0495b2" sx={{ borderBottomWidth: 50 }}></Divider>
 
-        <Box sx={{flexGrow: 1, position: 'inherited'}}>
-            <Grid container
-                justify="center"
-                spacing={4}
+        <Box sx={{flexGrow: 1, marginTop: '20px', marginBottom: '20px'}}>
+            <Grid container spacing={4} 
+                  justifyContent="center"
                 >
               {nineCards.map((obj, index) => (
-                <Grid key={`app__${obj.name}}`} item xs={4}>
                   <ListApartmentComponent
                     key={obj.name}    
                     name={obj.name} 
                     handleOnClick={navApartmentPage}
                     backgroundImage={obj.img_link}
                   />
-                </Grid>
               ))}
 
             </Grid>

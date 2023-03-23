@@ -57,7 +57,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
 
     const gridItem = {
         margin: "10px",
-        width: "80%",
+        width: "100%",
         height: "100%",
         position: 'relative',
         mb: 4,
@@ -98,7 +98,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
     }
 
   return (
-    <Grid item xs={4} sm={6} md={4}>
+    <Grid sx={{display: 'flex', justifyContent: 'center'}} item xs={4} sm={6} md={4}>
         <Card sx={gridItem} height="100%">
             <Grid name="main" display="flex" direction="row" justifyContent='space-between'>
                 <Grid item >
@@ -120,7 +120,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                     </Stack>
                 </Grid>
                 <Grid item>
-                    <Typography variant="h1">{title}</Typography>
+                    <Typography variant="h3">{title}</Typography>
                     
                     <StaticRating value={parseInt(rating)}></StaticRating>
                     <Typography variant="body1">{review}</Typography>
@@ -167,12 +167,13 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                         </CardContent>
                     </Collapse> 
                 </Grid>
-                <Grid id="tags" item>
+                <Grid id="tags" sx={{marginTop: '10px'}} item>
                     {(fullR.tags != undefined) &&(fullR.tags.map((tag) => (
-                        <Typography sx={{ color: '#0495b2', border: 1, borderColor: '#0495b2', borderRadius: '20px'}} variant="body">{tag}</Typography>
+                        <Typography sx={{ color: '#0495b2', border: 1, borderColor: '#0495b2', 
+                            borderRadius: '20px', margin: '4px', backgroundColor: 'rgba(113, 218, 249, 0.33)'}} variant="body">{tag}</Typography>
                     )))}
                 </Grid>
-                <Grid item>
+                <Grid sx={{margin: '10px'}} item>
                     <Typography>{date}</Typography>
                     <IconButton>
                         <OutlinedFlagIcon></OutlinedFlagIcon>

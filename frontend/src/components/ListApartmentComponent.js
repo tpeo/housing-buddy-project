@@ -12,31 +12,33 @@ import { useNavigate } from "react-router-dom";
 export default function ListApartmentComponent({name, handleOnClick, backgroundImage}) {
 
     return (
-    <Card id={name} sx={{
-        width: '20%',
-        height: '43%',
-        position: 'absolute',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        boxSizing: 'content-box',
-        textAlign: 'center',
-        overflow: 'hidden',
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: '100% 100%',
-        backgroundPosition: 'center',
-        borderRadius: '25px',
-        boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.3)',
-    }}>
-        <CardActionArea sx={{ flexGrow: 1 }}>
-            <Typography component='h3' variant="h3" color='white' fontWeight={'bold'} sx={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 1)' }}>
-                {name}
-            </Typography>
-        </CardActionArea>
-        <Button id={name} variant="contained" onClick={handleOnClick} sx={{ mt: 2 }}>
-            Visit Page
-        </Button>
-    </Card>
+    <Grid sx={{display: 'flex', justifyContent: 'center'}} item xs={4} sm={6} md={4}>
+        <Card id={name} sx={{
+            width: '50%',
+            height: '100%',
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            boxSizing: 'content-box',
+            textAlign: 'center',
+            overflow: 'hidden',
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            borderRadius: '25px',
+            boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.3)',
+        }}>
+            <CardActionArea sx={{ flexGrow: 1 }}>
+                <Typography component='h3' variant="h3" color='white' fontWeight={'bold'} sx={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 1)' }}>
+                    {name}
+                </Typography>
+            </CardActionArea>
+            <Button id={name} variant="contained" onClick={handleOnClick} sx={{ mt: 2 }}>
+                Visit Page
+            </Button>
+        </Card>
+    </Grid>
   );
 }
