@@ -95,8 +95,8 @@ export default function NavBarComponent() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
+        {settings.map((setting, idx) => (
+          <MenuItem key={idx} onClick={handleCloseUserMenu}>
             <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
         ))}
@@ -167,8 +167,8 @@ export default function NavBarComponent() {
                     display: { xs: 'block', md: 'none' },
                   }}
                 >
-                  {pages.map((page) => (
-                    <MenuItem key={page} name={page} onClick={() => handleCloseNavMenu(page)}>
+                  {pages.map((page, idx) => (
+                    <MenuItem key={idx} name={page} onClick={() => handleCloseNavMenu(page)}>
                       <Typography sx={{color: "#0495b2"}} textAlign="center">{page}</Typography>
                     </MenuItem>
                   ))}
@@ -193,9 +193,9 @@ export default function NavBarComponent() {
               >
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                {pages.map((page) => (
+                {pages.map((page, idx) => (
                   <Button
-                    key={page}
+                    key={idx}
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: '#0495b2', display: 'block' }}
                   >

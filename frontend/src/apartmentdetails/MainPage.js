@@ -17,8 +17,7 @@ import {
 } from "@mui/material"
 
 import { useNavigate, useParams } from "react-router-dom";
-import ReviewComponent from "./components/ReviewComponent";
-import SortIcon from '@mui/icons-material/Sort';
+import ReviewComponent from "./components/ReviewComponent";import SortComponent from "../components/SortComponent";
 
 export default function MainPage() {
     const params = useParams();
@@ -196,9 +195,7 @@ export default function MainPage() {
         </Modal>
           </Grid>
           <Grid  display='flex' direction='row' marginTop={'5px'}>
-            <IconButton>
-              <SortIcon style={{color: "#0495b2"}} fontSize="large"></SortIcon>
-            </IconButton>
+            <SortComponent apartment={name} setOrder={setReviews}></SortComponent>
             <FilterComponent apartment={name} collection="review" setOrder={setReviews}></FilterComponent>
           </Grid>
         </Box>
