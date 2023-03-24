@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import LayoutComponent from "../components/layout/LayoutComponent";
 import AddApartmentModal from "../components/AddApartmentModal";
+import MapComponent from "../components/MapComponent";
 import {
     Grid,
     TextField,
@@ -142,7 +143,7 @@ export default function AllApartmentsPage() {
         <Grid display='flex' justifyContent='center' item>
           <AddApartmentModal txt="Don't See an Apartment? Request to Add One!"/>
         </Grid>
-
+        <MapComponent></MapComponent>
         
     </LayoutComponent>
   );
