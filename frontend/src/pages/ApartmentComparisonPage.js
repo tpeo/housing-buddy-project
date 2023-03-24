@@ -126,11 +126,14 @@ export default function ApartmentComparisonPage() {
                         label="First"
                         onChange={handleChange1}
                     >
-                        {
-                            allApartments.map((name, img) => (
-                                <MenuItem id={name} value={name}>{name}</MenuItem>
-                            ))
-                        }
+                {
+                    allApartments.map((name) => (
+                        (name !== second) && (
+                            <MenuItem id={name} value={name}>{name}</MenuItem>
+                    )
+                    ))
+                    
+                }
                     </Select>
                     <FormHelperText>Appartment 1</FormHelperText>
                 </FormControl>
@@ -151,9 +154,12 @@ export default function ApartmentComparisonPage() {
                 onChange={handleChange2}
                 >
                 {
-                    allApartments.map((name, img) => (
-                        <MenuItem id={name} value={name}>{name}</MenuItem>
+                    allApartments.map((name) => (
+                        (name !== first) && (
+                            <MenuItem id={name} value={name}>{name}</MenuItem>
+                    )
                     ))
+                    
                 }
                 </Select>
                 <FormHelperText>Apartment 2</FormHelperText>
