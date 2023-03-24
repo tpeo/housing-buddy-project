@@ -64,7 +64,7 @@ reviews.get("/:apartment/tags/:tags/", async(req, res) => {
   const object = [];
   query.docs.forEach((doc) => {
     for (var i = 0;  i < filter_arr.length; i++) {
-      if (doc.data().tags.includes(filter_arr[i])) {
+      if (doc.data().tags.includes(filter_arr[i]) && !object.includes(doc.data())) {
         object.push(doc.data());
         break;
       }
@@ -78,7 +78,7 @@ reviews.get("/:apartment/tags/:tags/", async(req, res) => {
 reviews.put("/likes", async(req, res) => {
 
   const body = req.body
-  console.log(body)
+
     if(body.id == undefined || body.apartment == undefined) {
         return res.json({
           msg: "Error: review not defined in request",
@@ -89,7 +89,6 @@ reviews.put("/likes", async(req, res) => {
   const apartment = body.apartment;
   
   const query = await db.collection("apartment-info").doc(apartment).collection("reviews").doc(body.id).update({likes: firebase.increment});
-
   res.status(200).json(query);
 })
 
@@ -127,5 +126,61 @@ reviews.put("/flag", async(req, res) => {
 
   res.status(200).json(query);
 })
+
+reviews.delete("/delete", async(req, res) => {
+  const body = req.body;
+  if(body.id == undefined || body.apartment == undefined) { //check that review belongs to user
+      return res.json({
+        msg: "Error: uid not defined in request",
+        data: {},
+      });
+  }
+
+  //delete review
+  const review_info = await db.doc(body.review_id).get();
+  const metrics = review_info.data();
+  deleteRating(body.apartment, metrics);
+  //nullify review field for user
+  await db.doc(body.review_id).delete(); 
+  //update aggregate reviews
+  await db.collection("apartment-info").doc(body.apartment).update({num_reviews: firebase.decrement});
+  await db.collection("users").doc(body.uid).update({review: null})
+  res.status(200).json("Delete Successful");
+})
+
+function deleteRating(name, filters) {
+  var apartment = db.collection('apartment-info').doc(name);
+  var updateRatings = {
+    rating: 0,
+    cleanliness: 0,
+    amenities: 0,
+    management: 0,
+    proximity: 0,
+    spaciousness: 0,
+
+  }
+    // In a transaction, add the new rating and update the aggregate totals
+    return db.runTransaction((transaction) => {
+        return transaction.get(apartment).then((res) => {
+            if (!res.exists) {
+                throw "Document does not exist!";
+            }
+            // Compute new number of ratings
+            if (res.data().num_reviews === 0) return;
+            const newNumRatings = res.data().num_reviews - 1;
+            console.log(newNumRatings);
+
+            Object.keys(updateRatings).forEach((rating) => {
+              var oldRatingTotal = res.data()[rating] * res.data().num_reviews;
+              var newAvgRating = (oldRatingTotal - parseInt(filters[rating])) / newNumRatings;
+              updateRatings[rating] = newAvgRating;
+              
+            })
+            // Compute new average rating
+            // Commit to Firestore
+            transaction.update(apartment, updateRatings);
+        });
+    });
+}
 
 module.exports = {reviews};

@@ -7,7 +7,6 @@ import UserProfile from './pages/UserProfile';
 import ApartmentComparisonPage from './pages/ApartmentComparisonPage';
 import React from 'react';
 import { Routes, Route, useParams } from "react-router-dom";
-import { Query, QueryClient, QueryClientProvider, useQuery  } from 'react-query';
 
 import './App.css';
 

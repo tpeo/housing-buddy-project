@@ -19,6 +19,7 @@ import {
 } from '@mui/material'
 import { Stack } from '@mui/system';
 import { connectStorageEmulator } from 'firebase/storage';
+import ApartmentComparisonPage from '../pages/ApartmentComparisonPage';
 
 export default function SortComponent({apartment, setOrder}) {
     let tagDefault = {
@@ -60,7 +61,6 @@ export default function SortComponent({apartment, setOrder}) {
     });
 
     let selected = showTags;
-    console.log(selected)
     if (tagValues[tag] === false) {
         selected.push(tag)
     } else {
@@ -77,8 +77,7 @@ export default function SortComponent({apartment, setOrder}) {
         return;
     }
     const stringTag = JSON.stringify(tags);
-    console.log(stringTag)
-    const apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/${apartment}/tags/${tags}`;
+    const apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/${apartment}/tags/${stringTag}`;
 
         await fetch(apiCall, {
         method: "GET",
@@ -93,6 +92,7 @@ export default function SortComponent({apartment, setOrder}) {
           return response.json();
         })
         .then((response) => {
+            console.log(response)
             setOrder(response)
           })
         .catch((e) => {

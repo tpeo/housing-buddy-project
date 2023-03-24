@@ -50,7 +50,7 @@ app.get("/apartments/stats", async(req, res) => {
   res.status(200).json(object);
 })
 
-//get all apartment stats
+//get apartment stats
 app.get("/:apartment/stats", async(req, res) => {
   let apartment = req.params.apartment;
   const apartments = db.collection("apartment-info").doc(apartment);
@@ -119,18 +119,19 @@ app.get("/apartments/:filter", async(req, res) => {
   res.status(200).json(object);
 })
 
-app.post("/review/", async(req, res) => {
-
+app.post("/review/new/:uid", async(req, res) => {
   const body = req.body
+  const uid = req.params.uid;
   const apartment = req.body.apartment.name;
-    if(body.review == undefined || body.rating == undefined) {
+    if(body.review == undefined || body.rating == undefined || uid === undefined) {
         return res.json({
           msg: "Error: content not defined in request",
           data: {},
         });
     }
 
-    let r = (Math.random() + 1).toString(36).substring(2);
+    const r = (Math.random() + 1).toString(36).substring(2);      
+
     const data = {
         title: req.body.title,
         name: req.body.name,
@@ -155,7 +156,9 @@ app.post("/review/", async(req, res) => {
     const query = await db.collection("apartment-info").doc(apartment).collection("reviews").doc(data.id).set(data);
     addRating(apartment, data);
     await db.collection("apartment-info").doc(apartment).update({num_reviews: firebase.increment});
-    res.status(200).json(query);
+    await db.collection("users").doc(uid).update({review: `apartment-info/${apartment}/reviews/${r}`});
+
+    res.status(200).json(`apartment-info/${apartment}/reviews/${r}`);
 })
 
 function addRating(name, filters) {
@@ -186,7 +189,6 @@ function addRating(name, filters) {
               
             })
             // Compute new average rating
-            console.log(updateRatings)
             // Commit to Firestore
             transaction.update(apartment, updateRatings);
         });

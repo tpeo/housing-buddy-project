@@ -23,6 +23,7 @@ export default function ReviewForm() {
   const params = useParams();
     
   const name = params.apartment;
+  const user_obj = JSON.parse(window.localStorage.getItem("@user"));
 
   const defaultValues = {
       name: "name",
@@ -65,7 +66,8 @@ export default function ReviewForm() {
     };
 
     async function addRating() {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/`;
+      
+        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/new/${user_obj.uid}`;
 
         let selected = [];
         for (const tag in tags) {
@@ -73,7 +75,6 @@ export default function ReviewForm() {
             selected.push(tag)
           }
         }
-        console.log(selected)
     
         if (formValues.review === "") {return;}
             await fetch(apiCall, {
@@ -90,26 +91,62 @@ export default function ReviewForm() {
               cleanliness: formValues.cleanliness,
               amenities: formValues.amenities,
               management: formValues.management,
+              parking: formValues.parking,
               proximity: formValues.proximity,
               spaciousness: formValues.spaciousness,
               tags: selected
             })
           })
             .then((response) => {
+              console.log(response)
               setMsg("Review Submitted Successfully!");
               if (response.status !== 200) {
                 setMsg("Review Failed");
                 throw new Error();
               }
+              return response.json();
+            })
+            .then((response)=> {
+              console.log(response)
+              const user_obj = JSON.parse(window.localStorage.getItem("@user"));
+              user_obj["review"] = response;
+              window.localStorage.setItem("@user", JSON.stringify(user_obj));
             })
             .catch((e) => {
               console.log(e);
             });
         }
+
+        async function deleteRating() {
+          let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/delete`;
+          if (formValues.review === "") {return;}
+              await fetch(apiCall, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ 
+                apartment: {name},
+                uid: user_obj.uid,
+                review_id: user_obj.review
+              })
+            })
+              .then((response) => {
+                if (response.status !== 200) {
+                  throw new Error();
+                }
+              })
+              .catch((e) => {
+                console.log(e);
+              });
+          }
     
     const handleSubmit = (event) => {
         event.preventDefault();
         setOpen(true);
+        if (user_obj.review_id !== undefined) {
+          deleteRating();
+        }
         addRating();
         //after submit erase input
     };

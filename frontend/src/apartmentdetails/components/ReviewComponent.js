@@ -60,7 +60,6 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
 
     useEffect(() => {
         tags = fullR.tags;
-        console.log(flag)
         if (flag) {
             setColor('red');
         }

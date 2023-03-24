@@ -13,6 +13,11 @@ import {
     Typography,
     Modal,
     Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
     IconButton
 } from "@mui/material"
 
@@ -48,6 +53,12 @@ export default function MainPage() {
     const [stats, setStats] = useState(stat_obj);
     const [page, setPage] = React.useState(1);
 
+    const [dialogOpen, setDialogOpen] = React.useState(false);
+
+    const handleDialogClose = () => {
+      setDialogOpen(false);
+    };
+
     let navigate = useNavigate();
     const [reviews, setReviews] = useState([]);
     //use effect update whenever soomething changes
@@ -80,7 +91,13 @@ export default function MainPage() {
     const handleOnClick = () =>  {
         if (localStorage.getItem("loggedIn") === "true") {
             if (window.localStorage.getItem("@apartment") === name) {
-              navigate(`/${name}/review`);
+              const usr = JSON.parse(window.localStorage.getItem("@user"));
+              if (usr.review === undefined) {
+                navigate(`/${name}/review`);
+              } else {
+                setDialogOpen(true);
+              }
+
             } else if (window.localStorage.getItem("@apartment") === null) {
               setOpen(true)
             } else {
@@ -165,7 +182,7 @@ export default function MainPage() {
               .catch((e) => {
                 console.log(e);
               });
-          }
+        }
 
   return (
     <LayoutComponent>
@@ -181,6 +198,23 @@ export default function MainPage() {
               <AddIcon/>
                 Create a Review
             </Button>
+            <Dialog
+                open={dialogOpen}
+                onClose={handleDialogClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title"> Do You Want to Create a New Review?</DialogTitle>
+                <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    You already have an existing review for this apartment, would you like to make a new one? This will
+                    delete your current review. </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleClose}>No</Button>
+                <Button onClick={() => {navigate(`/${name}/review`)}} autoFocus>Yes</Button>
+                </DialogActions>
+            </Dialog>
             <Modal
               open={open}
               onClose={handleClose}
