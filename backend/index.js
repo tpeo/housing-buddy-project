@@ -50,6 +50,23 @@ app.get("/apartments/stats", async(req, res) => {
   res.status(200).json(object);
 })
 
+//get all apartment info
+app.get("/:apartment/info", async(req, res) => {
+  let apartment = req.params.apartment;
+  const apartments = db.collection("apartment-info").doc(apartment);
+  const query = await apartments.get();
+
+  //const set = new Set();
+  const object = {
+    "name": query.data().name,
+    "link": query.data().link,
+    "location": query.data().location
+  }
+
+  //const ret = JSON.stringify(Array.from(set));
+  res.status(200).json(object);
+})
+
 //get apartment stats
 app.get("/:apartment/stats", async(req, res) => {
   let apartment = req.params.apartment;
@@ -71,18 +88,18 @@ app.get("/:apartment/stats", async(req, res) => {
   res.status(200).json(object);
 })
 
-//get all apartment info
-app.get("/:apartment/info", async(req, res) => {
-  let apartment = req.params.apartment;
-  const apartments = db.collection("apartment-info").doc(apartment);
+//get apartment info for map feature
+app.get("/map-info", async(req, res) => {
+  const apartments = db.collection("apartment-info");
   const query = await apartments.get();
 
   //const set = new Set();
-  const object = {
-    "name": query.data().name,
-    "link": query.data().link,
-    "location": query.data().location
-  }
+  const object = [];
+  query.docs.forEach((doc) => object.push({
+    "name": doc.data().name,
+    "img_link": doc.data().img_link,
+    "coordinates": doc.data().coordinates
+  }));
 
   //const ret = JSON.stringify(Array.from(set));
   res.status(200).json(object);
