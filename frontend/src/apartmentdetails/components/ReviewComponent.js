@@ -196,7 +196,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                                 width={'31rem'}
                                 >
                                 {ratings.map((rating, index) => (
-                                    <Grid item xs={6} key={rating}>
+                                    <Grid item xs={6} key={`individ_${rating}`}>
                                     <Stack direction="row">
                                         <SentimentSatisfied></SentimentSatisfied>
                                         <Box width={'120px'} marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>

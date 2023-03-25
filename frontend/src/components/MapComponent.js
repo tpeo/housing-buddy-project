@@ -6,15 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 
 import {
-  Box, 
-  Tooltip,
-  IconButton,
-  Menu,
-  MenuItem,
   Stack,
   Link,
   Typography,
-  LinearProgress,
 } from '@mui/material'
 
 import './Map.css'

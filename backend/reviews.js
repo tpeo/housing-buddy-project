@@ -55,22 +55,34 @@ reviews.get("/:apartment/:filter", async(req, res) => {
   //filter reviews by tag
 reviews.get("/:apartment/tags/:tags/", async(req, res) => {
   let filter = req.params.tags;
+  console.log(filter)
   const filter_arr = JSON.parse(filter);
+  if (filter === "" || filter === undefined || filter === "[]") {filter = "all"}
   let apartment = req.params.apartment;
   const reviews = db.collection("apartment-info").doc(apartment).collection("reviews");
 
   const query = await reviews.orderBy('flagged').orderBy('likes', 'desc').get();
 
-  const object = [];
-  query.docs.forEach((doc) => {
-    for (var i = 0;  i < filter_arr.length; i++) {
-      if (doc.data().tags.includes(filter_arr[i]) && !object.includes(doc.data())) {
-        object.push(doc.data());
-        break;
+  let object = [];
+  let set = new Set();
+  
+  if (filter === "all") {
+    query.docs.forEach((doc) => {
+      object.push(doc.data());
+    });
+  } else {
+    query.docs.forEach((doc) => {
+      for (let filter of filter_arr) {
+        if (doc.data().tags.includes(filter) && !object.includes(doc.data())) {
+          set.add(doc.data());
+          break;
+        }
       }
-    }
+  
+    });
+  }
 
-  });
+  object = Array.from(set);
   res.status(200).json(object);
 })
 

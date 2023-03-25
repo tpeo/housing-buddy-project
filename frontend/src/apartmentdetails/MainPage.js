@@ -242,7 +242,7 @@ export default function MainPage() {
                     alignItems="stretch"
                     >
                     {currentCards.map((r) => (
-                        <ReviewComponent key={r.title}
+                        <ReviewComponent key={`key_${r.name}`}
                             apartment={name}
                             title={r.title}
                             review={r.review}

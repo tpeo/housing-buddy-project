@@ -5,21 +5,20 @@ import SortIcon from '@mui/icons-material/Sort';
 import {
   Box, 
   Tooltip,
+  Chip,
   IconButton,
   Menu,
   MenuItem,
   Typography,
   Divider,
   Checkbox,
+  Stack,
   FormControlLabel,
   FormGroup,
   FormControl,
   FormLabel,
   Button,
 } from '@mui/material'
-import { Stack } from '@mui/system';
-import { connectStorageEmulator } from 'firebase/storage';
-import ApartmentComparisonPage from '../pages/ApartmentComparisonPage';
 
 export default function SortComponent({apartment, setOrder}) {
     let tagDefault = {
@@ -31,15 +30,12 @@ export default function SortComponent({apartment, setOrder}) {
         spaciousness: false
     }
 
-  const tags = ['Cleanliness', 'Proximity', 'Spaciousness', "Amenities", "Management"];
+  const tags = ['Cleanliness', 'Proximity', 'Spaciousness', "Amenities", "Management", "Parking"];
   const [tagValues, setTagValues] = useState(tagDefault);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const [showTags, setShowTags] = useState([]);
-
-  useEffect(() => {
-
-  }, [showTags])
+  const [chipData, setChipData] = useState([]);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.target);
@@ -53,12 +49,19 @@ export default function SortComponent({apartment, setOrder}) {
   };
 
   const handleCheck = (event) => {
+    console.log(showTags)
     const tag = event.target.id.toLowerCase();
     const prev = tagValues[tag]
     setTagValues({
         ...tagValues,
         [tag]: !prev
     });
+
+    //set chips
+    const obj = {key: `tag_${tag}`, label: tag};
+    let curr = chipData;
+    curr.push(obj);
+    setChipData(curr);
 
     let selected = showTags;
     if (tagValues[tag] === false) {
@@ -69,11 +72,21 @@ export default function SortComponent({apartment, setOrder}) {
             selected.splice(idx, 1)
         }
     }
+    console.log(selected);
     setShowTags(selected);
   }
 
+  const handleDelete = (chipToDelete) => () => {
+    let selected = showTags;
+    var idx = selected.indexOf(chipToDelete.label);
+    if (idx !== -1) {
+        selected.splice(idx, 1)
+    }
+    setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+  };
+
   async function filterTags(tags) {
-    if (tags === undefined) {
+    if (tags === undefined || tags === "[]") {
         return;
     }
     const stringTag = JSON.stringify(tags);
@@ -92,7 +105,6 @@ export default function SortComponent({apartment, setOrder}) {
           return response.json();
         })
         .then((response) => {
-            console.log(response)
             setOrder(response)
           })
         .catch((e) => {
@@ -104,8 +116,8 @@ export default function SortComponent({apartment, setOrder}) {
   return (
 <Box sx={{ flexGrow: 0 }} marginTop={'12px'}>
   <Tooltip title="Open filters">
-  <IconButton>
-        <SortIcon onClick={handleOpenUserMenu} sx={{ p: 0 }} style={{color: "#0495b2"}} fontSize="large"></SortIcon>
+  <IconButton onClick={handleOpenUserMenu}>
+        <SortIcon sx={{ p: 0 }} style={{color: "#0495b2"}} fontSize="large"></SortIcon>
     </IconButton>
   </Tooltip>
   <Menu
@@ -124,23 +136,27 @@ export default function SortComponent({apartment, setOrder}) {
     open={Boolean(anchorElUser)}
     onClose={handleCloseNavMenu}
   >
-    <MenuItem key="checkboxes">
+    <MenuItem key="check_menu">
         <Stack>
-            <Box sx={{flexGrow: 1}}>
-                {(showTags != undefined) &&(showTags.map((tag) => (
-                            <Typography sx={{ color: '#0495b2', border: 1, borderColor: '#0495b2', 
-                                borderRadius: '20px', margin: '4px', backgroundColor: 'rgba(113, 218, 249, 0.33)'}} variant="body">{tag}</Typography>
-                )))}
+            <Box sx={{display: 'flex',
+                  justifyContent: 'center',
+                  flexWrap: 'wrap',}}>
+                {
+                  (chipData != undefined) &&(chipData.map((tag) => (
+                    <Chip key={tag.key} id={tag.label} onDelete={handleDelete(tag)} sx={{color:"#0495b2", contrastText: "#0495b2"}} label={tag.label}/>
+                )))
+                }
             </Box>
             <Divider></Divider>
             <Box>
-                <FormControl component='checkboxes'>
+                <FormControl>
                 <FormLabel>Tags</FormLabel>
                 <FormGroup style={{overflow: 'auto'}}>
-                {tags.map((tag, idx) => (
+                {tags.map((tag) => (
                     <FormControlLabel
+                        key={`check_${tag}`}
                         id={tag}
-                        control={<Checkbox id={tag} key={idx} onClick={handleCheck} />}
+                        control={<Checkbox id={tag} key={tag} onClick={handleCheck} />}
                         label={tag}
                         labelPlacement='end'
                     />
