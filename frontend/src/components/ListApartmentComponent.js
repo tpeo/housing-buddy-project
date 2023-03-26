@@ -3,6 +3,7 @@ import {
     Card,
     Button,
     Typography,
+    CardContent,
     CardActionArea
 } from "@mui/material"
 //import './fonts.css';
@@ -30,14 +31,16 @@ export default function ListApartmentComponent({name, handleOnClick, backgroundI
             borderRadius: '25px',
             boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.3)',
         }}>
-            <CardActionArea sx={{ flexGrow: 1 }}>
+            <CardContent sx={{ flexGrow: 1 }}>
                 <Typography component='h3' variant="h3" color='white' fontWeight={'bold'} sx={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 1)' }}>
                     {name}
                 </Typography>
+            </CardContent>
+            <CardActionArea sx={{margin: '10px'}}>
+                <Button id={name} variant="contained" onClick={handleOnClick} sx={{ backgroundColor: '#0495b2', mt: 2 }}>
+                    Visit Page
+                </Button>
             </CardActionArea>
-            <Button id={name} variant="contained" onClick={handleOnClick} sx={{ mt: 2 }}>
-                Visit Page
-            </Button>
         </Card>
     </Grid>
   );

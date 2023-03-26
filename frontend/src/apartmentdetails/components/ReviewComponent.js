@@ -4,6 +4,7 @@ import {
     Card,
     CardActionArea,
     CardActions,
+    Chip,
     Collapse,
     Stack,
     IconButton,
@@ -72,6 +73,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
     function handleFlag(event) {
         updateFlag(event.target.id);
         setOpen(false);
+        window.location.reload(false);
     }
 
     async function updateFlag(id) {
@@ -143,6 +145,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
 
     function handleLike(event, type) {
         updateLikes(event.currentTarget.id, type);
+        window.location.reload(false); //re-render only component by using state?
     }
 
   return (
@@ -217,8 +220,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                 </Grid>
                 <Grid id="tags" sx={{marginTop: '10px'}} item>
                     {(fullR.tags != undefined) &&(fullR.tags.map((tag) => (
-                        <Typography sx={{ color: '#0495b2', border: 1, borderColor: '#0495b2', 
-                            borderRadius: '20px', margin: '4px', backgroundColor: 'rgba(113, 218, 249, 0.33)'}} variant="body">{tag}</Typography>
+                        <Chip key={`chip_disp${tag}`} id={tag} sx={{color:"#0495b2", contrastText: "#0495b2"}} label={tag}></Chip>
                     )))}
                 </Grid>
                 <Grid sx={{margin: '10px'}} item>

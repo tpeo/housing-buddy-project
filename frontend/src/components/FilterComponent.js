@@ -114,6 +114,7 @@ export default function FilterComponent({apartment, collection, setOrder}) {
       horizontal: 'right',
     }}
     open={Boolean(anchorElUser)}
+    onClose={() => setAnchorElUser(null)}
   >
     {filters.map((filter) => (
       <MenuItem key={filter} onClick={handleCloseNavMenu}>

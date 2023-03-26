@@ -6,6 +6,8 @@ import { send } from 'emailjs-com';
 
 import {
   Box,
+  Card,
+  CardHeader,
   Button,
   Typography,
   Modal,
@@ -20,6 +22,7 @@ const style = {
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
+  align: 'center',
   p: 4,
 };
 
@@ -35,9 +38,13 @@ export default function PostSubmissionModal({info, nav, appt}) {
   }
 
   return (
-    <Box sx={style}>
+    <Card sx={style}>
+      <CardHeader
+        title={<Typography variant='h3' color='white' align='center'>Thank You!</Typography>}
+        sx={{backgroundColor: '#0495b2'}}
+      />
         <Typography variant="body1">{info}</Typography>
-        <Button onClick={() => navigateTo()}>{`Return to ${appt}`}</Button>
-    </Box>
+        <Button variant='outlined' sx={{color: '#0495b2'}} onClick={() => navigateTo()}>{`Return to ${appt}`}</Button>
+    </Card>
   );
 }

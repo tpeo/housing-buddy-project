@@ -2,15 +2,19 @@ import * as React from 'react';
 import { useEffect, useState } from "react";
 import { send } from 'emailjs-com';
 import PostSubmissionModal from './PostSubmissionModal';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import {
   Grid,
+  Card,
   Box,
   Link,
   Button,
   Typography,
   Modal,
-  TextField
+  TextField,
+  IconButton,
+  CardHeader
 } from "@mui/material"
 
 const style = {
@@ -82,23 +86,39 @@ export default function AddApartmentModal({txt}) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Card sx={style}>
+          <CardHeader
+            action={
+              <IconButton align='left' onClick={() => {setOpen(false)}}>
+                <ArrowBackIcon sx={{color:'white'}}/>
+              </IconButton>
+            }
+            title={<Typography variant='h3' color='white' align='center'>Add an Apartment</Typography>}
+            subheader={<Typography variant='body' color='white' align='center'>*West Campus Housing ONLY</Typography>}
+            sx={{backgroundColor: '#0495b2'}}
+          />
+
+          <Box marginTop='15px'>
         <form onSubmit={handleSubmit}>
         <Grid container display="flex" alignItems="center" justify="center" direction="column" spacing={4}>
             <Grid item>
                 <TextField
                 id="apartmentname"
                 label="Apartment Name"
+                defaultValue=''
                 type="text"
                 onChange={handleInputChange}
+                variant='outlined'
+                required
                 ></TextField>
             </Grid>
             <Grid item>
                 <TextField
                 id="location"
-                label="Location"
+                label="Address"
                 type="text"
                 onChange={handleInputChange}
+                required
                 ></TextField>
             </Grid>
             <Grid item>
@@ -114,11 +134,12 @@ export default function AddApartmentModal({txt}) {
                 </TextField>
             </Grid>
             <Grid item>
-              <Button variant="contained" color="primary" type="submit">Submit</Button>
+              <Button variant="contained" sx={{backgroundColor: '#0495b2'}} type="submit">Submit Request</Button>
             </Grid>
             
         </Grid>
         </form>
+        </Box>
         <Modal
           open={nestOpen}
           onClose={handleNestClose}
@@ -127,7 +148,7 @@ export default function AddApartmentModal({txt}) {
         >
             <PostSubmissionModal info={msg} nav="home" appt="home" ></PostSubmissionModal>
         </Modal>
-        </Box>
+        </Card>
       </Modal>
     </div>
   );

@@ -44,6 +44,7 @@ export default function SortComponent({apartment, setOrder}) {
 
 
   const handleCloseNavMenu = (event) => {
+    console.log(showTags)
     filterTags(showTags);
     setAnchorElUser(null);
   };
@@ -82,11 +83,12 @@ export default function SortComponent({apartment, setOrder}) {
     if (idx !== -1) {
         selected.splice(idx, 1)
     }
+    setShowTags(selected);
     setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
   };
 
   async function filterTags(tags) {
-    if (tags === undefined || tags === "[]") {
+    if (tags === undefined || tags === "[]" || tags.length === 0) {
         return;
     }
     const stringTag = JSON.stringify(tags);
@@ -135,6 +137,7 @@ export default function SortComponent({apartment, setOrder}) {
     }}
     open={Boolean(anchorElUser)}
     onClose={handleCloseNavMenu}
+    disableScrollLock
   >
     <MenuItem key="check_menu">
         <Stack>
