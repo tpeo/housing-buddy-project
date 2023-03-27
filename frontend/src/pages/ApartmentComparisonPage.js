@@ -7,6 +7,7 @@ import {
     Link, 
     Button,
     Card,
+    CardHeader,
     CardContent,
     Typography,
     FormControl,
@@ -126,7 +127,7 @@ export default function ApartmentComparisonPage() {
 
   return (
     <LayoutComponent>
-        <Grid display='flex' justifyContent='center'>
+        <Grid container display='flex' justifyContent='center' alignItems='space-around'>
             <Grid id="appt-1" item>
                 <FormControl sx={{ m: 1, minWidth: 120 }} >
                     <InputLabel id="demo-simple-0-disabled-label">Apartment 1</InputLabel>
@@ -137,6 +138,7 @@ export default function ApartmentComparisonPage() {
                         label="First"
                         onChange={handleChange1}
                     >
+                
                 {
                     allApartments.map((name) => (
                         (name !== second) && (
@@ -148,10 +150,16 @@ export default function ApartmentComparisonPage() {
                     </Select>
                     <FormHelperText>Appartment 1</FormHelperText>
                 </FormControl>
-                <Box>
-                    {display1}
+                <Card>
+                    <CardHeader
+                        title={<Typography variant='h3' color='white' align='center'>{first}</Typography>}
+                        sx={{backgroundColor: '#0495b2'}}
+                    />
+                    <CardContent>   
+                        {display1}
+                    </CardContent>
                     <Button id={first} onClick={navApartmentPage}>Visit Page</Button>
-                </Box>
+                </Card>
             </Grid>
             <Grid id="appt-2" item>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -174,10 +182,16 @@ export default function ApartmentComparisonPage() {
                 </Select>
                 <FormHelperText>Apartment 2</FormHelperText>
             </FormControl>
-                <Box>
-                    {display2}
+                <Card>
+                    <CardHeader
+                        title={<Typography variant='h3' color='white' align='center'>{second}</Typography>}
+                        sx={{backgroundColor: '#0495b2'}}
+                    />
+                    <CardContent>   
+                        {display2}
+                    </CardContent>
                     <Button id={second} onClick={navApartmentPage}>Visit Page</Button>
-                </Box>
+                </Card>
             </Grid>
         </Grid>
     </LayoutComponent>
