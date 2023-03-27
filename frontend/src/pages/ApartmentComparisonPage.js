@@ -37,12 +37,12 @@ export default function ApartmentComparisonPage() {
 
     const handleChange1 = (event) => {
         setFirst(event.target.value);
-        getStats(event.target.value.toLowerCase(), setStats1);
+        getStats(event.target.value.toLowerCase(), 1);
     };
 
     const handleChange2 = (event) => {
         setSecond(event.target.value);
-        getStats(event.target.value.toLowerCase(), setStats2);
+        getStats(event.target.value.toLowerCase(), 2);
     };
 
     const navigate = useNavigate();
@@ -85,6 +85,7 @@ export default function ApartmentComparisonPage() {
         }
 
     async function getStats(name, number) {
+        console.log("hello")
         let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${name}/stats`;
     
             await fetch(apiCall, {
@@ -101,6 +102,7 @@ export default function ApartmentComparisonPage() {
             })
             .then((response) => {
                 if (number === 1) {
+                    console.log(response)
                     setStats1(response);
                 } else {
                     setStats2(response);
@@ -113,6 +115,15 @@ export default function ApartmentComparisonPage() {
       }
 
       //move displays to render function only when first selected?
+
+    const display1 = Object.keys(stats1).map(stat => 
+        <Typography key={`stat1_${stat}`}>{`${stat}: ${stats1[stat]}`}</Typography>
+    )
+
+    const display2 = Object.keys(stats2).map(stat => 
+        <Typography key={`stat1_${stat}`}>{`${stat}: ${stats2[stat]}`}</Typography>
+    )
+
   return (
     <LayoutComponent>
         <Grid display='flex' justifyContent='center'>
@@ -138,8 +149,7 @@ export default function ApartmentComparisonPage() {
                     <FormHelperText>Appartment 1</FormHelperText>
                 </FormControl>
                 <Box>
-                    <Typography>{first}</Typography>
-                    <Typography>{stats1.rating}</Typography>
+                    {display1}
                     <Button id={first} onClick={navApartmentPage}>Visit Page</Button>
                 </Box>
             </Grid>
@@ -165,8 +175,7 @@ export default function ApartmentComparisonPage() {
                 <FormHelperText>Apartment 2</FormHelperText>
             </FormControl>
                 <Box>
-                    <Typography>{second}</Typography>
-                    <Typography>{stats2.rating}</Typography>
+                    {display2}
                     <Button id={second} onClick={navApartmentPage}>Visit Page</Button>
                 </Box>
             </Grid>
