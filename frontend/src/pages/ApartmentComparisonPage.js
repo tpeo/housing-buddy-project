@@ -58,7 +58,7 @@ export default function ApartmentComparisonPage() {
     }
 
     async function getAllApartments() {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/apartments/name`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/apartments/name`;
     
             await fetch(apiCall, {
             method: "GET",
@@ -87,7 +87,7 @@ export default function ApartmentComparisonPage() {
 
     async function getStats(name, number) {
         console.log("hello")
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${name}/stats`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/${name}/stats`;
     
             await fetch(apiCall, {
             method: "GET",

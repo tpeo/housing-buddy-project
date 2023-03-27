@@ -13,7 +13,7 @@ const verifyCredentials = async (navigate) => {
         //     return -1;
         // }
         const decode = jwtDecode(localStorage.getItem("@userToken"));
-        const user = await fetch(`http://localhost:4000/user`, {
+        const user = await fetch(`https://localhost:4000/user`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -77,7 +77,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
     }
 
     async function updateFlag(id) {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/flag`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/flag`;
         if (apartment === "") {return;}
             await fetch(apiCall, {
             method: "PUT",
@@ -121,7 +121,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
 
     //verfiy user here?
     async function updateLikes(id, type) {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/${type}`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/${type}`;
         if (apartment === "") {return;}
             await fetch(apiCall, {
             method: "PUT",

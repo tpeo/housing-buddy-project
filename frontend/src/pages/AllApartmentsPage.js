@@ -26,7 +26,7 @@ export default function AllApartmentsPage() {
     //use effect update whenever soomething changes
 
     async function getAllApartments() {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/apartments/name`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/apartments/name`;
     
             await fetch(apiCall, {
             method: "GET",

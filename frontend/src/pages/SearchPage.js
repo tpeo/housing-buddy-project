@@ -53,7 +53,7 @@ export default function SearchPage() {
     }, [])
 
     async function getAllApartments() {
-      let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/apartments/name`;
+      let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/apartments/name`;
   
           await fetch(apiCall, {
           method: "GET",

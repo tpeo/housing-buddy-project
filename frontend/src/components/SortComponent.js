@@ -92,7 +92,7 @@ export default function SortComponent({apartment, setOrder}) {
         return;
     }
     const stringTag = JSON.stringify(tags);
-    const apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/${apartment}/tags/${stringTag}`;
+    const apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/${apartment}/tags/${stringTag}`;
 
         await fetch(apiCall, {
         method: "GET",

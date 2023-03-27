@@ -49,7 +49,7 @@ export default function AllApartments() {
     }
 
     async function getAllApartments() {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/apartments/rating`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/apartments/rating`;
     
             await fetch(apiCall, {
             method: "GET",

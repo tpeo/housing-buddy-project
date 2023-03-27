@@ -67,7 +67,7 @@ export default function ReviewForm() {
 
     async function addRating() {
       
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/new/${user_obj.uid}`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/new/${user_obj.uid}`;
 
         let selected = [];
         for (const tag in tags) {
@@ -118,7 +118,7 @@ export default function ReviewForm() {
         }
 
         async function deleteRating() {
-          let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/delete`;
+          let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/delete`;
           if (formValues.review === "") {return;}
               await fetch(apiCall, {
               method: "DELETE",

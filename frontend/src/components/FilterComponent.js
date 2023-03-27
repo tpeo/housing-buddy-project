@@ -49,9 +49,9 @@ export default function FilterComponent({apartment, collection, setOrder}) {
   async function singleFilter(collection, filter) {
     let apiCall = "";
     if (collection === "apartments") {
-      apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${collection}/${filter}`;
+      apiCall = `https://${process.env.REACT_APP_HOSTNAME}/${collection}/${filter}`;
     } else {
-      apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${collection}/${apartment}/${filter}`;
+      apiCall = `https://${process.env.REACT_APP_HOSTNAME}/${collection}/${apartment}/${filter}`;
     }
 
         await fetch(apiCall, {

@@ -31,7 +31,7 @@ export default function MapComponent() {
     const center = useMemo(() => ({ lat: 30.285492906843807, lng: -97.73392795397169 }), []); 
 
     async function loadMarkerInfo() {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/map-info`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/map-info`;
     
             await fetch(apiCall, {
             method: "GET",
