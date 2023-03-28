@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { send } from 'emailjs-com';
 import PostSubmissionModal from './PostSubmissionModal';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AddIcon from '@mui/icons-material/Add';
 
 import {
   Grid,
@@ -79,7 +80,7 @@ export default function AddApartmentModal({txt}) {
 
   return (
     <div>
-      <Button onClick={handleOpen} style={{color: "#0495b2"}}>{txt}</Button>
+      <Button startIcon={<AddIcon/>} onClick={handleOpen} style={{color: "#0495b2"}}>{txt}</Button>
       <Modal
         open={open}
         onClose={handleClose}

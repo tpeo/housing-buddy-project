@@ -9,7 +9,6 @@ import {
     TextField,
     Stack,
     Button,
-    ButtonGroup,
     Modal,
     Card,
     Box,
@@ -71,7 +70,7 @@ export default function ReviewForm() {
 
         let selected = [];
         for (const tag in tags) {
-          if (tags[tag] == true) {
+          if (tags[tag] === true) {
             selected.push(tag)
           }
         }
@@ -155,7 +154,7 @@ export default function ReviewForm() {
       const tag = event.target.id.toLowerCase()
       const prev = tags[tag]
 
-      if (prev == true) {
+      if (prev === true) {
         //set color
       }
 

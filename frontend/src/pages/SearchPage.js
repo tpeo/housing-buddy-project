@@ -7,7 +7,6 @@ import {
 } from "@mui/material"
 import Footer from "../components/layout/Footer";
 import NavBarComponent from "../components/layout/NavBarComponent";
-
 import { styled, alpha } from '@mui/material/styles';
 
 import { useNavigate } from "react-router-dom";
@@ -21,6 +20,7 @@ export default function SearchPage() {
     const [results, setResults] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
     const queryParameters = new URLSearchParams(window.location.search);
+    let query = queryParameters.get("query");
 
     useEffect(() => {
       if (queryParameters.has("query")) {
@@ -45,7 +45,7 @@ export default function SearchPage() {
       })
       setResults(hits);
       setSuggestions(sugg);
-    }, [queryParameters.get("query")])
+    }, [query])
 
 
     useEffect(() => {

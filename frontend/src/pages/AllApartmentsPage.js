@@ -4,12 +4,10 @@ import AddApartmentModal from "../components/AddApartmentModal";
 import MapComponent from "../components/MapComponent";
 import {
     Grid,
-    TextField,
     Box,
     Link, 
     Button,
     Card,
-    CardContent,
     Typography
 } from "@mui/material"
 import { useNavigate } from "react-router-dom";
@@ -86,37 +84,38 @@ export default function AllApartmentsPage() {
           <Box sx={{flexGrow: 1}}>
               <Grid width="100%" container spacing={1} 
                   display="flex"
-                  direction="column"
                   justifyContent="center"
                   alignItems="stretch"
                   >
                   {allApartments.map((obj) => (
-                            <Card sx={{
-                              width: '100%',
-                              height: '100%',
-                              display: 'flex',
-                              flexDirection: 'column',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              boxSizing: 'content-box',
-                              textAlign: 'center',
-                              overflow: 'hidden',
-                              backgroundImage: `url(${obj.img_link})`,
-                              backgroundSize: '100% 100%',
-                              backgroundPosition: 'center',
-                              borderRadius: '25px',
-                              boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.3)',
-                              margin: '10px'
+                            <Card 
+                              key={`app-card-${obj.name}`}
+                              sx={{
+                                width: '100%',
+                                height: '100%',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                boxSizing: 'content-box',
+                                textAlign: 'center',
+                                overflow: 'hidden',
+                                backgroundImage: `url(${obj.img_link})`,
+                                backgroundSize: '100% 100%',
+                                backgroundPosition: 'center',
+                                borderRadius: '25px',
+                                boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.3)',
+                                margin: '10px'
                           }}>
                               <Button sx={{
                                 width: "150px",
                                 height: "49px",
                               }}
                               id={obj.name}
-                              key={obj.name}
+                              key={`allapp-button-${obj.name}`}
                               onClick={navApartmentPage}
                               >
-                                <Typography id={obj.name} component='h3' variant="h3" color='white' fontWeight={'bold'} 
+                                <Typography key={`allapp-label-${obj.name}`} id={obj.name} component='h3' variant="h3" color='white' fontWeight={'bold'} 
                                       sx={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 1)' }}>
                                   {obj.name}
                               </Typography>
@@ -130,18 +129,18 @@ export default function AllApartmentsPage() {
 
           <Grid item
             display="flex"
-            direction="column"
+            flexDirection='column'
             justifyContent="center"
             alignItems="stretch"
           >
           {alphabet.map((letter) => (
-            <Link id={letter} onClick={windowNav} sx={{color: '#0495b2'}}>{letter}</Link>
+            <Link key={letter} id={letter} onClick={windowNav} sx={{color: '#0495b2'}}>{letter}</Link>
           ))}
           </Grid>
 
         </Grid>
         <Grid display='flex' justifyContent='center' item>
-          <AddApartmentModal txt="Don't See an Apartment? Request to Add One!"/>
+          <AddApartmentModal txt={"Don't See an Apartment? Request to Add One!"}/>
         </Grid>
         <MapComponent></MapComponent>
         
