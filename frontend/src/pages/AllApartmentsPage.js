@@ -74,7 +74,7 @@ export default function AllApartmentsPage() {
 
   return (
     <LayoutComponent>
-        <Typography variant="h1">All Apartments</Typography>
+        <Typography variant="h1" align='center'>All Apartments</Typography>
         <Grid 
           display="flex"
           direction="row"
@@ -135,7 +135,7 @@ export default function AllApartmentsPage() {
             alignItems="stretch"
           >
           {alphabet.map((letter) => (
-            <Link id={letter} onClick={windowNav}>{letter}</Link>
+            <Link id={letter} onClick={windowNav} sx={{color: '#0495b2'}}>{letter}</Link>
           ))}
           </Grid>
 
