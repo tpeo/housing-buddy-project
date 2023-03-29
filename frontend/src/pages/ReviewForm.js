@@ -97,7 +97,6 @@ export default function ReviewForm() {
             })
           })
             .then((response) => {
-              console.log(response)
               setMsg("Review Submitted Successfully!");
               if (response.status !== 200) {
                 setMsg("Review Failed");
@@ -106,7 +105,6 @@ export default function ReviewForm() {
               return response.json();
             })
             .then((response)=> {
-              console.log(response)
               const user_obj = JSON.parse(window.localStorage.getItem("@user"));
               user_obj["review"] = response;
               window.localStorage.setItem("@user", JSON.stringify(user_obj));
@@ -163,7 +161,6 @@ export default function ReviewForm() {
         [tag]: !prev
       });
 
-      console.log(tags)
     }
 
     const card = (

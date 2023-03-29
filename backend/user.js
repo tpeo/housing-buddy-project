@@ -35,7 +35,6 @@ users.post('/', async (req, res) => {
       }
   
     } catch (error) {
-        console.log(error)
       return res.status(400).send(`User should contain firstName, lastName, email`)
     }
   });

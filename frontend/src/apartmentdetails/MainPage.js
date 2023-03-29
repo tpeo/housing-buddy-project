@@ -109,7 +109,6 @@ export default function MainPage() {
     }
 
     const handlePageChange = (event, value) => {
-      console.log(value)
       setPage(value);
     }
 

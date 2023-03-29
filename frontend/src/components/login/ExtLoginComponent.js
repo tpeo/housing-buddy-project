@@ -43,7 +43,6 @@ export default function ExtLoginComponent() {
           localStorage.setItem("@pfp", user.pfp);
           //6 - navigate user to the home page
           navSignIn();
-          console.log(newUser)
           if (newUser) {
             //ask them to input their apartment
             setOpen(true);
@@ -71,7 +70,6 @@ export default function ExtLoginComponent() {
       <div className="login-buttons">
         <IconButton onClick={googleLogin} sx={{ p: 0 }}>
           <Avatar src="google_icon.png"></Avatar>
-          <span>Login</span>
         </IconButton>
         <Modal
           open={open}

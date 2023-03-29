@@ -43,13 +43,11 @@ export default function SortComponent({apartment, setOrder}) {
 
 
   const handleCloseNavMenu = (event) => {
-    console.log(showTags)
     filterTags(showTags);
     setAnchorElUser(null);
   };
 
   const handleCheck = (event) => {
-    console.log(showTags)
     const tag = event.target.id.toLowerCase();
     const prev = tagValues[tag]
     setTagValues({
@@ -72,7 +70,6 @@ export default function SortComponent({apartment, setOrder}) {
             selected.splice(idx, 1)
         }
     }
-    console.log(selected);
     setShowTags(selected);
   }
 

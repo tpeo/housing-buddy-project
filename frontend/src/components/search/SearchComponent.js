@@ -3,8 +3,11 @@ import {
     Stack,
     InputBase,
     IconButton,
+    Link,
+    createTheme,
     Button,
     TextField,
+    Icon,
 } from "@mui/material"
 
 import SearchIcon from '@mui/icons-material/Search';
@@ -13,6 +16,8 @@ import { styled, alpha } from '@mui/material/styles';
 import { createSearchParams, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState, useRef, useStyles } from "react";
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+import { ThemeProvider } from '@emotion/react';
+
 
 const filter = createFilterOptions();
 
@@ -127,19 +132,16 @@ export default function SearchComponent() {
             // Default left padding is 6px
             paddingLeft: 26
           },
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: "gray"
+          "& .MuiAutocomplete-option": {
+            color: "black"
           },
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "gray"
-          },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "purple"
-          }
         }
       }));
-      
-    
+
+      const navApartmentPage = (event) => {
+        navigate(`/mainpage/${event.target.innerText.toLowerCase()}`);
+  
+      }
 
     return (
         <Search>
@@ -148,68 +150,67 @@ export default function SearchComponent() {
             </IconButton>
             <Stack direction='row'>
               <SearchIconWrapper/>
-              <StyledAutocomplete
-            value={value}
-            onChange={(event, newValue) => {
-              if (typeof newValue === 'string') {
-                setValue({
-                  title: newValue,
-                });
-              } else {
-                setValue(newValue);
-              }
+              <Autocomplete 
+                  value={value}
+                  onChange={(event, newValue) => {
+                    if (typeof newValue === 'string') {
+                      setValue({
+                        title: newValue,
+                      });
+                    } else {
+                      setValue(newValue);
+                    }
 
-              if (event.key === 'Enter') {
-                navigate({
-                    pathname: "/search",
-                    search: `?${createSearchParams({query: event.target.value})}`
-                });
-              }
-            }}
-            filterOptions={(options, params) => {
-              const filtered = filter(options, params);
-      
-              const { inputValue } = params;
-              // Suggest the creation of a new value
-              const isExisting = options.some((option) => inputValue === option.title);
-              // if (inputValue !== '' && !isExisting) {
-              //   filtered.push({
-              //     inputValue,
-              //     title: `Add "${inputValue}"`,
-              //   });
-              // }
-      
-              return filtered;
-            }}
-            selectOnFocus
-            clearOnBlur
-            handleHomeEndKeys
-            id="free-solo-with-text-demo"
-            options={allApartments}
-            getOptionLabel={(option) => {
-              // Value selected with enter, right from the input
-              if (typeof option === 'string') {
-                return option;
-              }
-              // Regular option
-              return option.title;
-            }}
-            renderOption={(props, option) => (
-              <li {...props} >{option.title}</li>
-            )}
-            sx={{ width: 300}}
-            freeSolo
-            renderInput={(params) => (
-              //<TextField {...params} label="Search" />
-              <StyledInputBase
-                  placeholder="Search…"
-                  ref={params.InputProps.ref}
-                  inputProps={params.inputProps}
-              >
-                
-              </StyledInputBase>
-            )}
-          />
+                    if (event.key === 'Enter') {
+                      navigate({
+                          pathname: "/search",
+                          search: `?${createSearchParams({query: event.target.value})}`
+                      });
+                    }
+                  }}
+                  filterOptions={(options, params) => {
+                    const filtered = filter(options, params);
+            
+                    const { inputValue } = params;
+                    // Suggest the creation of a new value
+                    //const isExisting = options.some((option) => inputValue === option.title);
+            
+                    return filtered;
+                  }}
+                  selectOnFocus
+                  clearOnBlur
+                  handleHomeEndKeys
+                  id="free-solo-with-text-demo"
+                  options={allApartments}
+                  getOptionLabel={(option) => {
+                    // Value selected with enter, right from the input
+                    if (typeof option === 'string') {
+                      return option;
+                    }
+                    // Regular option
+                    return option.title;
+                  }}
+                  renderOption={(props, option) => {
+                    return (
+                      <li {...props}>
+                        <Link onClick={navApartmentPage} sx={{color: 'black'}}>{option}</Link>
+                    </li>
+                    )
+                  }}
+                  sx={{ width: 300}}
+                  freeSolo
+                  renderInput={(params) => (
+                  //<TextField {...params} label="Search" />
+                  <StyledInputBase
+                      placeholder="Search…"
+                      ref={params.InputProps.ref}
+                      inputProps={params.inputProps}
+                      sx={{color: 'black'}}
+                  >
+                    
+                  </StyledInputBase>
+                )}
+            />
             </Stack>
 
             

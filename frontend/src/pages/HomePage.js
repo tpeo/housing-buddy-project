@@ -72,8 +72,7 @@ export default function AllApartments() {
         }
 
 const nineCards = allApartments.slice(0, 9);
-//            <AddIcon style={{color: "#0495b2"}}></AddIcon>
-//</IconButton>
+  
 return (
   <LayoutComponent>
         <img src='/logowbg.png' height='100%' width='100%' alt="bg-img"></img>
@@ -81,13 +80,13 @@ return (
             <AddApartmentModal txt="Apartment Request Form"/>
           <FilterComponent collection="apartments" setOrder={setAllApartments}></FilterComponent>
         </Stack>
-        <Divider color="#0495b2" sx={{ borderBottomWidth: 50 }}></Divider>
+        <Divider color="#0495b2" sx={{ borderBottomWidth: 15 }}></Divider>
 
         <Box sx={{flexGrow: 1, marginTop: '20px', marginBottom: '20px'}}>
             <Grid container spacing={4} 
                   justifyContent="center"
                 >
-              {nineCards.map((obj, index) => (
+              {nineCards.map((obj) => (
                   <ListApartmentComponent
                     key={obj.name}    
                     name={obj.name} 
