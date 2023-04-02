@@ -18,7 +18,6 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
-    IconButton
 } from "@mui/material"
 
 import { useNavigate, useParams } from "react-router-dom";
@@ -26,7 +25,6 @@ import ReviewComponent from "./components/ReviewComponent";import SortComponent 
 
 export default function MainPage() {
     const params = useParams();
-    
     const name = params.apartment;
     const [open, setOpen] = useState(false);
     //const handleOpen = () => setOpen(true);
