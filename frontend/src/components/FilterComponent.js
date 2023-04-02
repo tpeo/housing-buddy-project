@@ -49,9 +49,9 @@ export default function FilterComponent({apartment, collection, setOrder}) {
   async function singleFilter(collection, filter) {
     let apiCall = "";
     if (collection === "apartments") {
-      apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${collection}/${filter}`;
+      apiCall = `https://${process.env.REACT_APP_HOSTNAME}/${collection}/${filter}`;
     } else {
-      apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${collection}/${apartment}/${filter}`;
+      apiCall = `https://${process.env.REACT_APP_HOSTNAME}/${collection}/${apartment}/${filter}`;
     }
 
         await fetch(apiCall, {
@@ -80,7 +80,6 @@ export default function FilterComponent({apartment, collection, setOrder}) {
   function filterHelper(filter) {
     //add error handler for invalid
     let lower = filter.toLowerCase();
-    console.log(lower)
     switch(lower) {
       case "overall rating": 
         lower = "rating";
@@ -117,7 +116,7 @@ export default function FilterComponent({apartment, collection, setOrder}) {
     onClose={() => setAnchorElUser(null)}
   >
     {filters.map((filter) => (
-      <MenuItem key={filter} onClick={handleCloseNavMenu}>
+      <MenuItem key={filter} sx={{backgroundColor: "#0495b2", color: 'white'}} onClick={handleCloseNavMenu}>
         <Typography textAlign="center">{filter}</Typography>
       </MenuItem>
     ))}

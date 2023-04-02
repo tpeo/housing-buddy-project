@@ -55,7 +55,6 @@ reviews.get("/:apartment/:filter", async(req, res) => {
   //filter reviews by tag
 reviews.get("/:apartment/tags/:tags/", async(req, res) => {
   let filter = req.params.tags;
-  console.log(filter)
   const filter_arr = JSON.parse(filter);
   if (filter === "" || filter === undefined || filter === "[]") {filter = "all"}
   let apartment = req.params.apartment;
@@ -180,7 +179,6 @@ function deleteRating(name, filters) {
             // Compute new number of ratings
             if (res.data().num_reviews === 0) return;
             const newNumRatings = res.data().num_reviews - 1;
-            console.log(newNumRatings);
 
             Object.keys(updateRatings).forEach((rating) => {
               var oldRatingTotal = res.data()[rating] * res.data().num_reviews;

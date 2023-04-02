@@ -17,29 +17,6 @@ const StyledRating = styled(Rating)(({ theme }) => ({
   },
 }));
 
-// const customIcons = {
-//   1: {
-//     icon: <SentimentVeryDissatisfiedIcon fontSize='large' style={{color: '#71DAF9', '&:hover': {color: 'error'},}} />,
-//     label: 'Very Dissatisfied',
-//   },
-//   2: {
-//     icon: <SentimentDissatisfiedIcon fontSize='large' style={{color: '#68CDEB', '&:hover': {color: 'error'},}}/>,
-//     label: 'Dissatisfied',
-//   },
-//   3: {
-//     icon: <SentimentSatisfiedIcon fontSize='large' style={{color: '#45C6E0', '&:hover': {color: 'warning'},}} />,
-//     label: 'Neutral',
-//   },
-//   4: {
-//     icon: <SentimentSatisfiedAltIcon fontSize='large' style={{color: '#12AAC9', '&:hover': {color: 'success'},}} />,
-//     label: 'Satisfied',
-//   },
-//   5: {
-//     icon: <SentimentVerySatisfiedIcon fontSize='large' style={{color: '#0495B2', '&:hover': {color: 'success'},}} />,
-//     label: 'Very Satisfied',
-//   },
-// };
-
 const customIcons = {
   1: {
     icon: <SentimentVeryDissatisfiedIcon fontSize='large' color='#71DAF9' />,

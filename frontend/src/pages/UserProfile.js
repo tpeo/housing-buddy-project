@@ -29,7 +29,6 @@ export default function UserProfile() {
     useEffect(() => {
         const fetchData = async () => {
             getUser();
-            console.log(user)
             setLoaded(true);
         }
         fetchData();
@@ -37,7 +36,7 @@ export default function UserProfile() {
 
 
     async function getReviews() {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/${user.name}`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/${user.name}`;
     
             await fetch(apiCall, {
             method: "GET",
@@ -62,7 +61,7 @@ export default function UserProfile() {
         }
 
         async function getUser() {
-          let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/user/info/${JSON.parse(window.localStorage.getItem("@user")).uid}`;
+          let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/user/info/${JSON.parse(window.localStorage.getItem("@user")).uid}`;
       
               await fetch(apiCall, {
               method: "GET",

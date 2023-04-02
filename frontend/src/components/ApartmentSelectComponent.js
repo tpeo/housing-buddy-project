@@ -16,7 +16,7 @@ export default function ApartmentSelectComponent() {
     }, []);
 
   async function getAllApartments() {
-    let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/apartments/`;
+    let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/apartments/`;
 
         await fetch(apiCall, {
         method: "GET",
@@ -43,7 +43,7 @@ export default function ApartmentSelectComponent() {
   };
 
   async function updateApartment() {
-    let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/user/apartment/`;
+    let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/user/apartment/`;
     let user = window.localStorage.getItem("@user")
     if (apartment === "") {return;}
         await fetch(apiCall, {

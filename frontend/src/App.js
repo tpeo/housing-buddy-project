@@ -9,16 +9,33 @@ import React from 'react';
 import { Routes, Route, useParams } from "react-router-dom";
 
 import './App.css';
+import { Typography } from '@mui/material';
 
+const ProtectedFormRoute = ({isLoggedIn, children}) => {
+  const params = useParams();
+  const name = params.apartment;
+  if (isLoggedIn && window.localStorage.getItem("@apartment") === name) {
+    console.log(params)
+    return children;
+  } else {
+    return (
+    <Typography variant='body'>Error 404. You are not authorized to access this page</Typography>
+    );
+  }
+}
 
 function App() {
 
   return (
     <Routes>
-      <Route path="/:apartment/review" element={<ReviewForm></ReviewForm>}></Route>
+      <Route path="/:apartment/review" element={
+        <ProtectedFormRoute isLoggedIn={window.localStorage.getItem("loggedIn")}>
+          <ReviewForm></ReviewForm>
+        </ProtectedFormRoute>
+        }></Route>
       <Route path="/" element={<HomePage></HomePage>}></Route>
       <Route path="/allapartments" element={<AllApartments></AllApartments>}></Route>
-      <Route path="/mainpage/:apartment" element={<MainPage></MainPage>}></Route>
+      <Route path="/mainpage/:apartment" element={<MainPage/>}></Route>
       <Route path="/search" element={<SearchPage></SearchPage>}></Route>
       <Route path="/profile" element={<UserProfile></UserProfile>}></Route>
       <Route path="/compare" element={<ApartmentComparisonPage></ApartmentComparisonPage>}></Route>

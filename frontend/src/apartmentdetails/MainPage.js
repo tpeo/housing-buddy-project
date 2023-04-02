@@ -18,7 +18,6 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
-    IconButton
 } from "@mui/material"
 
 import { useNavigate, useParams } from "react-router-dom";
@@ -26,7 +25,6 @@ import ReviewComponent from "./components/ReviewComponent";import SortComponent 
 
 export default function MainPage() {
     const params = useParams();
-    
     const name = params.apartment;
     const [open, setOpen] = useState(false);
     //const handleOpen = () => setOpen(true);
@@ -109,12 +107,11 @@ export default function MainPage() {
     }
 
     const handlePageChange = (event, value) => {
-      console.log(value)
       setPage(value);
     }
 
     async function getReviews() {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/${name.toLowerCase()}`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/${name.toLowerCase()}`;
     
             await fetch(apiCall, {
             method: "GET",
@@ -139,7 +136,7 @@ export default function MainPage() {
         }
 
       async function getInfo() {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${name}/info`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/${name}/info`;
     
             await fetch(apiCall, {
             method: "GET",
@@ -162,7 +159,7 @@ export default function MainPage() {
         }
 
         async function getStats() {
-          let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${name}/stats`;
+          let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/${name}/stats`;
       
               await fetch(apiCall, {
               method: "GET",

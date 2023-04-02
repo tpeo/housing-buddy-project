@@ -9,7 +9,6 @@ import {
     TextField,
     Stack,
     Button,
-    ButtonGroup,
     Modal,
     Card,
     Box,
@@ -67,11 +66,11 @@ export default function ReviewForm() {
 
     async function addRating() {
       
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/new/${user_obj.uid}`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/new/${user_obj.uid}`;
 
         let selected = [];
         for (const tag in tags) {
-          if (tags[tag] == true) {
+          if (tags[tag] === true) {
             selected.push(tag)
           }
         }
@@ -98,7 +97,6 @@ export default function ReviewForm() {
             })
           })
             .then((response) => {
-              console.log(response)
               setMsg("Review Submitted Successfully!");
               if (response.status !== 200) {
                 setMsg("Review Failed");
@@ -107,7 +105,6 @@ export default function ReviewForm() {
               return response.json();
             })
             .then((response)=> {
-              console.log(response)
               const user_obj = JSON.parse(window.localStorage.getItem("@user"));
               user_obj["review"] = response;
               window.localStorage.setItem("@user", JSON.stringify(user_obj));
@@ -118,7 +115,7 @@ export default function ReviewForm() {
         }
 
         async function deleteRating() {
-          let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/review/delete`;
+          let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/review/delete`;
           if (formValues.review === "") {return;}
               await fetch(apiCall, {
               method: "DELETE",
@@ -155,7 +152,7 @@ export default function ReviewForm() {
       const tag = event.target.id.toLowerCase()
       const prev = tags[tag]
 
-      if (prev == true) {
+      if (prev === true) {
         //set color
       }
 
@@ -164,7 +161,6 @@ export default function ReviewForm() {
         [tag]: !prev
       });
 
-      console.log(tags)
     }
 
     const card = (

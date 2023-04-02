@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import LayoutComponent from "../components/layout/LayoutComponent";
 import {
     Grid,
-    TextField,
-    Box,
-    Link, 
     Button,
     Card,
+    CardHeader,
     CardContent,
     Typography,
     FormControl,
@@ -57,7 +55,7 @@ export default function ApartmentComparisonPage() {
     }
 
     async function getAllApartments() {
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/apartments/name`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/apartments/name`;
     
             await fetch(apiCall, {
             method: "GET",
@@ -85,8 +83,7 @@ export default function ApartmentComparisonPage() {
         }
 
     async function getStats(name, number) {
-        console.log("hello")
-        let apiCall = `http://${process.env.REACT_APP_HOSTNAME}/${name}/stats`;
+        let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/${name}/stats`;
     
             await fetch(apiCall, {
             method: "GET",
@@ -102,7 +99,6 @@ export default function ApartmentComparisonPage() {
             })
             .then((response) => {
                 if (number === 1) {
-                    console.log(response)
                     setStats1(response);
                 } else {
                     setStats2(response);
@@ -126,7 +122,7 @@ export default function ApartmentComparisonPage() {
 
   return (
     <LayoutComponent>
-        <Grid display='flex' justifyContent='center'>
+        <Grid container display='flex' justifyContent='center' alignItems='space-around'>
             <Grid id="appt-1" item>
                 <FormControl sx={{ m: 1, minWidth: 120 }} >
                     <InputLabel id="demo-simple-0-disabled-label">Apartment 1</InputLabel>
@@ -137,6 +133,7 @@ export default function ApartmentComparisonPage() {
                         label="First"
                         onChange={handleChange1}
                     >
+                
                 {
                     allApartments.map((name) => (
                         (name !== second) && (
@@ -148,10 +145,16 @@ export default function ApartmentComparisonPage() {
                     </Select>
                     <FormHelperText>Appartment 1</FormHelperText>
                 </FormControl>
-                <Box>
-                    {display1}
+                <Card>
+                    <CardHeader
+                        title={<Typography variant='h3' color='white' align='center'>{first}</Typography>}
+                        sx={{backgroundColor: '#0495b2'}}
+                    />
+                    <CardContent>   
+                        {display1}
+                    </CardContent>
                     <Button id={first} onClick={navApartmentPage}>Visit Page</Button>
-                </Box>
+                </Card>
             </Grid>
             <Grid id="appt-2" item>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -174,10 +177,16 @@ export default function ApartmentComparisonPage() {
                 </Select>
                 <FormHelperText>Apartment 2</FormHelperText>
             </FormControl>
-                <Box>
-                    {display2}
+                <Card>
+                    <CardHeader
+                        title={<Typography variant='h3' color='white' align='center'>{second}</Typography>}
+                        sx={{backgroundColor: '#0495b2'}}
+                    />
+                    <CardContent>   
+                        {display2}
+                    </CardContent>
                     <Button id={second} onClick={navApartmentPage}>Visit Page</Button>
-                </Box>
+                </Card>
             </Grid>
         </Grid>
     </LayoutComponent>
