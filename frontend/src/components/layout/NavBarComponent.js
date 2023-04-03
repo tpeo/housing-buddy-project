@@ -78,53 +78,45 @@ export default function NavBarComponent() {
       }
   }
 
-  function UserMenu(props) {
-    return (
-      <Box sx={{ flexGrow: 0 }}>
-      <Tooltip title="Open settings">
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar src={window.localStorage.getItem("@pfp")}>
-            <img src={window.localStorage.getItem("@pfp")} referrerPolicy="no-referrer"></img>
-          </Avatar>
-        </IconButton>
-      </Tooltip>
-      <Menu
-        sx={{ mt: '45px' }}
-        id="menu-appbar"
-        anchorEl={anchorElUser}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={Boolean(anchorElUser)}
-        onClose={handleCloseUserMenu}
-      >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
-          </MenuItem>
-        ))}
-      </Menu>
-    </Box>
-    );
-  }
-
-  function Default(props) {
-    return (
-      <ExtLoginComponent></ExtLoginComponent>
-    );
-  }
-
-  function Dashboard({isLoggedIn}) {
+  function dashboard(isLoggedIn) {
     if (isLoggedIn === "true") {
-      return <UserMenu/>;
+      return (
+        <Box sx={{ flexGrow: 0 }}>
+          <Tooltip title="Open settings">
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar src={window.localStorage.getItem("@pfp")}>
+                <img src={window.localStorage.getItem("@pfp")} referrerPolicy="no-referrer"></img>
+              </Avatar>
+            </IconButton>
+          </Tooltip>
+          <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map((setting) => (
+              <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">{setting}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
+    );
     } else {
-      return <Default/>;
+      return (
+        <ExtLoginComponent></ExtLoginComponent>
+      );
     }
   }
 
@@ -213,7 +205,7 @@ export default function NavBarComponent() {
                 ))}
               </Box>
               <SearchComponent></SearchComponent>
-              <Dashboard isLoggedIn={localStorage.getItem("loggedIn")}></Dashboard>
+              {dashboard(window.localStorage.getItem("loggedIn"))}
             </Toolbar>
           </Container>
         </AppBar>

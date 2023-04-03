@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import LayoutComponent from "../components/layout/LayoutComponent";
 import {
     Grid,
-    TextField,
-    Box,
-    Link, 
     Button,
     Card,
     CardHeader,
@@ -86,7 +83,6 @@ export default function ApartmentComparisonPage() {
         }
 
     async function getStats(name, number) {
-        console.log("hello")
         let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/${name}/stats`;
     
             await fetch(apiCall, {
@@ -103,7 +99,6 @@ export default function ApartmentComparisonPage() {
             })
             .then((response) => {
                 if (number === 1) {
-                    console.log(response)
                     setStats1(response);
                 } else {
                     setStats2(response);

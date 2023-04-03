@@ -91,6 +91,8 @@ export default function MapComponent() {
           mapContainerClassName='map-container'
           center={center}
           zoom={15}
+          defaultZoom={15}
+          defaultCenter={center}
           onLoad={onMapLoad}
           onClick={() => setIsOpen(false)}
         >

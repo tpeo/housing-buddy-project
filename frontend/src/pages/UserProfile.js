@@ -29,7 +29,6 @@ export default function UserProfile() {
     useEffect(() => {
         const fetchData = async () => {
             getUser();
-            console.log(user)
             setLoaded(true);
         }
         fetchData();

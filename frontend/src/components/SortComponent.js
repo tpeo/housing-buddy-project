@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect} from 'react';
+import { useState } from 'react';
 import SortIcon from '@mui/icons-material/Sort';
 
 import {
@@ -9,7 +9,6 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Typography,
   Divider,
   Checkbox,
   Stack,
@@ -44,13 +43,11 @@ export default function SortComponent({apartment, setOrder}) {
 
 
   const handleCloseNavMenu = (event) => {
-    console.log(showTags)
     filterTags(showTags);
     setAnchorElUser(null);
   };
 
   const handleCheck = (event) => {
-    console.log(showTags)
     const tag = event.target.id.toLowerCase();
     const prev = tagValues[tag]
     setTagValues({
@@ -73,7 +70,6 @@ export default function SortComponent({apartment, setOrder}) {
             selected.splice(idx, 1)
         }
     }
-    console.log(selected);
     setShowTags(selected);
   }
 
@@ -145,7 +141,7 @@ export default function SortComponent({apartment, setOrder}) {
                   justifyContent: 'center',
                   flexWrap: 'wrap',}}>
                 {
-                  (chipData != undefined) &&(chipData.map((tag) => (
+                  (chipData !== undefined) &&(chipData.map((tag) => (
                     <Chip key={tag.key} id={tag.label} onDelete={handleDelete(tag)} sx={{color:"#0495b2", contrastText: "#0495b2"}} label={tag.label}/>
                 )))
                 }
