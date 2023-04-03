@@ -115,6 +115,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
         direction: 'column',
         alignItems: 'center',
         backgroundSize: 'cover',
+        backgroundColor: expanded ? 'white' : '#EEEEEE',
         backgroundPosition: 'center'
 
     }   
@@ -220,7 +221,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                 </Grid>
                 <Grid id="tags" sx={{marginTop: '10px'}} item>
                     {(fullR.tags != undefined) &&(fullR.tags.map((tag) => (
-                        <Chip key={`chip_disp${tag}`} id={tag} sx={{color:"#0495b2", contrastText: "#0495b2"}} label={tag}></Chip>
+                        <Chip key={`chip_disp${tag}`} id={tag} sx={{color:"#0495b2", contrastText: "#0495b2", backgroundColor: "rgba(113, 218, 249, 0.33)"}} label={tag}></Chip>
                     )))}
                 </Grid>
                 <Grid sx={{margin: '10px'}} item>

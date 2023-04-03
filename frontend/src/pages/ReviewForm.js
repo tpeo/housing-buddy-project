@@ -6,6 +6,7 @@ import PostSubmissionModal from "../components/PostSubmissionModal";
 import { styled } from '@mui/material/styles';
 import {
     Grid,
+    Chip,
     TextField,
     Stack,
     Button,
@@ -149,7 +150,7 @@ export default function ReviewForm() {
     };
 
     const handleTags = (event) => {
-      const tag = event.target.id.toLowerCase()
+      const tag = event.target.innerText.toLowerCase()
       const prev = tags[tag]
 
       if (prev === true) {
@@ -227,8 +228,13 @@ export default function ReviewForm() {
             <Grid id="tags" item>
               <Stack id="button-group" direction="row">
                 {ratings.map((rating) => (
-                  <Button onClick={handleTags} variant="outlined" id={rating}
-                  style={{color: '#12AAC9', '&:click': {color: 'success',}, '&:iconFill': {color: 'success',}, borderRadius: '16px'}}> {rating} </Button>
+                  <Chip 
+                    key={`chip_review_${rating}`} 
+                    id={rating} 
+                    sx={{color:"#0495b2", contrastText: "#0495b2", backgroundColor: tags[rating.toLowerCase()] ? "rgba(113, 218, 249, 0.33)" : 'white'}} 
+                    onClick={handleTags}
+                    label={rating}>
+                  </Chip>
                 ))}
               </Stack>
             </Grid>
