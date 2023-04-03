@@ -52,6 +52,12 @@ export default function NavBarComponent() {
 
     function navHelper(name) {
         switch(name){
+            case "ABOUT US":
+                navigate("/about");
+                break;
+            case "FAQ":
+                navigate("/faq");
+                break;
             case "VIEW ALL APARTMENTS":
                 navigate('/allapartments');
                 break;
