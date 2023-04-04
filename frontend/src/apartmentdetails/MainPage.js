@@ -232,7 +232,7 @@ export default function MainPage() {
         </Box>
         
         <Grid>
-            <Box sx={{flexGrow: 1}}>
+            <Box sx={{flexGrow: 1}} margin='20px'>
                 <Grid container spacing={4} 
                     direction="column"
                     justifyContent="center"

@@ -150,13 +150,13 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
     }
 
   return (
-    <Grid sx={{display: 'flex', justifyContent: 'center'}} item xs={4} sm={6} md={4}>
+    <Grid sx={{display: 'flex', justifyContent: 'center', marginTop: '20px'}} item xs={4} sm={6} md={4}>
         <Card sx={gridItem} height="100%">
-            <Grid name="main" display="flex" direction="row" justifyContent='space-between'>
-                <Grid item >
+            <Grid name="main" display="flex" direction="row" justifyContent='space-between' margin='10px'>
+                <Grid alignItems='center' item >
                     <Box width={'120px'} marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
                             <Typography marginLeft='7px' component='h3' variant="h3" fontWeight={'bold'} color="inherit" paragraph>
-                            {rating}/5
+                            {Number(rating).toFixed(1)}/5
                             </Typography>
                     </Box>
                     <Typography variant="body">{fullR.name}</Typography>
@@ -201,14 +201,14 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                                 >
                                 {ratings.map((rating, index) => (
                                     <Grid item xs={6} key={`individ_${rating}`}>
-                                    <Stack direction="row">
+                                    <Stack direction="row" margin="10px">
                                         <SentimentSatisfied></SentimentSatisfied>
                                         <Box width={'120px'} marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
                                             <Typography marginLeft='7px' component='h3' variant="h3" fontWeight={'bold'} color="inherit" paragraph>
-                                            {parseInt(stats[index]) || 0}/5
+                                            {Number(stats[index]).toFixed(1) || 0}/5
                                             </Typography>
                                         </Box>
-                                        <Typography variant="body" color={'#0495b2'}>{rating}</Typography>
+                                        <Typography variant="body" color={'#0495b2'} margin="10px">{rating}</Typography>
                                     </Stack>
                                     </Grid>
                                 ))}
