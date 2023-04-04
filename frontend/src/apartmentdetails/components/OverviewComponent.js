@@ -78,7 +78,6 @@ export default function OverviewComponent({rating, name, stats}) {
                                 ))}
                             </Grid>
                             </Box>
-
               </Grid>
               </Grid>
             </Grid>

@@ -117,11 +117,11 @@ export default function NavBarComponent() {
     
 
     return (
-        <AppBar sx={{ background: 'white' }} position="sticky">
-          <Container maxWidth="xl">
-            <Toolbar disableGutters>
+        <AppBar width="100%" sx={{ background: 'white' }} position="sticky">
+          <Container maxWidth="100%">
+            <Toolbar>
             <Button onClick={navigateHome} sx={{ p: 0 }}>
-                <img src='/logo.png' width={200} height={80} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}></img>
+                <img src='/logo.png' width='150rem' height='75rem' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}></img>
             </Button>
 
     

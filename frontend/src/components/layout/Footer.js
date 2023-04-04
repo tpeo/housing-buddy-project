@@ -104,9 +104,8 @@ export default function StickyFooter() {
             </Grid>
         </Grid>
 
-
-        <Container maxWidth={false}>
-            <Divider></Divider>
+        <Divider sx={{marginTop: '1rem', marginBottom: '1rem'}}></Divider>
+        <Container maxWidth={true}>
             <Stack direction="row" alignItems="center" justifyContent="space-between">
             <Typography variant="body1">
             Apartment Marketing Austin, Texas. All Rights Reserved
