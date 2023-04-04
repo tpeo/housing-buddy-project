@@ -48,11 +48,15 @@ export default function ApartmentHeader({info}) {
           justifyContent: 'center'
         }}
       >
-        <Typography variant="body1">VISIT THE </Typography>
+        <Typography variant="body1">VISIT THE</Typography>
+        <Typography variant="title" color="inherit" noWrap>&nbsp;</Typography>
         <Link href={info.link} target="_blank" rel="noopener noreferrer">{`${info.name} WEBSITE`}</Link>
-        <Typography variant="body1">OR CALL </Typography>
+        <Typography variant="title" color="inherit" noWrap>&nbsp;</Typography>
+        <Typography variant="body1">OR CALL</Typography>
+        <Typography variant="title" color="inherit" noWrap>&nbsp;</Typography>
         <Link href={`tel:${info.number}`}>{info.number}</Link>
-        <Typography variant="body1"> FOR MORE INFORMATION</Typography>
+        <Typography variant="title" color="inherit" noWrap>&nbsp;</Typography>
+        <Typography variant="body1">FOR MORE INFORMATION</Typography>
       </Box>
         </ThemeProvider>
       

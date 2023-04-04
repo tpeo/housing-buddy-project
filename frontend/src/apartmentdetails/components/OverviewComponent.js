@@ -43,7 +43,7 @@ export default function OverviewComponent({rating, name, stats}) {
               <Grid flexDirection={'column'}>
                 <Box width={'120px'} marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
                     <Typography marginLeft='7px' component='h3' variant="h3" fontWeight={'bold'} color="inherit" paragraph>
-                      {Math.round(parseInt(rating))}/5
+                      {Number(rating).toFixed(1)}/5
                     </Typography>
                 </Box>
                 <Box marginLeft={'25px'}>
@@ -52,7 +52,7 @@ export default function OverviewComponent({rating, name, stats}) {
               </Grid>
             </Grid>
             <Grid item xs={3}>
-              <StaticRating value={Math.round(parseInt(rating))}></StaticRating>
+              <StaticRating value={Math.round(Number(rating).toFixed(1))}></StaticRating>
             </Grid>
             <Grid marginTop={'20px'} width={'100%'} display={'flex'} direction={'row'} justifyContent={'center'} alignItems={'center'}>
               <Grid width={'60%'} height={'245px'} sx={{border: '7px solid #0495B2'}} display={'flex'} direction={'row'} justifyContent={'center'} alignItems={'center'}>

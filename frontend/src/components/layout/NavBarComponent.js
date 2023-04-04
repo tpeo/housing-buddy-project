@@ -11,7 +11,6 @@ import {
     MenuItem,
     Container,
     Avatar,
-    InputBase,
     Button,
     Tooltip,
 } from "@mui/material"
@@ -23,8 +22,8 @@ import { useNavigate } from "react-router-dom";
 export default function NavBarComponent() {
     const navigate = useNavigate();
 
-    const pages = ['About Us', 'FAQ', 'View All Apartments', 'Apartment Comparison'];
-    const settings = ['Profile', 'Logout'];
+    const pages = ['About Us', 'View All Apartments', 'Apartment Comparison'];
+    const settings = ['Logout'];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -42,7 +41,7 @@ export default function NavBarComponent() {
     };
   
     const handleCloseUserMenu = (event) => {
-      menuHelper(event.currentTarget.innerText);
+      logout();
       setAnchorElUser(null);
     };
 
@@ -66,17 +65,6 @@ export default function NavBarComponent() {
               break;
         }
     }
-
-    function menuHelper(name) {
-      switch(name){
-          case "Profile":
-            navigate('/profile');
-            break;
-          case "Logout":
-              logout();
-              break;
-      }
-  }
 
   function dashboard(isLoggedIn) {
     if (isLoggedIn === "true") {
