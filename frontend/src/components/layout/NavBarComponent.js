@@ -1,6 +1,7 @@
 import React from "react";
 import ExtLoginComponent from "../login/ExtLoginComponent";
 import SearchComponent from "../search/SearchComponent"
+import HoverMenuComponent from "./HoverMenuComponent";
 import {
     AppBar,
     Box,
@@ -11,6 +12,7 @@ import {
     MenuItem,
     Container,
     Avatar,
+    InputBase,
     Button,
     Tooltip,
 } from "@mui/material"
@@ -59,6 +61,7 @@ export default function NavBarComponent() {
               break;
         }
     }
+
 
   function dashboard(isLoggedIn) {
     if (isLoggedIn === "true") {
@@ -185,6 +188,7 @@ export default function NavBarComponent() {
                     {page}
                   </Button>
                 ))}
+                <HoverMenuComponent nav={navHelper("APARTMENT")}></HoverMenuComponent>
               </Box>
               <SearchComponent></SearchComponent>
               {dashboard(window.localStorage.getItem("loggedIn"))}
