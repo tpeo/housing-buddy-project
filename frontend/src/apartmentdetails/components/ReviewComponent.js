@@ -203,8 +203,8 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                                     <Grid item xs={6} key={`individ_${rating}`}>
                                     <Stack direction="row" margin="10px">
                                         <SentimentSatisfied></SentimentSatisfied>
-                                        <Box width={'120px'} marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
-                                            <Typography marginLeft='7px' component='h3' variant="h3" fontWeight={'bold'} color="inherit" paragraph>
+                                        <Box width='100%' marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
+                                            <Typography margin='7px' component='h3' variant="h3" fontWeight={'bold'} color="inherit" paragraph>
                                             {Number(stats[index]).toFixed(1) || 0}/5
                                             </Typography>
                                         </Box>

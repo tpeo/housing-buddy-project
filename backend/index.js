@@ -98,6 +98,7 @@ app.get("/map-info", async(req, res) => {
   query.docs.forEach((doc) => object.push({
     "name": doc.data().name,
     "img_link": doc.data().img_link,
+    "address": doc.data().address,
     "coordinates": doc.data().coordinates
   }));
 
