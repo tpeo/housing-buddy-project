@@ -3,6 +3,7 @@ import LayoutComponent from "../components/layout/LayoutComponent";
 import {
     Grid,
     Button,
+    Box,
     Card,
     CardHeader,
     CardContent,
@@ -10,10 +11,14 @@ import {
     FormControl,
     MenuItem,
     Select,
+    Stack,
     InputLabel,
     FormHelperText,
+    IconButton,
 } from "@mui/material"
 import { useNavigate } from "react-router-dom";
+import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function ApartmentComparisonPage() {
     const stat_obj = {
@@ -29,9 +34,13 @@ export default function ApartmentComparisonPage() {
 
     const [first, setFirst] = useState('');
     const [second, setSecond] = useState('');
+    const [third, setThird] = useState('');
     const [stats1, setStats1] = useState(stat_obj);
     const [stats2, setStats2] = useState(stat_obj);
+    const [stats3, setStats3] = useState(stat_obj);
     const [allApartments, setAllApartments] = useState([]);
+
+    const [add, setAdd] = useState(false);
 
     const handleChange1 = (event) => {
         setFirst(event.target.value);
@@ -41,6 +50,11 @@ export default function ApartmentComparisonPage() {
     const handleChange2 = (event) => {
         setSecond(event.target.value);
         getStats(event.target.value.toLowerCase(), 2);
+    };
+
+    const handleChange3 = (event) => {
+        setThird(event.target.value);
+        getStats(event.target.value.toLowerCase(), 3);
     };
 
     const navigate = useNavigate();
@@ -111,13 +125,25 @@ export default function ApartmentComparisonPage() {
       }
 
       //move displays to render function only when first selected?
+    
+    const addThird = () => {
+        setAdd(true);
+    }
+
+    const closeThird = () => {
+        setAdd(false);
+    }
 
     const display1 = Object.keys(stats1).map(stat => 
         <Typography key={`stat1_${stat}`}>{`${stat}: ${stats1[stat]}`}</Typography>
     )
 
     const display2 = Object.keys(stats2).map(stat => 
-        <Typography key={`stat1_${stat}`}>{`${stat}: ${stats2[stat]}`}</Typography>
+        <Typography key={`stat2_${stat}`}>{`${stat}: ${stats2[stat]}`}</Typography>
+    )
+
+    const display3 = Object.keys(stats3).map(stat => 
+        <Typography key={`stat3_${stat}`}>{`${stat}: ${stats3[stat]}`}</Typography>
     )
 
   return (
@@ -188,6 +214,57 @@ export default function ApartmentComparisonPage() {
                     <Button id={second} onClick={navApartmentPage}>Visit Page</Button>
                 </Card>
             </Grid>
+            <Grid item>
+                {
+                    (add) ? (
+                        <Stack direction='row'>
+                        <Grid id="appt-3" item>
+                        <FormControl sx={{ m: 1, minWidth: 120 }}>
+                            <InputLabel id="demo-simple-select-disabled-label">Apartment 3</InputLabel>
+                            <Select
+                            labelId="demo-simple-select-disabled-label"
+                            id="appt3select"
+                            value={third}
+                            label="Third"
+                            onChange={handleChange3}
+                            >
+                            {
+                                allApartments.map((name) => (
+                                    (name !== first && name !== second) && (
+                                        <MenuItem id={name} value={name}>{name}</MenuItem>
+                                )
+                                ))
+                                
+                            }
+                            </Select>
+                            <FormHelperText>Apartment 3</FormHelperText>
+                        </FormControl>
+                            <Card>
+                                <CardHeader
+                                    title={<Typography variant='h3' color='white' align='center'>{third}</Typography>}
+                                    sx={{backgroundColor: '#0495b2'}}
+                                />
+                                <CardContent>   
+                                    {display3}
+                                </CardContent>
+                                <Button id={third} onClick={navApartmentPage}>Visit Page</Button>
+                            </Card>
+                        </Grid>
+                        <Grid item>
+                            <IconButton>
+                                <CloseIcon style={{color: "#0495b2"}} fontSize="large" onClick={closeThird} />
+                            </IconButton>
+                        </Grid>
+                        </Stack>
+                    ) : (
+                        <IconButton>
+                            <AddIcon style={{color: "#0495b2"}} fontSize="large" onClick={addThird}></AddIcon>
+                        </IconButton>
+
+                    )
+                }
+            </Grid>
+            
         </Grid>
     </LayoutComponent>
   );
