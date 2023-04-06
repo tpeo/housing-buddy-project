@@ -6,7 +6,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
-
+import { createTheme } from "@mui/material";
 
 const StyledMenu = styled(Menu)(({ theme }) => ({
     "& .MuiPaper-root": {
@@ -50,7 +50,7 @@ export default function HoverMenuComponent() {
         onClose={handleClose}
         MenuListProps={{ onMouseLeave: handleClose }}
       >
-        <MenuItem onClick={() => navigate('../compare')}>APARTMENT COMPARISON</MenuItem>
+        <MenuItem sx={{color: 'white'}} onClick={() => navigate('../compare')}>APARTMENT COMPARISON</MenuItem>
       </StyledMenu>
     </div>
   );

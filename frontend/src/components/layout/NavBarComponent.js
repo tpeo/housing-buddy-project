@@ -20,11 +20,37 @@ import {
 import AdbIcon from '@mui/icons-material/Adb';
 import { styled, alpha } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
+import {createTheme} from "@mui/material";
+
+const myTheme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textDecoration: "none",
+          ":hover": {
+            textDecoration: "underline",
+          },
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          textDecoration: "none",
+          ":hover": {
+            textDecoration: "underline",
+          },
+        },
+      },
+    },
+  },
+});
 
 export default function NavBarComponent() {
     const navigate = useNavigate();
 
-    const pages = ['About Us', 'View All Apartments', 'Apartment Comparison'];
+    const pages = ['Home', 'About Us', 'View All Apartments', 'Apartment Comparison'];
     const settings = ['Logout'];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -53,6 +79,9 @@ export default function NavBarComponent() {
 
     function navHelper(name) {
         switch(name){
+            case "HOME":
+              navigate('/');
+              break;
             case "VIEW ALL APARTMENTS":
                 navigate('/allapartments');
                 break;
@@ -117,14 +146,12 @@ export default function NavBarComponent() {
     
 
     return (
-        <AppBar width="100%" sx={{ background: 'white' }} position="sticky">
+        <AppBar width="100%" sx={{ background: 'white'}} position="sticky">
           <Container maxWidth="100%">
             <Toolbar>
             <Button onClick={navigateHome} sx={{ p: 0 }}>
                 <img src='/logo.png' width='150rem' height='75rem' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}></img>
             </Button>
-
-    
               <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                 <IconButton
                   size="large"
@@ -154,8 +181,10 @@ export default function NavBarComponent() {
                   }}
                 >
                   {pages.map((page) => (
-                    <MenuItem key={page} name={page} onClick={() => handleCloseNavMenu(page)}>
-                      <Typography sx={{color: "#0495b2"}} textAlign="center">{page}</Typography>
+                    <MenuItem sx={{
+                      '&:hover': {textDecoration: "underline"}
+                    }} key={page} name={page} onClick={() => handleCloseNavMenu(page)}>
+                      <Typography sx={{color: '#0495b2'}} textAlign="center">{page}</Typography>
                     </MenuItem>
                   ))}
                 </Menu>
@@ -183,7 +212,7 @@ export default function NavBarComponent() {
                   <Button
                     key={page}
                     onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: '#0495b2', display: 'block' }}
+                    sx={{ my: 2, color: '#0495b2', display: 'block', '&:hover': {textDecoration: "underline"}}}
                   >
                     {page}
                   </Button>
