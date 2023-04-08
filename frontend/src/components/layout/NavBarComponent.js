@@ -156,7 +156,7 @@ export default function NavBarComponent() {
           <Container maxWidth="100%">
             <Toolbar>
             <Button onClick={navigateHome} sx={{ p: 0 }}>
-                <img src='/logo.png' width='150rem' height='75rem' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}></img>
+                <img src='/logo.png' width='160rem' height='75rem' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}></img>
             </Button>
               <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                 <IconButton

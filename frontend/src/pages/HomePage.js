@@ -99,8 +99,8 @@ return (
         {/* Increase the priority of the hero background image */}
         {/*<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />*/} 
         {/* <img src='/final_home_pg.jpg' height='100%' width='100%' alt="bg-img"></img> */}
-        <Grid display='flex' justifyContent='center'>
-        <Stack sx={{border: 1, borderColor: 'white', borderRadius: 5, width: '80%', height:'25%', boxShadow: 5, marginBottom:'1rem'}} direction="row" container justifyContent="space-between">
+        <Grid display='flex' justifyContent='center' height='5rem'>
+        <Stack sx={{border: 1, borderColor: 'white', borderRadius: 5, width: '85%', height: '100%', boxShadow: 8,}} direction="row" container alignItems='center' justifyContent="space-between">
           <AddApartmentModal txt="Apartment Request Form"/>
           <FilterComponent collection="apartments" setOrder={setAllApartments}></FilterComponent>
         </Stack>
@@ -122,7 +122,7 @@ return (
 
             </Grid>
           </Box>
-      <Grid justifyContent={'center'} display='flex' item>
+      <Grid justifyContent={'center'} display='flex' marginBottom='5rem' marginTop='2rem' item>
           <Link href='/allapartments' color={'#0495B2'}>View All Apartments</Link>
       </Grid>
 
