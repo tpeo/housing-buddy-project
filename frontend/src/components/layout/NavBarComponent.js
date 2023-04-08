@@ -80,7 +80,7 @@ export default function NavBarComponent() {
     function navHelper(name) {
         switch(name){
             case "ABOUT US":
-                navigate("/about");
+                navigate("/aboutus");
                 break;
             case "FAQ":
                 navigate("/faq");

@@ -82,7 +82,9 @@ export default function AllApartmentsPage() {
           alignItems="flex-start"
         >
 
-        <Grid width='50%' margin='20px' item>
+        <Grid width='50%' margin='20px' display="flex"
+                flexDirection='column' item>
+
 
           <Box sx={{flexGrow: 1}}>
               <Grid width="100%" container spacing={1} 
@@ -90,11 +92,13 @@ export default function AllApartmentsPage() {
                   justifyContent="center"
                   alignItems="stretch"
                   >
+
+
                     <div
                       id="scrollableDiv"
                       style={{
-                        height: "100%",
-                        width: "100%",
+                        height: "800px",
+                        width: "95%",
                         overflow: 'auto',
                         display: 'flex',
                         flexDirection: 'column-reverse',
@@ -109,8 +113,8 @@ export default function AllApartmentsPage() {
                             <Card 
                               key={`app-card-${obj.name}`}
                               sx={{
-                                width: '100%',
-                                height: '200px',
+                                width: '95%',
+                                height: '150px',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 justifyContent: 'center',
@@ -126,7 +130,7 @@ export default function AllApartmentsPage() {
                                 margin: '10px'
                           }}>
                               <Button sx={{
-                                width: "150px",
+                                width: "500px",
                                 height: "49px",
                               }}
                               id={obj.name}
@@ -143,19 +147,17 @@ export default function AllApartmentsPage() {
   ))}
   </InfiniteScroll>
   </div>  
-  </Grid>
-
   <Grid item
-            display="flex"
-            flexDirection='column'
-            justifyContent="center"
-            alignItems="stretch"
-          >
-          {alphabet.map((letter) => (
-            <Link key={letter} id={letter} onClick={windowNav} sx={{color: '#0495b2'}}>{letter}</Link>
-          ))}
-    </Grid>
-
+                display="flex"
+                flexDirection='column'
+                justifyContent="center"
+                alignItems="stretch"
+              >
+              {alphabet.map((letter) => (
+                <Link key={letter} id={letter} underline="hover"  onClick={windowNav} sx={{color: '#0495b2'}}>{letter}</Link>
+              ))}
+         </Grid>
+  </Grid>
   </Box>
   </Grid>
 
@@ -165,7 +167,7 @@ export default function AllApartmentsPage() {
         <Grid display='flex' justifyContent='center' item>
           <AddApartmentModal txt={"Don't See an Apartment? Request to Add One!"}/>
         </Grid>
-        <MapComponent></MapComponent>
+        <MapComponent/>
         
     </LayoutComponent>
   );

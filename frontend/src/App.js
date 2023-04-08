@@ -1,6 +1,5 @@
 import ReviewForm from './pages/ReviewForm';
 import HomePage from './pages/HomePage';
-import FAQ from './pages/FAQ';
 import AllApartments from './pages/AllApartmentsPage';
 import MainPage from './apartmentdetails/MainPage';
 import SearchPage from './pages/SearchPage'
@@ -41,8 +40,7 @@ function App() {
       <Route path="/search" element={<SearchPage></SearchPage>}></Route>
       <Route path="/profile" element={<UserProfile></UserProfile>}></Route>
       <Route path="/compare" element={<ApartmentComparisonPage></ApartmentComparisonPage>}></Route>
-      <Route path="/faq" element={<FAQ/>}></Route>
-      <Route path="/about" element={<AboutUs/>}></Route>
+      <Route path="/aboutus" element={<AboutUs/>}></Route>
     </Routes>
   );
 }
