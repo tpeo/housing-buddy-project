@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { send } from 'emailjs-com';
 import PostSubmissionModal from './PostSubmissionModal';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import CloseIcon from '@mui/icons-material/Close'
 import AddIcon from '@mui/icons-material/Add';
 
 import {
@@ -91,7 +92,7 @@ export default function AddApartmentModal({txt}) {
           <CardHeader
             action={
               <IconButton align='left' onClick={() => {setOpen(false)}}>
-                <ArrowBackIcon sx={{color:'white'}}/>
+                <CloseIcon sx={{color:'white'}}/>
               </IconButton>
             }
             title={<Typography variant='h3' color='white' align='center'>Add an Apartment</Typography>}

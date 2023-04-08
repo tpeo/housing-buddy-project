@@ -50,7 +50,7 @@ const myTheme = createTheme({
 export default function NavBarComponent() {
     const navigate = useNavigate();
 
-    const pages = ['Home', 'About Us', 'View All Apartments', 'Apartment Comparison'];
+    const pages = ['Home', 'About Us'];
     const settings = ['Logout'];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -79,6 +79,12 @@ export default function NavBarComponent() {
 
     function navHelper(name) {
         switch(name){
+            case "ABOUT US":
+                navigate("/aboutus");
+                break;
+            case "FAQ":
+                navigate("/faq");
+                break;
             case "HOME":
               navigate('/');
               break;
@@ -146,11 +152,11 @@ export default function NavBarComponent() {
     
 
     return (
-        <AppBar width="100%" sx={{ background: 'white'}} position="sticky">
+        <AppBar width="100%" sx={{background: 'white'}} position="sticky">
           <Container maxWidth="100%">
             <Toolbar>
             <Button onClick={navigateHome} sx={{ p: 0 }}>
-                <img src='/logo.png' width='150rem' height='75rem' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}></img>
+                <img src='/logo.png' width='160rem' height='75rem' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}></img>
             </Button>
               <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                 <IconButton

@@ -125,7 +125,7 @@ app.get("/apartments/:filter", async(req, res) => {
   const apartments = db.collection("apartment-info");
    let query = 0;
   if (filter === 'name') {
-    query = await apartments.orderBy(filter).get();
+    query = await apartments.orderBy(filter, 'desc').get();
   } else {
     query = await apartments.orderBy(filter, 'desc').get();
   }
