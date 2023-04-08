@@ -250,7 +250,6 @@ export default function ApartmentComparisonPage() {
                                 <Typography variant='body'>Please choose an apartment</Typography>
                             )
                         }
-
                     </Grid>
                     <Grid id="appt-2" display='flex' direction='column' justifyContent='center' item>
                     <FormControl sx={{ m: 1.5, minWidth: 140 }}>
@@ -317,9 +316,10 @@ export default function ApartmentComparisonPage() {
                                     </Select>
                                     <FormHelperText>Apartment 3</FormHelperText>
                                 </FormControl>
+
                                     <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginRight: '16px', marginBottom:'10px', minWidth: '250px', borderRadius: '16px'}}>
                                         <CardHeader
-                                            title={<Typography variant='h3' color='white' align='center'>{third}</Typography>}
+                                            title={<Typography variant='h5' color='white' align='center'>{third}</Typography>}
                                             sx={{backgroundColor: '#0495b2', minHeight: '25px'}}
                                         />
                                         <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>   

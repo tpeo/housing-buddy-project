@@ -8,6 +8,7 @@ import {
     Button,
     TextField,
     Icon,
+    Grid,
 } from "@mui/material"
 
 import SearchIcon from '@mui/icons-material/Search';
@@ -113,11 +114,10 @@ export default function SearchComponent() {
       }
 
     return (
-        <Search>
-            <IconButton onClick={navSearch}>
+        <Search style={{ display: 'flex', flexDirection:'row', alignItems: 'center', minHeight:'55px', marginRight:'10px' }}>
+            <IconButton onClick={navSearch} style={{ marginRight:'-40px' }}>
                 <SearchIcon/>
             </IconButton>
-            <Stack direction='row'>
               <SearchIconWrapper/>
               <Autocomplete 
                   value={value}
@@ -177,11 +177,7 @@ export default function SearchComponent() {
                       sx={{color: 'black'}}
                   />
                 )}
-            />
-            </Stack>
-
-            
+            />            
         </Search>
-
       );
 }
