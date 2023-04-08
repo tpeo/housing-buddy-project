@@ -9,6 +9,7 @@ import React from 'react';
 import { Routes, Route, useParams } from "react-router-dom";
 
 import './App.css';
+import AboutUs from './pages/AboutUs';
 import { Typography } from '@mui/material';
 
 const ProtectedFormRoute = ({isLoggedIn, children}) => {
@@ -39,6 +40,7 @@ function App() {
       <Route path="/search" element={<SearchPage></SearchPage>}></Route>
       <Route path="/profile" element={<UserProfile></UserProfile>}></Route>
       <Route path="/compare" element={<ApartmentComparisonPage></ApartmentComparisonPage>}></Route>
+      <Route path="/aboutus" element={<AboutUs/>}></Route>
     </Routes>
   );
 }

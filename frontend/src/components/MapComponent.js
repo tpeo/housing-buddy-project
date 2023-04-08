@@ -23,12 +23,14 @@ export default function MapComponent() {
     const [isOpen, setIsOpen] = useState(false);
     const [infoWindowData, setInfoWindowData] = useState();
     const [markers, setMarkers] = useState([]);
+    const [zoom, setZoom] = useState(18);
 
     useEffect(() => {
         loadMarkerInfo();
+        setZoom(18)
     }, [])
 
-    const center = useMemo(() => ({ lat: 30.285492906843807, lng: -97.73392795397169 }), []); 
+    const center = { lat: 30.285492906843807, lng: -97.73392795397169 } 
 
     async function loadMarkerInfo() {
         let apiCall = `https://${process.env.REACT_APP_HOSTNAME}/map-info`;
@@ -90,7 +92,8 @@ export default function MapComponent() {
         <GoogleMap
           mapContainerClassName='map-container'
           center={center}
-          zoom={15}
+          zoom={zoom}
+          defaultZoom={zoom}
           onLoad={onMapLoad}
           onClick={() => setIsOpen(false)}
         >
