@@ -154,8 +154,8 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
         <Card sx={gridItem} height="100%">
             <Grid name="main" display="flex" direction="row" justifyContent='space-between' margin='10px'>
                 <Grid alignItems='center' item >
-                    <Box width={'120px'} marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
-                            <Typography marginLeft='7px' component='h3' variant="h3" fontWeight={'bold'} color="inherit" paragraph>
+                    <Box sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
+                            <Typography marginRight='1rem' marginLeft='1rem' component='h3' variant="h3" fontWeight={'bold'} color="inherit" paragraph>
                             {Number(rating).toFixed(1)}/5
                             </Typography>
                     </Box>
@@ -197,13 +197,13 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                                 justifyContent="center"
                                 alignItems="stretch"
                                 marginLeft={'4%'}
-                                width={'31rem'}
+                                width={'40rem'}
                                 >
                                 {ratings.map((rating, index) => (
                                     <Grid item xs={6} key={`individ_${rating}`}>
                                     <Stack direction="row" margin="10px">
                                         <SentimentSatisfied></SentimentSatisfied>
-                                        <Box width='100%' marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
+                                        <Box marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
                                             <Typography margin='7px' component='h3' variant="h3" fontWeight={'bold'} color="inherit" paragraph>
                                             {Number(stats[index]).toFixed(1) || 0}/5
                                             </Typography>

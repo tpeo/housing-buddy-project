@@ -98,18 +98,6 @@ export default function SearchComponent() {
           },
         },
       }));
-      
-      // const valueRef = useRef('');
-      // const onKeyClick = (event) => {
-      //   if (event.key === 'Enter') {
-      //       navigate({
-      //           pathname: "/search",
-      //           search: `?${createSearchParams({query: event.target.value})}`
-      //       });
-      //       //window.location.reload(false);
-
-      //   }
-      // }
 
       const navSearch = () => {
         navigate({
@@ -118,25 +106,6 @@ export default function SearchComponent() {
         });
         window.location.reload(false);
       }
-
-      const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
-        "& .MuiInputLabel-outlined:not(.MuiInputLabel-shrink)": {
-          // Default transform is "translate(14px, 20px) scale(1)""
-          // This lines up the label with the initial cursor position in the input
-          // after changing its padding-left.
-          transform: "translate(34px, 20px) scale(1);"
-        },
-        "& .MuiAutocomplete-inputRoot": {
-          color: "purple",
-          '&[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-of-type': {
-            // Default left padding is 6px
-            paddingLeft: 26
-          },
-          "& .MuiAutocomplete-option": {
-            color: "black"
-          },
-        }
-      }));
 
       const navApartmentPage = (event) => {
         navigate(`/mainpage/${event.target.innerText.toLowerCase()}`);
@@ -206,9 +175,7 @@ export default function SearchComponent() {
                       ref={params.InputProps.ref}
                       inputProps={params.inputProps}
                       sx={{color: 'black'}}
-                  >
-                    
-                  </StyledInputBase>
+                  />
                 )}
             />
             </Stack>

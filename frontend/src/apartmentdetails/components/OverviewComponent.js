@@ -41,8 +41,8 @@ export default function OverviewComponent({rating, name, stats}) {
             <Grid item xs={5}></Grid>
             <Grid flexDirection={'row'}>  
               <Grid flexDirection={'column'}>
-                <Box width={'120px'} marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
-                    <Typography marginLeft='7px' component='h3' variant="h3" fontWeight={'bold'} color="inherit" paragraph>
+                <Box marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
+                    <Typography marginRight='1rem' marginLeft='1rem' component='h3' variant="h3" fontWeight={'bold'} color="inherit" paragraph>
                       {Number(rating).toFixed(1)}/5
                     </Typography>
                 </Box>
@@ -78,7 +78,6 @@ export default function OverviewComponent({rating, name, stats}) {
                                 ))}
                             </Grid>
                             </Box>
-
               </Grid>
               </Grid>
             </Grid>

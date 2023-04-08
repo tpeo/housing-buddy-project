@@ -74,7 +74,7 @@ export default function AllApartmentsPage() {
 
   return (
     <LayoutComponent>
-        <Typography variant="h1" align='center'>All Apartments</Typography>
+        <Typography variant="h3" fontWeight={'bold'} color={'#0495b2'} align='center'>All Apartments</Typography>
         <Grid 
           display="flex"
           direction="row"

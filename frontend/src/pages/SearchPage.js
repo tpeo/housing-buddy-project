@@ -7,7 +7,6 @@ import {
 } from "@mui/material"
 import Footer from "../components/layout/Footer";
 import NavBarComponent from "../components/layout/NavBarComponent";
-import { styled, alpha } from '@mui/material/styles';
 
 import { useNavigate } from "react-router-dom";
 
