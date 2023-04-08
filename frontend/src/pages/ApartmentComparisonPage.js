@@ -218,10 +218,10 @@ export default function ApartmentComparisonPage() {
                             </Select>
                             <FormHelperText>Apartment 1</FormHelperText>
                         </FormControl>
-                        <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginLeft: '16px', marginRight: '16px', minWidth: '250px'}}>
+                        <Card style={{backgroundColor:'white', marginLeft: '16px', marginRight: '16px', minWidth: '250px'}}>
                             <CardHeader
-                                title={<Typography variant='h4' color='white' align='center'>{first}</Typography>}
-                                sx={{backgroundColor: '#0495b2', minHeight:'25px'}}
+                                title={<Typography variant='h5' fontWeight={'bold'} color='white' align='center'>{first}</Typography>}
+                                sx={{backgroundColor: '#0495b2', height:'30px'}}
                             />
                             <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>
                                 {display1}
@@ -250,10 +250,10 @@ export default function ApartmentComparisonPage() {
                         </Select>
                         <FormHelperText>Apartment 2</FormHelperText>
                     </FormControl>
-                        <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginRight: '16px', minWidth: '250px'}}>
+                        <Card style={{backgroundColor:'white', marginRight: '16px', minWidth: '250px'}}>
                             <CardHeader
-                                title={<Typography variant='h3' color='white' align='center'>{second}</Typography>}
-                                sx={{backgroundColor: '#0495b2', minHeight: '25px'}}
+                                title={<Typography variant='h5' fontWeight={'bold'} color='white' align='center'>{second}</Typography>}
+                                sx={{backgroundColor: '#0495b2', height: '30px'}}
                             />
                             <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>   
                                 {display2}
@@ -286,10 +286,10 @@ export default function ApartmentComparisonPage() {
                                     </Select>
                                     <FormHelperText>Apartment 3</FormHelperText>
                                 </FormControl>
-                                    <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginRight: '16px', minWidth: '250px'}}>
+                                    <Card style={{backgroundColor:'white', marginRight: '16px', minWidth: '250px'}}>
                                         <CardHeader
-                                            title={<Typography variant='h3' color='white' align='center'>{third}</Typography>}
-                                            sx={{backgroundColor: '#0495b2', minHeight: '25px'}}
+                                            title={<Typography variant='h5' fontWeight={'bold'} color='white' align='center'>{third}</Typography>}
+                                            sx={{backgroundColor: '#0495b2', height: '30px'}}
                                         />
                                         <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>   
                                             {display3}
