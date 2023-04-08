@@ -50,7 +50,7 @@ const myTheme = createTheme({
 export default function NavBarComponent() {
     const navigate = useNavigate();
 
-    const pages = ['Home', 'About Us', 'View All Apartments', 'Apartment Comparison'];
+    const pages = ['Home', 'About Us'];
     const settings = ['Logout'];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);

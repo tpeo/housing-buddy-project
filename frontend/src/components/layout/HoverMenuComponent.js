@@ -41,7 +41,7 @@ export default function HoverMenuComponent() {
         onMouseEnter={handleClick}
         sx={{ my: 2, color: '#0495b2', display: 'block' }}
       >
-        Open Menu
+        APARTMENTS
       </Button>
       <StyledMenu
         id="simple-menu"
@@ -51,6 +51,7 @@ export default function HoverMenuComponent() {
         MenuListProps={{ onMouseLeave: handleClose }}
       >
         <MenuItem sx={{color: 'white'}} onClick={() => navigate('../compare')}>APARTMENT COMPARISON</MenuItem>
+        <MenuItem sx={{color: 'white'}} onClick={() => navigate('../allapartments')}>ALL APARTMENTS</MenuItem>
       </StyledMenu>
     </div>
   );

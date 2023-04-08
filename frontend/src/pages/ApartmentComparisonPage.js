@@ -7,6 +7,7 @@ import {
     Card,
     CardHeader,
     CardContent,
+    Divider,
     Typography,
     FormControl,
     MenuItem,
@@ -15,6 +16,7 @@ import {
     InputLabel,
     FormHelperText,
     IconButton,
+    CardActionArea,
 } from "@mui/material"
 import { useNavigate } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
@@ -114,8 +116,10 @@ export default function ApartmentComparisonPage() {
             .then((response) => {
                 if (number === 1) {
                     setStats1(response);
-                } else {
+                } else if (number === 2) {
                     setStats2(response);
+                } else {
+                    setStats3(response);
                 }
               })
             .catch((e) => {
@@ -135,16 +139,24 @@ export default function ApartmentComparisonPage() {
     }
 
     const display1 = Object.keys(stats1).map(stat => 
-        <Typography key={`stat1_${stat}`} style={{ marginBottom: 33}} variant='h5'>{`${stat}: ${stats1[stat]}`}</Typography>
-    )
+        <>
+            <Typography key={`stat2_${stat}`} style={{ margin: 15 }} variant='h5'>{`${stats1[stat]}`}</Typography>
+            <Divider sx={{width: '100%', color: '#0495b2'}}></Divider>
+        </>    )
 
     const display2 = Object.keys(stats2).map(stat => 
-        <Typography key={`stat2_${stat}`} style={{ marginBottom: 33 }} variant='h5'>{`${stat}: ${stats2[stat]}`}</Typography>
+        <>
+            <Typography key={`stat2_${stat}`} style={{ margin: 15 }} variant='h5'>{`${stats2[stat]}`}</Typography>
+            <Divider sx={{width: '100%', color: '#0495b2'}}></Divider>
+        </>
+
     )
 
     const display3 = Object.keys(stats3).map(stat => 
-        <Typography key={`stat3_${stat}`} style={{ marginBottom: 33 }} variant='h5'>{`${stat}: ${stats3[stat]}`}</Typography>
-    )
+        <>
+            <Typography key={`stat2_${stat}`} style={{ margin: 15 }} variant='h5'>{`${stats3[stat]}`}</Typography>
+            <Divider sx={{width: '100%', color: '#0495b2'}}></Divider>
+        </>    )
     
   return (
     <LayoutComponent>
@@ -218,15 +230,16 @@ export default function ApartmentComparisonPage() {
                             </Select>
                             <FormHelperText>Apartment 1</FormHelperText>
                         </FormControl>
-                        <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginLeft: '16px', marginRight: '16px', minWidth: '250px'}}>
+                        <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginLeft: '16px', marginRight: '16px', marginBottom:'10px', minWidth: '250px', borderRadius: '16px'}}>
                             <CardHeader
                                 title={<Typography variant='h4' color='white' align='center'>{first}</Typography>}
                                 sx={{backgroundColor: '#0495b2', minHeight:'25px'}}
                             />
                             <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>
                                 {display1}
+                                <Button id={first} width='100%' align='center' sx={{marginTop: '10px', backgroundColor: '#0495b2', color: 'white'}} onClick={navApartmentPage}>Visit Page</Button>
+
                             </CardContent>
-                            <Button id={first} onClick={navApartmentPage}>Visit Page</Button>
                         </Card>
                     </Grid>
                     <Grid id="appt-2" item>
@@ -250,15 +263,16 @@ export default function ApartmentComparisonPage() {
                         </Select>
                         <FormHelperText>Apartment 2</FormHelperText>
                     </FormControl>
-                        <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginRight: '16px', minWidth: '250px'}}>
+                        <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginLeft: '16px', marginRight: '16px', marginBottom:'10px', minWidth: '250px', borderRadius: '16px'}}>
                             <CardHeader
-                                title={<Typography variant='h3' color='white' align='center'>{second}</Typography>}
-                                sx={{backgroundColor: '#0495b2', minHeight: '25px'}}
+                                title={<Typography variant='h4' color='white' align='center'>{first}</Typography>}
+                                sx={{backgroundColor: '#0495b2', minHeight:'25px'}}
                             />
-                            <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>   
+                            <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>
                                 {display2}
+                                <Button id={second} width='100%' align='center' sx={{marginTop: '10px', backgroundColor: '#0495b2', color: 'white'}} onClick={navApartmentPage}>Visit Page</Button>
+
                             </CardContent>
-                            <Button id={second} onClick={navApartmentPage}>Visit Page</Button>
                         </Card>
                     </Grid>
                     <Grid item>
@@ -286,15 +300,16 @@ export default function ApartmentComparisonPage() {
                                     </Select>
                                     <FormHelperText>Apartment 3</FormHelperText>
                                 </FormControl>
-                                    <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginRight: '16px', minWidth: '250px'}}>
+                                    <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginRight: '16px', marginBottom:'10px', minWidth: '250px', borderRadius: '16px'}}>
                                         <CardHeader
                                             title={<Typography variant='h3' color='white' align='center'>{third}</Typography>}
                                             sx={{backgroundColor: '#0495b2', minHeight: '25px'}}
                                         />
                                         <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>   
                                             {display3}
+                                            <Button id={third} width='100%' align='center' sx={{marginTop: '10px', backgroundColor: '#0495b2', color: 'white'}} onClick={navApartmentPage}>Visit Page</Button>
+
                                         </CardContent>
-                                        <Button id={third} onClick={navApartmentPage}>Visit Page</Button>
                                     </Card>
                                 </Grid>
                                 <Grid item marginTop={'15px'}>
