@@ -20,9 +20,9 @@ import { useNavigate } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 
+
 export default function ApartmentComparisonPage() {
     const stat_obj = {
-        "name": "",
         "rating": 0,
         "cleanliness": 0,
         "amenities": 0,
@@ -135,136 +135,185 @@ export default function ApartmentComparisonPage() {
     }
 
     const display1 = Object.keys(stats1).map(stat => 
-        <Typography key={`stat1_${stat}`}>{`${stat}: ${stats1[stat]}`}</Typography>
+        <Typography key={`stat1_${stat}`} style={{ marginBottom: 33}} variant='h5'>{`${stat}: ${stats1[stat]}`}</Typography>
     )
 
     const display2 = Object.keys(stats2).map(stat => 
-        <Typography key={`stat2_${stat}`}>{`${stat}: ${stats2[stat]}`}</Typography>
+        <Typography key={`stat2_${stat}`} style={{ marginBottom: 33 }} variant='h5'>{`${stat}: ${stats2[stat]}`}</Typography>
     )
 
     const display3 = Object.keys(stats3).map(stat => 
-        <Typography key={`stat3_${stat}`}>{`${stat}: ${stats3[stat]}`}</Typography>
+        <Typography key={`stat3_${stat}`} style={{ marginBottom: 33 }} variant='h5'>{`${stat}: ${stats3[stat]}`}</Typography>
     )
-
+    
   return (
     <LayoutComponent>
-        <Grid container display='flex' justifyContent='center' alignItems='space-around'>
-            <Grid id="appt-1" item>
-                <FormControl sx={{ m: 1, minWidth: 120 }} >
-                    <InputLabel id="demo-simple-0-disabled-label">Apartment 1</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-disabled-label"
-                        id="appt1select"
-                        value={first}
-                        label="First"
-                        onChange={handleChange1}
-                    >
-                
-                {
-                    allApartments.map((name) => (
-                        (name !== second) && (
-                            <MenuItem id={name} value={name}>{name}</MenuItem>
-                    )
-                    ))
-                    
-                }
-                    </Select>
-                    <FormHelperText>Appartment 1</FormHelperText>
-                </FormControl>
-                <Card>
-                    <CardHeader
-                        title={<Typography variant='h3' color='white' align='center'>{first}</Typography>}
-                        sx={{backgroundColor: '#0495b2'}}
-                    />
-                    <CardContent>   
-                        {display1}
-                    </CardContent>
-                    <Button id={first} onClick={navApartmentPage}>Visit Page</Button>
-                </Card>
+        <Grid container spacing={2}>
+            <Grid item xs={3} display='flex' justifyContent='center'>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <div style={{ height: 50}}>
+                            <Typography variant="h5" fontWeight={'bold'} color={'#0495b2'} display='flex' justifyContent={'center'} marginTop='115px'>Key Metrics</Typography>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} display='flex' justifyContent={'center'}>
+                        <div style={{ height: 50, display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="h6" color={'#0495b2'} display='flex' justifyContent={'center'}>Overall Rating</Typography>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} display='flex' justifyContent={'center'}>
+                        <div style={{ height: 50, display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="h6" color={'#0495b2'} display='flex'>Cleanliness</Typography>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} display='flex' justifyContent={'center'}>
+                        <div style={{ height: 50, display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="h6" color={'#0495b2'} display='flex'>Amenities</Typography>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} display='flex' justifyContent={'center'}>
+                        <div style={{ height: 50, display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="h6" color={'#0495b2'} display='flex'>Management</Typography>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} display='flex' justifyContent={'center'}>
+                        <div style={{ height: 50, display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="h6" color={'#0495b2'} display='flex'>Proximity</Typography>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} display='flex' justifyContent={'center'}>
+                        <div style={{ height: 50, display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="h6" color={'#0495b2'} display='flex'>Parking</Typography>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} display='flex' justifyContent={'center'}>
+                        <div style={{ height: 50, display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="h6" color={'#0495b2'} display='flex'>Spaciousness</Typography>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12}><div style={{ height: 60}}></div></Grid>
+                </Grid>
             </Grid>
-            <Grid id="appt-2" item>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel id="demo-simple-select-disabled-label">Appartment 2</InputLabel>
-                <Select
-                labelId="demo-simple-select-disabled-label"
-                id="appt2select"
-                value={second}
-                label="Second"
-                onChange={handleChange2}
-                >
-                {
-                    allApartments.map((name) => (
-                        (name !== first) && (
-                            <MenuItem id={name} value={name}>{name}</MenuItem>
-                    )
-                    ))
-                    
-                }
-                </Select>
-                <FormHelperText>Apartment 2</FormHelperText>
-            </FormControl>
-                <Card>
-                    <CardHeader
-                        title={<Typography variant='h3' color='white' align='center'>{second}</Typography>}
-                        sx={{backgroundColor: '#0495b2'}}
-                    />
-                    <CardContent>   
-                        {display2}
-                    </CardContent>
-                    <Button id={second} onClick={navApartmentPage}>Visit Page</Button>
-                </Card>
-            </Grid>
-            <Grid item>
-                {
-                    (add) ? (
-                        <Stack direction='row'>
-                        <Grid id="appt-3" item>
-                        <FormControl sx={{ m: 1, minWidth: 120 }}>
-                            <InputLabel id="demo-simple-select-disabled-label">Apartment 3</InputLabel>
+            <Grid item xs={9} style={{ backgroundColor: '#EEEEEE' }}>
+            <Grid container display='flex' justifyContent='center' alignItems='space-around'>
+                    <Grid id="appt-1" item>
+                        <FormControl sx={{ m: 1.5, minWidth: 140 }} >
+                            <InputLabel id="demo-simple-0-disabled-label">Apartment 1</InputLabel>
                             <Select
-                            labelId="demo-simple-select-disabled-label"
-                            id="appt3select"
-                            value={third}
-                            label="Third"
-                            onChange={handleChange3}
+                                labelId="demo-simple-select-disabled-label"
+                                id="appt1select"
+                                value={first}
+                                label="First"
+                                onChange={handleChange1}
                             >
-                            {
-                                allApartments.map((name) => (
-                                    (name !== first && name !== second) && (
-                                        <MenuItem id={name} value={name}>{name}</MenuItem>
-                                )
-                                ))
-                                
-                            }
+                        
+                        {
+                            allApartments.map((name) => (
+                                (name !== second) && (
+                                    <MenuItem id={name} value={name}>{name}</MenuItem>
+                            )
+                            ))
+                            
+                        }
                             </Select>
-                            <FormHelperText>Apartment 3</FormHelperText>
+                            <FormHelperText>Apartment 1</FormHelperText>
                         </FormControl>
-                            <Card>
-                                <CardHeader
-                                    title={<Typography variant='h3' color='white' align='center'>{third}</Typography>}
-                                    sx={{backgroundColor: '#0495b2'}}
-                                />
-                                <CardContent>   
-                                    {display3}
-                                </CardContent>
-                                <Button id={third} onClick={navApartmentPage}>Visit Page</Button>
-                            </Card>
-                        </Grid>
-                        <Grid item>
-                            <IconButton>
-                                <CloseIcon style={{color: "#0495b2"}} fontSize="large" onClick={closeThird} />
-                            </IconButton>
-                        </Grid>
-                        </Stack>
-                    ) : (
-                        <IconButton>
-                            <AddIcon style={{color: "#0495b2"}} fontSize="large" onClick={addThird}></AddIcon>
-                        </IconButton>
+                        <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginLeft: '16px', marginRight: '16px', minWidth: '250px'}}>
+                            <CardHeader
+                                title={<Typography variant='h4' color='white' align='center'>{first}</Typography>}
+                                sx={{backgroundColor: '#0495b2', minHeight:'25px'}}
+                            />
+                            <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>
+                                {display1}
+                            </CardContent>
+                            <Button id={first} onClick={navApartmentPage}>Visit Page</Button>
+                        </Card>
+                    </Grid>
+                    <Grid id="appt-2" item>
+                    <FormControl sx={{ m: 1.5, minWidth: 140 }}>
+                        <InputLabel id="demo-simple-select-disabled-label">Apartment 2</InputLabel>
+                        <Select
+                        labelId="demo-simple-select-disabled-label"
+                        id="appt2select"
+                        value={second}
+                        label="Second"
+                        onChange={handleChange2}
+                        >
+                        {
+                            allApartments.map((name) => (
+                                (name !== first) && (
+                                    <MenuItem id={name} value={name}>{name}</MenuItem>
+                            )
+                            ))
+                            
+                        }
+                        </Select>
+                        <FormHelperText>Apartment 2</FormHelperText>
+                    </FormControl>
+                        <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginRight: '16px', minWidth: '250px'}}>
+                            <CardHeader
+                                title={<Typography variant='h3' color='white' align='center'>{second}</Typography>}
+                                sx={{backgroundColor: '#0495b2', minHeight: '25px'}}
+                            />
+                            <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>   
+                                {display2}
+                            </CardContent>
+                            <Button id={second} onClick={navApartmentPage}>Visit Page</Button>
+                        </Card>
+                    </Grid>
+                    <Grid item>
+                        {
+                            (add) ? (
+                                <Stack direction='row'>
+                                <Grid id="appt-3" item>
+                                <FormControl sx={{ m: 1.5, minWidth: 140 }}>
+                                    <InputLabel id="demo-simple-select-disabled-label">Apartment 3</InputLabel>
+                                    <Select
+                                    labelId="demo-simple-select-disabled-label"
+                                    id="appt3select"
+                                    value={third}
+                                    label="Third"
+                                    onChange={handleChange3}
+                                    >
+                                    {
+                                        allApartments.map((name) => (
+                                            (name !== first && name !== second) && (
+                                                <MenuItem id={name} value={name}>{name}</MenuItem>
+                                        )
+                                        ))
+                                        
+                                    }
+                                    </Select>
+                                    <FormHelperText>Apartment 3</FormHelperText>
+                                </FormControl>
+                                    <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginRight: '16px', minWidth: '250px'}}>
+                                        <CardHeader
+                                            title={<Typography variant='h3' color='white' align='center'>{third}</Typography>}
+                                            sx={{backgroundColor: '#0495b2', minHeight: '25px'}}
+                                        />
+                                        <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>   
+                                            {display3}
+                                        </CardContent>
+                                        <Button id={third} onClick={navApartmentPage}>Visit Page</Button>
+                                    </Card>
+                                </Grid>
+                                <Grid item marginTop={'15px'}>
+                                    <IconButton>
+                                        <CloseIcon style={{color: "#0495b2"}} fontSize="large" onClick={closeThird} />
+                                    </IconButton>
+                                </Grid>
+                                </Stack>
+                            ) : (
+                                <IconButton>
+                                    <AddIcon style={{color: "#0495b2"}} fontSize="large" onClick={addThird}></AddIcon>
+                                </IconButton>
 
-                    )
-                }
+                            )
+                        }
+                    </Grid>
+                    
+                </Grid>
             </Grid>
-            
         </Grid>
     </LayoutComponent>
   );
