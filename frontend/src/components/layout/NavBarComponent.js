@@ -152,7 +152,7 @@ export default function NavBarComponent() {
     
 
     return (
-        <AppBar width="100%" sx={{ background: 'white'}} position="sticky">
+        <AppBar width="100%" sx={{background: 'white'}} position="sticky">
           <Container maxWidth="100%">
             <Toolbar>
             <Button onClick={navigateHome} sx={{ p: 0 }}>

@@ -50,8 +50,8 @@ export default function HoverMenuComponent() {
         onClose={handleClose}
         MenuListProps={{ onMouseLeave: handleClose }}
       >
-        <MenuItem sx={{color: 'white'}} onClick={() => navigate('../compare')}>APARTMENT COMPARISON</MenuItem>
         <MenuItem sx={{color: 'white'}} onClick={() => navigate('../allapartments')}>ALL APARTMENTS</MenuItem>
+        <MenuItem sx={{color: 'white'}} onClick={() => navigate('../compare')}>APARTMENT COMPARISON</MenuItem>
       </StyledMenu>
     </div>
   );

@@ -66,7 +66,9 @@ export default function ApartmentComparisonPage() {
     }, [])
 
     const navApartmentPage = (event) => {
-        navigate(`/mainpage/${event.target.id.toLowerCase()}`);
+        if (event.target.id !== '' || event.target.id !== undefined) {
+            navigate(`/mainpage/${event.target.id.toLowerCase()}`);
+        }
   
     }
 
@@ -160,6 +162,7 @@ export default function ApartmentComparisonPage() {
     
   return (
     <LayoutComponent>
+        <Divider sx={{width:'100%', backgroundColor:'#0495b2', borderTopWidth: '2rem', top:0, marginBottom: '3rem'}}></Divider>
         <Grid container spacing={2}>
             <Grid item xs={3} display='flex' justifyContent='center'>
                 <Grid container spacing={2}>
@@ -208,7 +211,7 @@ export default function ApartmentComparisonPage() {
             </Grid>
             <Grid item xs={9} style={{ backgroundColor: '#EEEEEE' }}>
             <Grid container display='flex' justifyContent='center' alignItems='space-around'>
-                    <Grid id="appt-1" item>
+                    <Grid id="appt-1" display='flex' direction='column' justifyContent='center' item>
                         <FormControl sx={{ m: 1.5, minWidth: 140 }} >
                             <InputLabel id="demo-simple-0-disabled-label">Apartment 1</InputLabel>
                             <Select
@@ -230,19 +233,26 @@ export default function ApartmentComparisonPage() {
                             </Select>
                             <FormHelperText>Apartment 1</FormHelperText>
                         </FormControl>
-                        <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginLeft: '16px', marginRight: '16px', marginBottom:'10px', minWidth: '250px', borderRadius: '16px'}}>
-                            <CardHeader
-                                title={<Typography variant='h4' color='white' align='center'>{first}</Typography>}
-                                sx={{backgroundColor: '#0495b2', minHeight:'25px'}}
-                            />
-                            <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>
-                                {display1}
-                                <Button id={first} width='100%' align='center' sx={{marginTop: '10px', backgroundColor: '#0495b2', color: 'white'}} onClick={navApartmentPage}>Visit Page</Button>
+                        {
+                            (first !== '') ? (
+                                <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginLeft: '16px', marginRight: '16px', marginBottom:'10px', minWidth: '250px', borderRadius: '16px'}}>
+                                <CardHeader
+                                    title={<Typography variant='h4' color='white' align='center'>{first}</Typography>}
+                                    sx={{backgroundColor: '#0495b2', minHeight:'25px'}}
+                                />
+                                <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>
+                                    {display1}
+                                    <Button id={first} width='100%' align='center' sx={{marginTop: '10px', backgroundColor: '#0495b2', color: 'white'}} onClick={navApartmentPage}>Visit Page</Button>
+    
+                                </CardContent>
+                            </Card>
+                            ) : (
+                                <Typography variant='body'>Please choose an apartment</Typography>
+                            )
+                        }
 
-                            </CardContent>
-                        </Card>
                     </Grid>
-                    <Grid id="appt-2" item>
+                    <Grid id="appt-2" display='flex' direction='column' justifyContent='center' item>
                     <FormControl sx={{ m: 1.5, minWidth: 140 }}>
                         <InputLabel id="demo-simple-select-disabled-label">Apartment 2</InputLabel>
                         <Select
@@ -263,17 +273,24 @@ export default function ApartmentComparisonPage() {
                         </Select>
                         <FormHelperText>Apartment 2</FormHelperText>
                     </FormControl>
-                        <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginLeft: '16px', marginRight: '16px', marginBottom:'10px', minWidth: '250px', borderRadius: '16px'}}>
-                            <CardHeader
-                                title={<Typography variant='h4' color='white' align='center'>{first}</Typography>}
-                                sx={{backgroundColor: '#0495b2', minHeight:'25px'}}
-                            />
-                            <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>
-                                {display2}
-                                <Button id={second} width='100%' align='center' sx={{marginTop: '10px', backgroundColor: '#0495b2', color: 'white'}} onClick={navApartmentPage}>Visit Page</Button>
+                    {
+                            (second !== '') ? (
+                                <Card style={{backgroundColor:'#EEEEEE', border:'2px solid #0495b2', marginLeft: '16px', marginRight: '16px', marginBottom:'10px', minWidth: '250px', borderRadius: '16px'}}>
+                                    <CardHeader
+                                        title={<Typography variant='h4' color='white' align='center'>{second}</Typography>}
+                                        sx={{backgroundColor: '#0495b2', minHeight:'25px'}}
+                                    />
+                                    <CardContent style={{color: '#0495b2', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'10px'}}>
+                                        {display2}
+                                        <Button id={second} width='100%' align='center' sx={{marginTop: '10px', backgroundColor: '#0495b2', color: 'white'}} onClick={navApartmentPage}>Visit Page</Button>
+        
+                                    </CardContent>
+                                </Card>
+                            ) : (
+                                <Typography variant='body'>Please choose an apartment</Typography>
+                            )
+                        }
 
-                            </CardContent>
-                        </Card>
                     </Grid>
                     <Grid item>
                         {

@@ -4,14 +4,18 @@ import ListApartmentComponent from "../components/ListApartmentComponent";
 import AddApartmentModal from "../components/AddApartmentModal";
 import FilterComponent from "../components/FilterComponent";
 import LayoutComponent from "../components/layout/LayoutComponent";
+import { shadows } from '@mui/system';
 
 import {
     Box,
+    Card,
     Grid,
     Link,
     Divider,
     Stack,
-    IconButton
+    IconButton,
+    CardActionArea,
+    Button
 } from "@mui/material"
 
 import AddIcon from '@mui/icons-material/Add';
@@ -75,11 +79,32 @@ const nineCards = allApartments.slice(0, 9);
   
 return (
   <LayoutComponent>
-        <img src='/logowbg.png' height='100%' width='100%' alt="bg-img"></img>
-        <Stack direction="row" container justifyContent="space-between">
-            <AddApartmentModal txt="Apartment Request Form"/>
+      <Card
+        sx={{
+            position: 'relative',
+            color: '#0495B2',
+            mb: 0,
+            backgroundSize: 'cover',
+            width: '100%',
+            height: '50rem',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            backgroundImage: `url(${process.env.PUBLIC_URL}/final_home_pg.jpg)`,
+        }}>
+        <CardActionArea>
+            <Button sx={{marginLeft: '5rem', marginTop: '40rem', width: '30%', backgroundColor: '#0495b2', color: 'white'}}
+              onClick={() => navigate('/allapartments')}>View All Apartments</Button>
+        </CardActionArea>
+      </Card>
+        {/* Increase the priority of the hero background image */}
+        {/*<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />*/} 
+        {/* <img src='/final_home_pg.jpg' height='100%' width='100%' alt="bg-img"></img> */}
+        <Grid display='flex' justifyContent='center'>
+        <Stack sx={{border: 1, borderColor: 'white', borderRadius: 5, width: '80%', height:'25%', boxShadow: 5, marginBottom:'1rem'}} direction="row" container justifyContent="space-between">
+          <AddApartmentModal txt="Apartment Request Form"/>
           <FilterComponent collection="apartments" setOrder={setAllApartments}></FilterComponent>
         </Stack>
+        </Grid>
         <Divider color="#0495b2" sx={{ borderBottomWidth: 15 }}></Divider>
 
         <Box sx={{flexGrow: 1, marginTop: '20px', marginBottom: '20px'}}>
