@@ -43,6 +43,7 @@ export default function ExtLoginComponent() {
           localStorage.setItem("@pfp", user.pfp);
           //6 - navigate user to the home page
           navSignIn();
+          console.log(newUser)
           if (newUser) {
             //ask them to input their apartment
             setOpen(true);
@@ -50,7 +51,7 @@ export default function ExtLoginComponent() {
           } else {
             navigate('/'); //stay on current page
           }
-          window.location.reload(false);
+         window.location.reload(false);
         }
       },
       function (error) {
@@ -61,6 +62,7 @@ export default function ExtLoginComponent() {
     function navSignIn() {
       const fetchData = async () => {
         setNewUser(await verifyCredentials(navigate, true));
+        console.log(newUser)
       }
       fetchData();
     }

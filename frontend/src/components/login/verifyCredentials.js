@@ -13,7 +13,7 @@ const verifyCredentials = async (navigate) => {
         //     return -1;
         // }
         const decode = jwtDecode(localStorage.getItem("@userToken"));
-        const user = await fetch(`https://localhost:4000/user`, {
+        const user = await fetch(`https://${process.env.REACT_APP_HOSTNAME}/user`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -22,6 +22,7 @@ const verifyCredentials = async (navigate) => {
             body: JSON.stringify({ user: decode }),
         });
         const result = (await user.json());
+        console.log(result)
         window.localStorage.setItem("@apartment", result.apartment);
         return result.newUser;
     }else{
