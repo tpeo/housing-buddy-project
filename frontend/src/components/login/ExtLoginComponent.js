@@ -12,6 +12,18 @@ import {
 import { auth, firebase } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function ExtLoginComponent() {
 
   let navigate = useNavigate();
@@ -46,11 +58,13 @@ export default function ExtLoginComponent() {
           if (newUser) {
             //ask them to input their apartment
             setOpen(true);
-            navigate('../profile');
-          } else {
-            navigate('/'); //stay on current page
+            navigate('./'); //nav to their apartment
+          } else if (window.localStorage.getItem("@apartment") === 'undefined') {
+            console.log(open)
+            setOpen(true);
+            //navigate('/'); //stay on current page
           }
-          window.location.reload(false);
+        //  window.location.reload(false);
         }
       },
       function (error) {
@@ -61,6 +75,7 @@ export default function ExtLoginComponent() {
     function navSignIn() {
       const fetchData = async () => {
         setNewUser(await verifyCredentials(navigate, true));
+        console.log(newUser)
       }
       fetchData();
     }
@@ -77,7 +92,7 @@ export default function ExtLoginComponent() {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-            <Box>
+            <Box sx={style}>
                 <Typography>Where are you living?</Typography>
                 <ApartmentSelectComponent></ApartmentSelectComponent>
                 <AddApartmentModal txt="Don't See an Apartment? Request to Add One!"></AddApartmentModal>

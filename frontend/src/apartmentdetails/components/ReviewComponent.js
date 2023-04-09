@@ -151,8 +151,8 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
 
   return (
     <Grid sx={{display: 'flex', justifyContent: 'center', marginTop: '20px'}} item xs={4} sm={6} md={4}>
-        <Card sx={gridItem} height="100%">
-            <Grid name="main" display="flex" direction="row" justifyContent='space-between' margin='10px'>
+        <Card sx={gridItem} height="100%" width='100%'>
+            <Grid name="main" display="flex" direction="row" justifyContent='space-between' margin='5px' width='100%' spacing={1} container>
                 <Grid alignItems='center' item >
                     <Box sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
                             <Typography marginRight='1rem' marginLeft='1rem' component='h3' variant="h3" fontWeight={'bold'} color="inherit" paragraph>
@@ -171,7 +171,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                         <Typography variant="body">{fullR.dislikes}</Typography>
                     </Stack>
                 </Grid>
-                <Grid item>
+                <Grid xs={4} item>
                     <Typography variant="h3">{title}</Typography>
                     
                     <StaticRating value={parseInt(rating)}></StaticRating>
@@ -200,7 +200,7 @@ export default function ReviewComponent({apartment, title, review, rating, fullR
                                 width={'40rem'}
                                 >
                                 {ratings.map((rating, index) => (
-                                    <Grid item xs={6} key={`individ_${rating}`}>
+                                    <Grid item  key={`individ_${rating}`}>
                                     <Stack direction="row" margin="10px">
                                         <SentimentSatisfied></SentimentSatisfied>
                                         <Box marginLeft={'1rem'} sx={{backgroundColor: 'rgba(113, 218, 249, 0.33)'}}>
