@@ -23,6 +23,18 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import ReviewComponent from "./components/ReviewComponent";import SortComponent from "../components/SortComponent";
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function MainPage() {
     const params = useParams();
     const name = params.apartment;
@@ -67,18 +79,6 @@ export default function MainPage() {
         getStats();
     }, [])
 
-    const style = {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: 400,
-      bgcolor: 'background.paper',
-      border: '2px solid #000',
-      boxShadow: 24,
-      p: 4,
-    };
-
     const reviewsPerPage = 10;
     const pages = Math.ceil(reviews/reviewsPerPage);
     const indexLast = page * reviewsPerPage;
@@ -88,15 +88,16 @@ export default function MainPage() {
 
     const handleOnClick = () =>  {
         if (localStorage.getItem("loggedIn") === "true") {
-            if (window.localStorage.getItem("@apartment") === name) {
+            if (window.localStorage.getItem("@apartment").toLowerCase() === name) {
               const usr = JSON.parse(window.localStorage.getItem("@user"));
+              console.log(usr)
               if (usr.review === undefined) {
                 navigate(`/${name}/review`);
               } else {
                 setDialogOpen(true);
               }
 
-            } else if (window.localStorage.getItem("@apartment") === null) {
+            } else if (window.localStorage.getItem("@apartment") === 'undefined') {
               setOpen(true)
             } else {
               //don't allow them ->

@@ -15,7 +15,7 @@ import { Typography } from '@mui/material';
 const ProtectedFormRoute = ({isLoggedIn, children}) => {
   const params = useParams();
   const name = params.apartment;
-  if (isLoggedIn && window.localStorage.getItem("@apartment") === name) {
+  if (isLoggedIn && window.localStorage.getItem("@apartment").toLowerCase() === name) {
     console.log(params)
     return children;
   } else {

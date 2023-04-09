@@ -60,6 +60,7 @@ export default function ApartmentSelectComponent() {
           if (response.status !== 200) {
             throw new Error();
           }
+          window.localStorage.setItem("@apartment", apartment);
         })
         .catch((e) => {
           console.log(e);
@@ -68,6 +69,7 @@ export default function ApartmentSelectComponent() {
 
   const handleSubmit = () => {
     updateApartment();
+    console.log(apartment)
     window.localStorage.setItem("@apartment", apartment);
   }
 
