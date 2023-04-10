@@ -115,9 +115,9 @@ return (
                   {nineCards.map((obj) => (
                       <ListApartmentComponent
                         key={obj.name}    
-                        name={obj.name} 
+                        name={obj.name}  
                         handleOnClick={navApartmentPage}
-                        backgroundImage={obj.img_link}
+                        backgroundImage={obj.img_link} 
                       />
                     ))}
               </Grid>
