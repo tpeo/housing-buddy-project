@@ -142,13 +142,13 @@ export default function ApartmentComparisonPage() {
 
     const display1 = Object.keys(stats1).map(stat => 
         <>
-            <Typography key={`stat2_${stat}`} style={{ margin: 15 }} variant='h5'>{`${stats1[stat]}`}</Typography>
+            <Typography key={`stat2_${stat}`} style={{ margin: 15 }} variant='h5'>{Number(stats1[stat]).toFixed(1)}</Typography>
             <Divider sx={{width: '100%', color: '#0495b2'}}></Divider>
         </>    )
 
     const display2 = Object.keys(stats2).map(stat => 
         <>
-            <Typography key={`stat2_${stat}`} style={{ margin: 15 }} variant='h5'>{`${stats2[stat]}`}</Typography>
+            <Typography key={`stat2_${stat}`} style={{ margin: 15 }} variant='h5'>{Number(stats2[stat]).toFixed(1)}</Typography>
             <Divider sx={{width: '100%', color: '#0495b2'}}></Divider>
         </>
 
@@ -156,7 +156,7 @@ export default function ApartmentComparisonPage() {
 
     const display3 = Object.keys(stats3).map(stat => 
         <>
-            <Typography key={`stat2_${stat}`} style={{ margin: 15 }} variant='h5'>{`${stats3[stat]}`}</Typography>
+            <Typography key={`stat2_${stat}`} style={{ margin: 15 }} variant='h5'>{Number(stats3[stat]).toFixed(1)}</Typography>
             <Divider sx={{width: '100%', color: '#0495b2'}}></Divider>
         </>    )
     
