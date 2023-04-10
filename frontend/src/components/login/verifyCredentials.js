@@ -22,8 +22,8 @@ const verifyCredentials = async (navigate) => {
             body: JSON.stringify({ user: decode }),
         });
         const result = (await user.json());
-        console.log(result)
-        window.localStorage.setItem("@apartment", result.apartment);
+        console.log(result.data.apartment)
+        window.localStorage.setItem("@apartment", result.data.apartment);
         return result.newUser;
     }else{
         navigate("/login");

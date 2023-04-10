@@ -5,8 +5,7 @@ import {
     Grid,
     Typography,
 } from "@mui/material"
-import Footer from "../components/layout/Footer";
-import NavBarComponent from "../components/layout/NavBarComponent";
+import LayoutComponent from "../components/layout/LayoutComponent";
 
 import { useNavigate } from "react-router-dom";
 
@@ -113,13 +112,14 @@ export default function SearchPage() {
     }
 
     return (
-        <Grid>
-            <NavBarComponent></NavBarComponent>
+        <LayoutComponent>
+          <Grid>
             <Typography variant="h1">Search Results</Typography>
             <Typography variant="h3">{` for ${searchQuery}: `}</Typography>
             {renderHits()}
-            <Footer></Footer>
         </Grid>
+        </LayoutComponent>
+
 
     );
 }

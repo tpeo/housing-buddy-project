@@ -87,8 +87,11 @@ export default function MainPage() {
     
 
     const handleOnClick = () =>  {
-        if (localStorage.getItem("loggedIn") === "true") {
+      console.log(window.localStorage.getItem("loggedIn"))
+
+        if (window.localStorage.getItem("loggedIn") === "true") {
             if (window.localStorage.getItem("@apartment").toLowerCase() === name) {
+
               const usr = JSON.parse(window.localStorage.getItem("@user"));
               console.log(usr)
               if (usr.review === undefined) {
